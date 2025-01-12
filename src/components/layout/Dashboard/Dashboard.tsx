@@ -1,62 +1,44 @@
-import AlignIcon from "../../../assets/icons/Align";
-import BellIcon from "../../../assets/icons/Bell";
-import InformationIcon from "../../../assets/icons/Information";
-import ShareIcon from "../../../assets/icons/Share";
-import UserIcon from "../../../assets/icons/User";
+import { useState } from "react";
+import { DashboardViewContext } from "../../../hooks/DashboardViewContext";
+import { DashboardNavbar } from "./DashboardNavbar";
+import EyeIcon from "../../../assets/icons/Eye";
+import ArrowIcon from "../../../assets/icons/Arrow";
 
 export default function Dashboard() {
+    const [currentView, setCurrentView] = useState<"Overview" | "Notifications" | "History">("Overview");
+
     return (
-        <div>
-            <div className="border-b-2">
-                <div className="flex gap-2 items-center">
-                    <h1 className="font-Roboto font-bold text-3xl">Dashboard</h1>
+        <DashboardViewContext.Provider value={{ currentView, setCurrentView }}>
+            <DashboardNavbar />
+            <div className="relative w-1/4 group cursor-pointer mt-3">
+                {
+                    /* border overlay */
+                }
+                <div className="absolute top-0 left-0 bg-neutral-200 group-hover:bg-gradient-to-br group-hover:from-green-500 group-hover:to-blue-500 w-full h-full rounded-lg" />
 
-                    {/* right side */}
-                    <div className="w-9 h-9 ml-auto text-gray-500 flex cursor-pointer items-center justify-center bg-white border-2 rounded-full">
-                        <div className="w-4 h-4">
-                            <InformationIcon />
-                        </div>
-                    </div>
-                    <div className="w-9 h-9 text-gray-500 flex cursor-pointer items-center justify-center bg-white border-2 rounded-full">
-                        <div className="w-4 h-4">
-                            <BellIcon />
-                        </div>
-                    </div>
-                    <div className="w-9 h-9 text-gray-500 flex cursor-pointer items-center justify-center bg-white border-2 rounded-full">
-                        <div className="w-4 h-4">
-                            <UserIcon />
-                        </div>
-                    </div>
-                </div>
-                <div className="flex font-Poppins pt-4 items-end">
-                    <div className="pb-2 px-3 relative cursor-pointer">
-                        Overview
-                        <div className="absolute -bottom-0.5 left-0 w-full h-[3px] bg-green-500" />
-                    </div>
-                    <div className="pb-2 px-3 relative cursor-pointer text-gray-500">
-                        Notifications
-                    </div>
-                    <div className="pb-2 px-3 relative cursor-pointer text-gray-500">
-                        History
-                    </div>
-
-                    {/* right side */}
-                    <div className="ml-auto flex gap-3 pb-2 items-center">
-                        <div className="text-gray-500 flex bg-white items-center py-1.5 cursor-pointer border-2 px-3.5 font-Roboto text-xs gap-1.5 rounded-md">
-                            <div className="w-4 h-4">
-                                <AlignIcon />
+                {
+                    /* padding so the container with border is visible */
+                }
+                <div className="p-0.5">
+                    <div className="bg-white relative rounded-md p-4">
+                        <div className="w-10 h-10  flex justify-center items-center bg-neutral-100 text-green-500 rounded-full">
+                            <div className="w-8 h-8">
+                                <EyeIcon />
                             </div>
-                            <p>Filter</p>
                         </div>
-                        <div className="text-white flex bg-green-500 items-center py-1.5 shadow cursor-pointer shadow-green-600 border-2 border-green-500 px-3.5 font-Roboto text-xs gap-1.5 rounded-md">
-                            <div className="w-4 h-4">
-                                <ShareIcon />
-                            </div>
-                            <p>Share</p>
+                        <div className="text-sm font-bold font-Poppins pt-6">Total views</div>
+                        <div className="text-3xl font-Roboto font-bold py-1 flex items-center gap-2">1428
+                            <span className="text-sm text-green-500 bg-green-200 py-0.5 px-1 rounded-xl flex items-center">
+                                <div className="w-5 h-5">
+                                    <ArrowIcon />
+                                </div>
+                                12,55%
+                            </span>
                         </div>
+                        <div className="font-Poppins text-sm text-neutral-500">Compared to last month</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </DashboardViewContext.Provider >
     )
 }
