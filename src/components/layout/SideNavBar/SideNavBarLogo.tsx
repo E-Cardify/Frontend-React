@@ -6,7 +6,7 @@ export function SideNavBarLogo() {
 
     return (
         <div>
-            <div className="text-2xl font-Poppins font-bold cursor-pointer flex gap-1 items-center">
+            <div className="text-2xl font-Poppins font-bold cursor-pointer flex gap-1 items-center dark:text-white">
                 <div className="w-8 h-8 text-green-600">
                     <Slack />
                 </div>
