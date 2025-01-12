@@ -1,7 +1,7 @@
 import SunIcon from "../../../assets/icons/Sun";
 
 export function SideNavBarToggleTheme() {
-    return (<div className="mt-auto flex items-center px-2 text-gray-500 text-sm font-Roboto gap-2">
+    return (<div className="flex items-center px-2 text-gray-500 text-sm font-Roboto gap-2">
         <div className="w-5 h-5">
             <SunIcon />
         </div>

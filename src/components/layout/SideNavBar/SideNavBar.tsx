@@ -6,6 +6,7 @@ import PlusIcon from "../../../assets/icons/Plus";
 import { SideNavBarItem } from "./SideNavBarItem";
 import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
+import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeNowButton";
 
 export function SideNavBar() {
     return (
@@ -35,7 +36,11 @@ export function SideNavBar() {
                 <PlusIcon />
             </div>
 
-            <SideNavBarToggleTheme />
+            {/* bottom */}
+            <div className="mt-auto">
+                <SideNavBarUpgradeNowButton></SideNavBarUpgradeNowButton>
+                <SideNavBarToggleTheme />
+            </div>
         </div>
     );
 }
