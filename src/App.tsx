@@ -1,9 +1,12 @@
 import { SideNavBar } from "./components"
+import { ViewProvider } from "./hooks/ViewContext"
 
 function App() {
   return (
     <div className="min-h-[200vh] bg-gray-100">
-      <SideNavBar />
+      <ViewProvider>
+        <SideNavBar />
+      </ViewProvider>
     </div>
   )
 }
