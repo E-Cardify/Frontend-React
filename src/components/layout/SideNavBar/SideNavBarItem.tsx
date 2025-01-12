@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import useViewContext from "../../../hooks/useViewContext";
 import useCollapseSideNavBarContext from "../../../hooks/useCollapseSideNavBarContext";
+import { useTranslation } from "react-i18next";
 
 
 export function SideNavBarItem(props: {
@@ -8,6 +9,7 @@ export function SideNavBarItem(props: {
     children?: ReactNode;
     text: "Dashboard" | "Cards" | "Analytics";
 }) {
+    const { t } = useTranslation();
     const { isCollapsed } = useCollapseSideNavBarContext();
     const { currentView, setCurrentView } = useViewContext();
 
@@ -21,7 +23,7 @@ export function SideNavBarItem(props: {
             <div className={`${!isCollapsed ? "h-5 w-5" : "w-full p-3"} flex items-center justify-center`}>
                 {props.children}
             </div>
-            {(props.text && !isCollapsed) && <h1 className="flex items-center justify-center">{props.text}</h1>}
+            {(props.text && !isCollapsed) && <h1 className="flex items-center justify-center">{t(props.text)}</h1>}
         </div>
     );
 }
