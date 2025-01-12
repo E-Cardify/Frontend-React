@@ -18,9 +18,9 @@ export function SideNavBarItem(props: {
     }
 
     return (
-        <div className={`flex gap-x-1 cursor-pointer items-center ${!isCollapsed && "min-w-[200px]"} py-2 rounded-md px-1 font-Roboto text-sm ${currentView == props.text ? "bg-green-500 text-white" : "text-neutral-500"}`}
+        <div className={`flex gap-x-1 cursor-pointer items-center ${!isCollapsed ? "min-w-[200px]" : "w-max"} py-2 rounded-md px-1 font-Roboto text-sm ${currentView == props.text ? "bg-green-500 text-white" : "text-neutral-500"}`}
             onClick={handleViewChange}>
-            <div className={`${!isCollapsed ? "h-5 w-5" : "w-full p-3"} flex items-center justify-center`}>
+            <div className={`${!isCollapsed ? "h-5 w-5" : "h-10 w-10 p-1"} flex items-center justify-center`}>
                 {props.children}
             </div>
             {(props.text && !isCollapsed) && <h1 className="flex items-center justify-center">{t(props.text)}</h1>}

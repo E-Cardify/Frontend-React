@@ -27,7 +27,7 @@ export function SideNavBar() {
                     </div>
                 </div>
 
-                <div className="gap-2 pt-6 flex flex-col overflow-x-auto">
+                <div className="gap-2 pt-6 flex flex-col overflow-x-auto items-center">
                     <SideNavBarItem text="Dashboard" active={true}>
                         <DashboardIcon />
                     </SideNavBarItem>
