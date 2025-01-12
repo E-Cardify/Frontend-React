@@ -31,11 +31,11 @@ export function SideNavBar() {
                 </SideNavBarItem>
             </div>
 
-            <div className="h-9 mt-5 text-green-500 w-9 mx-auto border-2 border-green-500 rounded-lg cursor-pointer">
+            <div className="h-8 w-8 mt-5 text-green-500 mx-auto border-2 border-green-500 rounded-lg cursor-pointer">
                 <PlusIcon />
             </div>
 
-            <SideNavBarToggleTheme></SideNavBarToggleTheme>
+            <SideNavBarToggleTheme />
         </div>
     );
 }
