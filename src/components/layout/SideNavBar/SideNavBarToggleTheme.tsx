@@ -12,7 +12,7 @@ export function SideNavBarToggleTheme() {
         setTheme(theme === "dark" ? "light" : "dark")
     }
 
-    return (<div className="flex items-center px-2 text-gray-500 text-sm font-Roboto gap-2">
+    return (<div className="flex items-center px-2 text-neutral-500 text-sm font-Roboto gap-2">
         <div className="w-5 h-5">
             <SunIcon />
         </div>
