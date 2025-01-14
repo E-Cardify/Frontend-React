@@ -1,14 +1,10 @@
 import { useState } from "react";
-import CollapseIcon from "../../../assets/icons/Collapse";
-import CreditCardIcon from "../../../assets/icons/CreditCard";
-import DashboardIcon from "../../../assets/icons/Dashboard";
-import PieChartIcon from "../../../assets/icons/PieChart";
-import PlusIcon from "../../../assets/icons/Plus";
-import { CollapseSideNavBarContext } from "../../../hooks/CollapseSideNavBarContext";
+import { CollapseSideNavBarContext } from "@hooks/CollapseSideNavBarContext";
 import { SideNavBarItem } from "./SideNavBarItem";
 import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
-import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeNowButton";
+import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
+import { CollapseIcon, CreditCardIcon, DashboardIcon, PieChartIcon, PlusIcon } from "@icons";
 
 export function SideNavBar() {
     const [isCollapsed, setIsCollapsed] = useState(false);

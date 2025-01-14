@@ -1,5 +1,5 @@
-import Slack from "../../../assets/icons/Slack";
-import useCollapseSideNavBarContext from "../../../hooks/useCollapseSideNavBarContext";
+import { SlackIcon } from "@icons";
+import useCollapseSideNavBarContext from "@hooks/useCollapseSideNavBarContext";
 
 export function SideNavBarLogo() {
     const { isCollapsed } = useCollapseSideNavBarContext();
@@ -8,7 +8,7 @@ export function SideNavBarLogo() {
         <div>
             <div className="text-2xl font-Poppins font-bold cursor-pointer flex gap-1 items-center dark:text-white">
                 <div className="w-8 h-8 text-green-600">
-                    <Slack />
+                    <SlackIcon />
                 </div>
                 {!isCollapsed && <h1>Cardify</h1>}
             </div>

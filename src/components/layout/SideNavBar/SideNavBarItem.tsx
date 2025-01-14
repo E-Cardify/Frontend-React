@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import useViewContext from "../../../hooks/useViewContext";
-import useCollapseSideNavBarContext from "../../../hooks/useCollapseSideNavBarContext";
+import useViewContext from "@hooks/useViewContext";
+import useCollapseSideNavBarContext from "@hooks/useCollapseSideNavBarContext";
 import { useTranslation } from "react-i18next";
 
 

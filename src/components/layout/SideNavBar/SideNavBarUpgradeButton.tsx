@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import useCollapseSideNavBarContext from "../../../hooks/useCollapseSideNavBarContext";
+import useCollapseSideNavBarContext from "@hooks/useCollapseSideNavBarContext";
 
 export function SideNavBarUpgradeNowButton() {
     const { isCollapsed } = useCollapseSideNavBarContext();

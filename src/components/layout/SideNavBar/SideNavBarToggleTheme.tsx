@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import SunIcon from "../../../assets/icons/Sun";
-import useCollapseSideNavBarContext from "../../../hooks/useCollapseSideNavBarContext";
-import useTheme from "../../../hooks/useTheme";
+import useCollapseSideNavBarContext from "@hooks/useCollapseSideNavBarContext";
+import useTheme from "@hooks/useTheme";
+import { SunIcon } from "@icons";
 
 export function SideNavBarToggleTheme() {
     const { t } = useTranslation();

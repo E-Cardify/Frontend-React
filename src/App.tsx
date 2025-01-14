@@ -1,5 +1,5 @@
 import { SideNavBar, ViewContainer } from "./components"
-import { ViewProvider } from "./hooks/ViewContext"
+import { ViewProvider } from "@hooks/ViewContext"
 
 function App() {
   return (

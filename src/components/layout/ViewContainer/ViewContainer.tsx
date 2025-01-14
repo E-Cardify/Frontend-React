@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import useViewContext from "../../../hooks/useViewContext";
+import useViewContext from "@hooks/useViewContext";
 import Dashboard from "../Dashboard/Dashboard";
 
 export default function ViewContainer(props: {

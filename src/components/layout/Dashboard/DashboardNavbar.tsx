@@ -1,10 +1,6 @@
 import { useTranslation } from "react-i18next";
-import AlignIcon from "../../../assets/icons/Align";
-import BellIcon from "../../../assets/icons/Bell";
-import InformationIcon from "../../../assets/icons/Information";
-import ShareIcon from "../../../assets/icons/Share";
-import UserIcon from "../../../assets/icons/User";
-import useDashboardViewContext from "../../../hooks/useDashboardViewContext";
+import { AlignIcon, BellIcon, InformationIcon, ShareIcon, UserIcon } from "@icons";
+import useDashboardViewContext from "@hooks/useDashboardViewContext";
 import { ReactNode } from "react";
 
 
