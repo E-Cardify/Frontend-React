@@ -21,7 +21,8 @@ const Dashboard = {
     "Account": "Konto",
     "Hide sidebar": "Schowaj pasek boczny",
     "Show sidebar": "Pokaż pasek boczny",
-    "Add card": "Dodaj kartę"
+    "Add card": "Dodaj kartę",
+    "Total cards created:": "Stworzone wizytówki:"
 }
 
 export default {
