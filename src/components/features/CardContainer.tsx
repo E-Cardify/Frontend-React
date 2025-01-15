@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 export default function CardContainer(props: {
     children: ReactNode,
 }) {
-    return (<div className="relative group cursor-pointer float-left">
+    return (<div className="relative group cursor-pointer">
         {
             /* border overlay */
         }
