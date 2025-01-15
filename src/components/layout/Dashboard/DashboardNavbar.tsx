@@ -15,15 +15,15 @@ export function DashboardNavbar() {
                     /* right side */
                 }
                 <div className="flex gap-2 ml-auto items-center">
-                    <DashboardInfoButton>
+                    <DashboardInfoButton title={t("Help")}>
                         <InformationIcon />
                     </DashboardInfoButton>
 
-                    <DashboardInfoButton>
+                    <DashboardInfoButton title={t("Notifications")}>
                         <BellIcon />
                     </DashboardInfoButton>
 
-                    <DashboardInfoButton>
+                    <DashboardInfoButton title={t("Account")}>
                         <UserIcon />
                     </DashboardInfoButton>
                 </div>

@@ -16,7 +16,12 @@ const Dashboard = {
     "Create New Card": "Utwórz nową kartę",
     "Your Qr Code": "Twój kod Qr",
     "Total views": "Wyświetlenia:",
-    "Compared to last month": "Wzrostu od tamtego miesiąca"
+    "Compared to last month": "Wzrostu od tamtego miesiąca",
+    "Help": "Pomoc",
+    "Account": "Konto",
+    "Hide sidebar": "Schowaj pasek boczny",
+    "Show sidebar": "Pokaż pasek boczny",
+    "Add card": "Dodaj kartę"
 }
 
 export default {
