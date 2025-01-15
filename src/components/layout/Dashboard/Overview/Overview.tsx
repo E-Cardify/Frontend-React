@@ -3,15 +3,26 @@ import QRCode from "react-qr-code";
 import CardPreview from "./CardPreview";
 import TotalViewsCard from "./TotalViewsCard";
 import { PlusIcon, ShareIcon } from "@icons";
+import { useState } from "react";
+import QrCodePreview from "../../../features/QrCodePreview";
 
 export default function Overview() {
+    const [showQrCodePreview, setShowQrCodePreview] = useState(false);
+
+    const handleShowQrCodePreview = () => {
+        setShowQrCodePreview(true);
+    }
+
     return (
-        <div className="mt-3 flex gap-2 items-start">
+        <div className="mt-3 flex gap-2 items-start flex-wrap">
+            {showQrCodePreview && <QrCodePreview toggleVisibility={setShowQrCodePreview} value="sohskjgh" />}
+
             <CardContainer>
                 <CardPreview />
             </CardContainer>
-            <div className="flex flex-col w-max h-full gap-y-2">
-                <div className="flex gap-x-2">
+
+            <div className="flex flex-col w-max h-full gap-y-2 flex-wrap">
+                <div className="flex gap-x-2 flex-wrap">
                     <CardContainer>
                         <TotalViewsCard />
                     </CardContainer>
@@ -21,9 +32,9 @@ export default function Overview() {
                 </div>
 
 
-                <div className="flex h-full gap-2 ">
+                <div className="flex h-full gap-2 flex-wrap flex-col sm:flex-row">
                     <CardContainer>
-                        <div className="overflow-hidden rounded-md relative flex gap-1 items-center dark:border-black dark:to-neutral-950 dark:from-neutral-950 bg-white dark:bg-neutral-900 dark:text-white text-black cursor-pointer p-1 justify-center">
+                        <div onClick={handleShowQrCodePreview} className="overflow-hidden rounded-md relative flex gap-1 items-center dark:border-black dark:to-neutral-950 dark:from-neutral-950 bg-white dark:bg-neutral-900 dark:text-white text-black cursor-pointer p-1 justify-center">
                             <QRCode value="H" className="w-20 h-20" />
                         </div>
                     </CardContainer>

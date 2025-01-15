@@ -1,41 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { AlignIcon, BellIcon, InformationIcon, ShareIcon, UserIcon } from "@icons";
-import useDashboardViewContext from "@hooks/useDashboardViewContext";
-import { ReactNode } from "react";
-
-
-function DashboardNavItem(props: {
-    text: "Notifications" | "Overview" | "History"
-}) {
-    const { t } = useTranslation();
-    const { currentView, setCurrentView } = useDashboardViewContext();
-
-    const handleViewChange = () => {
-        setCurrentView(props.text);
-    }
-
-    return (
-        <div className={`pb-2 px-3 dark:text-white relative cursor-pointer ${currentView !== props.text && "text-neutral-500 dark:text-neutral-400"}`} onClick={handleViewChange}>
-            {t(props.text)}
-            <div className={`absolute -bottom-0.5 left-0 w-full h-[3px] ${(currentView === props.text) && "bg-green-500"}`} />
-        </div>
-    );
-}
-
-
-
-function DashboardInfoButton(props: {
-    children: ReactNode,
-}) {
-    return (
-        <div className="w-9 h-9 text-neutral-500 dark:bg-neutral-900 dark:border-black flex cursor-pointer items-center justify-center bg-white border-2 rounded-full">
-            <div className="w-4 h-4">
-                {props.children}
-            </div>
-        </div>
-    );
-}
-
+import { DashboardInfoButton } from "./DashboardInfoButton";
+import { DashboardNavItem } from "./DashboardNavItem";
 
 export function DashboardNavbar() {
     const { t } = useTranslation();
@@ -62,7 +28,7 @@ export function DashboardNavbar() {
                     </DashboardInfoButton>
                 </div>
             </div>
-            <div className="flex font-Poppins pt-4 items-end">
+            <div className="flex font-Poppins pt-4 items-end flex-wrap">
                 <DashboardNavItem text="Overview" />
                 <DashboardNavItem text="Notifications" />
                 <DashboardNavItem text="History" />
