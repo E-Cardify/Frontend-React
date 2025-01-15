@@ -10,6 +10,16 @@ export default {
         Poppins: ["Poppins", "sans-serif"],
         BebasNeue: ["Bebas Neue", "sans-serif"],
       },
+      keyframes: {
+        "slide-right": {
+          "0%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(100px)" },
+          "100%": { transform: "translateX(100px)" },
+        },
+      },
+      animation: {
+        "slide-right": "slide-right 2.5s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
