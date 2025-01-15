@@ -28,7 +28,7 @@ export default function TotalViewsCard() {
             setLastMonthViews(1829);
 
             setDataLoading(false);
-        }, 10000);
+        }, 1000);
     }, [])
 
     return (
@@ -41,7 +41,7 @@ export default function TotalViewsCard() {
                 </div>
                 <div className="text-sm font-bold font-Poppins pt-6 text-neutral-800 dark:text-neutral-400">{t("Total views")}</div>
                 <div className="relative text-3xl font-Roboto font-bold py-1 flex items-center gap-2 dark:text-white">{thisMonthViews || "0"}
-                    {dataLoading && <div className="absolute inset-0 from-neutral-200 to-neutral-100 bg-gradient-to-br"></div>}
+                    {dataLoading && <div className="absolute inset-0 from-neutral-200 to-neutral-100 dark:from-neutral-800 dark:to-neutral-700 bg-gradient-to-br"></div>}
                     <span className={`text-sm ${progress && progress <= 0 ? (progress == 0 ? "text-yellow-500 bg-yellow-200" : "text-red-500 bg-red-200") : "text-green-500 bg-green-200"} py-0.5 px-1 rounded-xl flex items-center`}>
                         <div className={`w-5 h-5 ${progress && progress < 0 ? "rotate-90" : (progress == 0 && "rotate-45")}`}>
                             <ArrowIcon />
