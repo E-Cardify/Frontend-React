@@ -21,7 +21,7 @@ export default function QrCodePreview(props: {
                 {/* qr code in the middle */}
                 <div className="from-green-500 to-blue-500 bg-gradient-to-br z-20 rounded-lg border-2 border-black shadow shadow-black">
                     <div className="flex items-center gap-1 w-full p-5 mb-8">
-                        <div className="w-10 h-10 text-red-500 z-50 relative cursor-pointer" onClick={handleHideQrCodePreview}>
+                        <div className="w-10 h-10 text-red-500 hover:text-red-800 z-50 relative cursor-pointer" onClick={handleHideQrCodePreview}>
                             <XIcon />
                         </div>
                         <p className="flex-1 text-3xl text-center font-Montserrat font-bold text-white z-50 relative">{t("Your Qr Code")}</p>
