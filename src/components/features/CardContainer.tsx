@@ -12,7 +12,7 @@ export default function CardContainer(props: {
         {
             /* padding so the container with border is visible */
         }
-        <div className="h-full p-0.5 rounded-md overflow-hidden">
+        <div className="h-full p-0.5 rounded-md overflow-hidden flex items-center justify-center">
             {props.children}
         </div>
     </div>);

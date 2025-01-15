@@ -14,19 +14,18 @@ export default function Overview() {
     }
 
     return (
-        <div className="mt-3 flex gap-2 items-start flex-wrap">
+        <div className="mt-3 flex gap-2 flex-wrap">
             {showQrCodePreview && <QrCodePreview toggleVisibility={setShowQrCodePreview} value="sohskjgh" />}
 
             <CardPreviewCard />
 
-            <div className="flex flex-col w-max h-full gap-y-2 flex-wrap">
-                <div className="flex gap-x-2 flex-wrap">
+            <div className="flex flex-col h-max gap-2">
+                <div className="flex gap-2 flex-wrap">
                     <TotalViewsCard />
                     <TotalViewsCard />
                 </div>
 
-
-                <div className="flex h-full gap-2 flex-wrap">
+                <div className="flex gap-2 flex-wrap justify-center">
                     <QrCodeCard handleShowQrCodePreview={handleShowQrCodePreview} />
                     <CreateNewCard />
                     <ShareCard />

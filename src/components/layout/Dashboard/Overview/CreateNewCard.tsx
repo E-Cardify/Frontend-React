@@ -9,7 +9,7 @@ export function CreateNewCard() {
             <div className="w-10 h-10">
                 <PlusIcon />
             </div>
-            <p className="font-bold font-Poppins">{t("Create New Card")}</p>
+            <p className="font-bold font-Poppins text-center">{t("Create New Card")}</p>
         </div>
     );
 }
