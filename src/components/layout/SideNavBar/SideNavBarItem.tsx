@@ -23,7 +23,7 @@ export function SideNavBarItem(props: {
             <div className={`${!isCollapsed ? "h-5 w-5" : "h-10 w-10 p-1"} flex items-center justify-center`}>
                 {props.children}
             </div>
-            {(props.text && !isCollapsed) && <h1 className="flex items-center justify-center">{t(props.text)}</h1>}
+            {(props.text && !isCollapsed) && <h1 className="flex items-center justify-center select-none">{t(props.text)}</h1>}
         </div>
     );
 }

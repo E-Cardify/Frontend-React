@@ -21,7 +21,7 @@ export function SideNavBarUpgradeNowButton() {
                         <p>
                             {t("Get detailed analytics to help you, upgrade and go pro")}
                         </p>
-                        <button type="button" title="Show Premium Options" className="text-sm mt-3 w-max bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded-lg">
+                        <button type="button" title="Show Premium Options" className="select-none text-sm mt-3 w-max bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded-lg">
                             {t("Upgrade Now")}
                         </button>
                     </div>

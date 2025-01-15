@@ -10,7 +10,7 @@ export function SideNavBarLogo() {
                 <div className="w-8 h-8 text-green-600">
                     <SlackIcon />
                 </div>
-                {!isCollapsed && <h1>Cardify</h1>}
+                {!isCollapsed && <h1 className="select-none">Cardify</h1>}
             </div>
         </div>
     );
