@@ -20,7 +20,7 @@ export function SideNavBar() {
             <div className="flex  flex-col sticky bg-white dark:bg-neutral-900 w-[240px] h-[95vh] rounded-lg top-[2.5vh] border-2 max-w-max px-2 py-2 left-5 t-5 dark:border-black">
                 <div className="flex justify-between items-center">
                     <SideNavBarLogo />
-                    <div title={!isCollapsed ? t("Hide sidebar") : t("Show sidebar")} className="w-6 h-6 cursor-pointer text-neutral-500" onClick={handleCollapseSideNavBar}>
+                    <div title={!isCollapsed ? t("Hide sidebar") : t("Show sidebar")} className="w-6 h-6 cursor-pointer text-neutral-500 hover:text-neutral-600 dark:hover:text-neutral-400" onClick={handleCollapseSideNavBar}>
                         <CollapseIcon />
                     </div>
                 </div>

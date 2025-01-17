@@ -18,7 +18,7 @@ export function SideNavBarItem(props: {
     }
 
     return (
-        <div title={isCollapsed ? t(props.text) : ""} className={`flex gap-x-1 cursor-pointer items-center ${!isCollapsed ? "w-full" : "w-max"} py-2 rounded-md px-1 font-Roboto text-sm ${currentView == props.text ? "bg-green-500 text-white" : "text-neutral-500"}`}
+        <div title={isCollapsed ? t(props.text) : ""} className={`flex gap-x-1 cursor-pointer items-center ${!isCollapsed ? "w-full" : "w-max"} py-2 rounded-md px-1 font-Roboto text-sm ${currentView == props.text ? "bg-green-500 text-white" : "text-neutral-500 hover:text-neutral-700 hover:dark:text-neutral-400"}`}
             onClick={handleViewChange}>
             <div className={`${!isCollapsed ? "h-5 w-5" : "h-10 w-10 p-1"} flex items-center justify-center`}>
                 {props.children}
