@@ -13,7 +13,7 @@ export function SideNavBarToggleTheme() {
     }
 
     return (<div className="flex items-center px-2 text-neutral-500 text-sm font-Roboto gap-2">
-        <div className="w-5 h-5">
+        <div className="w-5 h-5 dark:fill-current fill-transparent">
             <SunIcon />
         </div>
         {!isCollapsed && <p className="select-none">{t("Light Mode")}</p>}
