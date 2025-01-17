@@ -1,12 +1,7 @@
 import { ReactNode } from "react"
 import useViewContext from "@hooks/useViewContext";
 import Dashboard from "../Dashboard/Dashboard";
-
-function CardCreationComponent() {
-    return (
-        <></>
-    )
-}
+import { CardCreationComponent } from "../CardCreationComponent/CardCreationComponent";
 
 export default function ViewContainer(props: {
     children?: ReactNode;
@@ -14,7 +9,7 @@ export default function ViewContainer(props: {
     const { currentView } = useViewContext();
 
     return (
-        <div className="pl-10 pr-5 pt-[3vh] flex-1">
+        <div className="pl-10 pr-5 py-[3vh] flex-1">
             {props.children}
             {currentView == "Dashboard" && <Dashboard />}
             {currentView == "CardCreation" && <CardCreationComponent />}
