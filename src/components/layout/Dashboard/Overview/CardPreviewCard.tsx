@@ -68,9 +68,9 @@ export default function CardPreviewCard(props: {
                         }
 
 
-                        {/* <p className="text-center italic font-Roboto font-bold dark:text-white">
+                        <p className="text-center italic font-Roboto font-bold dark:text-white">
                             &bdquo;{props.cardInfo?.information.motto || "Passion for life."}&quot;
-                        </p> */}
+                        </p>
 
                     </div>
                 </div>
