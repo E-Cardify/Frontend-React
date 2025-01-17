@@ -6,7 +6,7 @@ import { DashboardNavItem } from "./DashboardNavItem";
 export function DashboardNavbarTabs() {
     const { t } = useTranslation();
 
-    return (<div className="flex font-Poppins pt-4 items-end flex-wrap">
+    return (<div className="flex font-Poppins pt-4 items-end flex-wrap justify-center sm:justify-normal gap-y-2">
         <DashboardNavItem text="Overview" />
         <DashboardNavItem text="Notifications" />
         <DashboardNavItem text="History" />
