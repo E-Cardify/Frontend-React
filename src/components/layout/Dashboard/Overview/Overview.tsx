@@ -6,9 +6,12 @@ import QrCodeCard from "./QrCodeCard";
 import { CreateNewCard } from "./CreateNewCard";
 import { ShareCard } from "./ShareCard";
 import TotalCardsCreated from "./TotalCardCreated";
+import { getCardInfo } from "../../../../helpers/getCardInfo";
+import { CardInfoInterface } from "@hooks/CardCreationTabContext";
 
 export default function Overview() {
     const [showQrCodePreview, setShowQrCodePreview] = useState(false);
+    const [cardInfo] = useState<CardInfoInterface>(getCardInfo() || { information: {} });
 
     const handleShowQrCodePreview = () => {
         setShowQrCodePreview(true);
@@ -18,7 +21,7 @@ export default function Overview() {
         <div className="mt-3 flex gap-2 flex-wrap items-start">
             {showQrCodePreview && <QrCodePreview toggleVisibility={setShowQrCodePreview} value="sohskjgh" />}
 
-            <CardPreviewCard />
+            <CardPreviewCard cardInfo={cardInfo} />
 
             <div className="flex flex-col h-max gap-2">
                 <div className="flex gap-2 flex-wrap">

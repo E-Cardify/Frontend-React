@@ -8,7 +8,7 @@ export default function CardPreviewCard(props: {
     return (
         <CardContainer>
             <div className="bg-white dark:bg-neutral-900 relative rounded-md overflow-hidden w-80">
-                <div className="h-20 from-green-500 bg-gradient-to-br to-green-300">
+                <div className="h-40 from-green-500 bg-gradient-to-br to-green-300">
 
                 </div>
 
