@@ -68,7 +68,7 @@ export function CardCreationComponent() {
                         <div className="flex mt-2 border-b-2">
                             <CardCustomizerTab text="Display" />
                             <CardCustomizerTab text="Information" />
-                            <CardCustomizerTab text="Fields" />
+                            {/* <CardCustomizerTab text="Fields" /> */}
                         </div>
                         <div className="flex-1 px-4 py-2">
                             {currentTab == "Information" && <>
