@@ -1,6 +1,7 @@
 import useCardCreationTabContext from "@hooks/useCardCreationTabContext";
 import { CheckIcon } from "@icons";
 import { SaveResetCardCustomizer } from "./SaveResetCardCustomizer";
+import getLighterShade from "../../../helpers/getLighterShade";
 
 export function Display() {
     const { cardInfo, setCardInfo } = useCardCreationTabContext();
@@ -9,7 +10,18 @@ export function Display() {
         setCardInfo((prevCardInfo) => ({
             ...prevCardInfo,
             design: {
+                ...prevCardInfo.design,
                 color: newColor,
+            },
+        }));
+    };
+
+    const handleStyleChange = (newStyle: string) => {
+        setCardInfo((prevCardInfo) => ({
+            ...prevCardInfo,
+            design: {
+                ...prevCardInfo.design,
+                style: newStyle,
             },
         }));
     };
@@ -26,6 +38,7 @@ export function Display() {
         'indigo-500',
         'emerald-500'
     ]
+
 
     return (
         <>
@@ -47,6 +60,20 @@ export function Display() {
                                 )
                             })
                         }
+                    </div>
+
+                    <h1 className="text-xl font-Poppins font-bold p-2 px-3 border-b-2 border-neutral-200">Style</h1>
+                    <div className="px-3 flex gap-5 py-3 flex-wrap">
+                        <div title="Solid" onClick={() => handleStyleChange("solid")} className={`rounded-xl w-10 h-10 bg-${cardInfo.design?.color || "green-500"} cursor-pointer`}>
+                            {"solid" == cardInfo.design?.style && <div className="text-white p-1 flex items-center justify-center">
+                                <CheckIcon />
+                            </div>}
+                        </div>
+                        <div title="Gradient" onClick={() => handleStyleChange("gradient")} className={`rounded-xl w-10 h-10 from-${cardInfo.design?.color || "green-500"} to-${getLighterShade(cardInfo.design?.color || "green-500")} bg-gradient-to-br cursor-pointer`}>
+                            {"gradient" == cardInfo.design?.style && <div className="text-white p-1 flex items-center justify-center">
+                                <CheckIcon />
+                            </div>}
+                        </div>
                     </div>
                 </div>
             </div>

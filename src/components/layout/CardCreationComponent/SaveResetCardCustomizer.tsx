@@ -36,7 +36,8 @@ export function SaveResetCardCustomizer() {
                 motto: "",
 
             }, design: {
-                color: "green-500"
+                color: "green-500",
+                style: "solid",
             }
         })
 

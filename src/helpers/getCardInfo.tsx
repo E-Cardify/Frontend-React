@@ -5,19 +5,25 @@ export const getCardInfo = () => {
         try {
             const cardInfoData = JSON.parse(cardInfoString);
 
+            const obj: {
+                information: object,
+                design: object
+            } = {
+                information: {},
+                design: {}
+            };
 
-            if ((typeof cardInfoData === "object") && cardInfoData.information && (typeof cardInfoData.information === "object")) {
-                const obj = {
-                    information: {
-                        ...cardInfoData.information,
-                    },
-                    design: {
-                        ...cardInfoData.design
-                    }
-                };
+            if (typeof cardInfoData === "object") {
+                if (cardInfoData.information && (typeof cardInfoData.information === "object")) {
+                    obj.information = cardInfoData.information;
+                }
 
-                return obj;
+                if (cardInfoData.design && (typeof cardInfoData.design === "object")) {
+                    obj.design = cardInfoData.design;
+                }
             }
+
+            return obj;
         } catch (e) {
             console.log(e);
             localStorage.removeItem("cardInfo");

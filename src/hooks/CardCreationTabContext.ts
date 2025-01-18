@@ -3,7 +3,7 @@ import { createContext } from "react";
 export type tabsType = "Display" | "Information" | "Fields";
 
 export interface CardInfoInterface {
-    information: {
+    information?: {
         firstName?: string,
         middleName?: string,
         lastName?: string,
@@ -17,7 +17,8 @@ export interface CardInfoInterface {
         motto?: string,
     },
     design?: {
-        color?: string
+        color?: string,
+        style?: string
     }
 }
 

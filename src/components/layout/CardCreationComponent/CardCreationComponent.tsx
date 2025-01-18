@@ -12,15 +12,18 @@ import useViewContext from "@hooks/useViewContext";
 import useDashboardViewContext from "@hooks/useDashboardViewContext";
 
 export function CardCreationComponent() {
-    const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || { information: {} });
+    const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || {
+        information: {}, design: {
+            color: "green-500",
+            style: "solid"
+        }
+    });
     const { t } = useTranslation();
     const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Information");
     const { currentView, setCurrentView } = useViewContext();
     const { currentView: currentDashboardView, setCurrentView: setCurrentDashboardView } = useDashboardViewContext();
 
     const showNotifications = () => {
-        console.log('showing notifications');
-
         if (currentView !== "Dashboard") {
             setCurrentView("Dashboard");
         }
