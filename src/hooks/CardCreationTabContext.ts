@@ -15,6 +15,9 @@ export interface CardInfoInterface {
         company?: string,
         headline?: string,
         motto?: string,
+    },
+    design?: {
+        color?: string
     }
 }
 

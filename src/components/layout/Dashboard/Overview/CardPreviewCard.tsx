@@ -8,7 +8,7 @@ export default function CardPreviewCard(props: {
     return (
         <CardContainer>
             <div className="bg-white dark:bg-neutral-900 relative rounded-md overflow-hidden w-80">
-                <div className="h-40 from-green-500 bg-gradient-to-br to-green-300">
+                <div className={`h-40 bg-${props.cardInfo?.design?.color || 'green-500'}`}>
 
                 </div>
 
@@ -24,7 +24,7 @@ export default function CardPreviewCard(props: {
                         {props.cardInfo?.information?.title || "Software Developer"}
                     </p>
 
-                    <p className="text-green-500 font-Poppins font-bold text-lg">
+                    <p className={`text-${props.cardInfo?.design?.color || 'green-500'} font-Poppins font-bold text-lg`}>
                         {props.cardInfo?.information.department}
                     </p>
 
@@ -38,19 +38,19 @@ export default function CardPreviewCard(props: {
 
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-2 items-center text-neutral-700">
-                            <div className="w-5 text-green-500">
+                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
                                 <MailIcon />
                             </div>
                             <p className="font-Roboto text-sm dark:text-neutral-400">zaksiu279@gmail.com</p>
                         </div>
                         <div className="flex gap-2 items-center text-neutral-700">
-                            <div className="w-5 text-green-500">
+                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
                                 <PhoneIcon />
                             </div>
                             <p className="font-Roboto text-sm flex gap-1 items-center dark:text-neutral-400"><span className="text-xs dark:text-neutral-500 text-neutral-600">+48</span> 571 381 382</p>
                         </div>
                         <div className="flex gap-2 items-center text-neutral-700">
-                            <div className="w-5 text-green-500">
+                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
                                 <MapPinIcon />
                             </div>
                             <p className="font-Roboto text-sm dark:text-neutral-400">Ubiad 119, Chełmiec 33-311</p>

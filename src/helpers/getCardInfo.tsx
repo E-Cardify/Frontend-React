@@ -10,6 +10,9 @@ export const getCardInfo = () => {
                 const obj = {
                     information: {
                         ...cardInfoData.information,
+                    },
+                    design: {
+                        ...cardInfoData.design
                     }
                 };
 

@@ -7,11 +7,28 @@ import { CardCreationTabContext, CardInfoInterface } from "@hooks/CardCreationTa
 import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "./Information";
 import { getCardInfo } from "../../../helpers/getCardInfo";
+import { Display } from "./Display";
+import useViewContext from "@hooks/useViewContext";
+import useDashboardViewContext from "@hooks/useDashboardViewContext";
 
 export function CardCreationComponent() {
     const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || { information: {} });
     const { t } = useTranslation();
     const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Information");
+    const { currentView, setCurrentView } = useViewContext();
+    const { currentView: currentDashboardView, setCurrentView: setCurrentDashboardView } = useDashboardViewContext();
+
+    const showNotifications = () => {
+        console.log('showing notifications');
+
+        if (currentView !== "Dashboard") {
+            setCurrentView("Dashboard");
+        }
+
+        if (currentDashboardView !== "Notifications") {
+            setCurrentDashboardView("Notifications");
+        }
+    }
 
     return (
         <CardCreationTabContext.Provider value={{ cardInfo, setCardInfo, currentTab, setCurrentTab }}>
@@ -28,7 +45,7 @@ export function CardCreationComponent() {
                                 <InformationIcon />
                             </DashboardInfoButton>
 
-                            <DashboardInfoButton title={t("Notifications")}>
+                            <DashboardInfoButton title={t("Notifications")} onClick={showNotifications}>
                                 <BellIcon />
                             </DashboardInfoButton>
 
@@ -56,6 +73,9 @@ export function CardCreationComponent() {
                         <div className="flex-1 px-4 py-2">
                             {currentTab == "Information" && <>
                                 <Information />
+                            </>}
+                            {currentTab == "Display" && <>
+                                <Display />
                             </>}
                         </div>
                     </div>

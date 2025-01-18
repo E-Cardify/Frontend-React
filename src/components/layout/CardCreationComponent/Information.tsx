@@ -1,13 +1,7 @@
-import useCardCreationTabContext from "@hooks/useCardCreationTabContext";
 import CardCustomizerInputContainer from "./CardCustomizerInputContainer";
+import { SaveResetCardCustomizer } from "./SaveResetCardCustomizer";
 
 export function Information() {
-    const { cardInfo } = useCardCreationTabContext();
-
-    const handleCardInfoSave = () => {
-        localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
-    }
-
     return (
         <>
             <div className="min-h-[70vh] max-h-[70vh] overflow-auto">
@@ -34,13 +28,6 @@ export function Information() {
                     </div>
                 </div>
             </div>
-            <div>
-                <button>
-                    Reset
-                </button>
-                <button onClick={handleCardInfoSave}>
-                    Save
-                </button>
-            </div>
+            <SaveResetCardCustomizer />
         </>);
 }
