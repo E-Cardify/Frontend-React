@@ -64,6 +64,7 @@ const CardCreationComponent = {
     "Communication": "Komunikacja",
     "Payment": "Płatności",
     "Design": "Projektowanie",
+    "Your links": "Twoje linki"
 }
 
 export default {

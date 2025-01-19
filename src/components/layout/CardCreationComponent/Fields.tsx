@@ -12,6 +12,7 @@ function YourLinksLink(props: {
     index: number,
 }) {
     const { cardInfo, setCardInfo } = useCardCreationTabContext();
+    const { t } = useTranslation();
 
     const handleFieldDelete = () => {
         const updatedCardInfo = cardInfo.fields.filter((_, i) => i !== props.index);
@@ -45,7 +46,7 @@ function YourLinksLink(props: {
                             <div className="h-6 w-6">
                                 {allFields.find(singleField => singleField.text == cardInfo.fields[props.index].label)?.icon}
                             </div>
-                            <label htmlFor={`${cardInfo.fields[props.index]}-${props.index}`} className="font-Poppins font-bold text-lg">{cardInfo.fields[props.index].label}</label>
+                            <label htmlFor={`${cardInfo.fields[props.index]}-${props.index}`} className="font-Poppins font-bold text-lg">{t(cardInfo.fields[props.index].label)}</label>
                         </div>
                         <div className="w-6 h-6 cursor-pointer text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200" onClick={handleFieldDelete}>
                             <XIcon />
