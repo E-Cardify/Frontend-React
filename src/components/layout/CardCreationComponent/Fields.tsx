@@ -39,7 +39,7 @@ function YourLinksLink(props: {
     return (
         <div>
             <CardContainer alwaysOn={true}>
-                <div className="flex flex-col gap-2 px-3 py-2 rounded-md relative w-full bg-white cursor-auto">
+                <div className="flex flex-col gap-2 px-3 py-2 rounded-md relative w-full bg-white dark:bg-neutral-950 cursor-auto">
                     <div className="flex justify-between gap-2">
                         <div className="flex gap-2 items-center w-max">
                             <div className="h-6 w-6">
@@ -47,11 +47,11 @@ function YourLinksLink(props: {
                             </div>
                             <label htmlFor={`${cardInfo.fields[props.index]}-${props.index}`} className="font-Poppins font-bold text-lg">{cardInfo.fields[props.index].label}</label>
                         </div>
-                        <div className="w-6 h-6 cursor-pointer text-neutral-500 hover:text-neutral-800" onClick={handleFieldDelete}>
+                        <div className="w-6 h-6 cursor-pointer text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200" onClick={handleFieldDelete}>
                             <XIcon />
                         </div>
                     </div>
-                    <input id={`${cardInfo.fields[props.index]}-${props.index}`} value={cardInfo.fields[props.index].value} onChange={e => { handleValueChange(e.target.value) }} className="dark:bg-neutral- dark:border-black dark:focus:border-neutral-600 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins w-full" />
+                    <input id={`${cardInfo.fields[props.index]}-${props.index}`} value={cardInfo.fields[props.index].value} onChange={e => { handleValueChange(e.target.value) }} className="dark:bg-neutral-800 dark:border-black dark:focus:border-neutral-600 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins w-full" />
                 </div>
             </CardContainer>
         </div>
