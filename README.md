@@ -2,6 +2,8 @@
 
 ![App preview image](assets/app-preview-1.png)
 ![App preview image - dark](assets/app-preview-dark-1.png)
+![Card creation preview image](assets/card-creation-preview-1.png)
+![Card creation preview image](assets/card-creation-preview-2.png)
 
 # React + TypeScript + Vite
 

@@ -6,11 +6,14 @@ import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
 import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
 import { CollapseIcon, CreditCardIcon, DashboardIcon, PieChartIcon, PlusIcon } from "@icons";
 import { useTranslation } from "react-i18next";
+import useViewContext from "@hooks/useViewContext";
+import { viewsType } from "@hooks/ViewContext";
 
 export function SideNavBar() {
     const { t } = useTranslation();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isMobile, setIsMobile] = useState((window.innerWidth < 640));
+    const { setCurrentView } = useViewContext();
 
     const handleCollapseSideNavBar = () => {
         setIsCollapsed(!isCollapsed);
@@ -29,6 +32,10 @@ export function SideNavBar() {
 
         return () => window.removeEventListener("resize", handleResize);
     }, [])
+
+    const handleViewChange = (text: viewsType) => {
+        setCurrentView(text);
+    }
 
     return (
         <CollapseSideNavBarContext.Provider value={{ isCollapsed, setIsCollapsed }}>
@@ -54,7 +61,7 @@ export function SideNavBar() {
                     </SideNavBarItem>
                 </div>
 
-                <div title={t("Add card")} className="h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500">
+                <div onClick={() => { handleViewChange("CardCreation") }} title={t("Add card")} className="h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500">
                     <PlusIcon />
                 </div>
 

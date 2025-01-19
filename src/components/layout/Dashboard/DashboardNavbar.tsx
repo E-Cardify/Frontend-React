@@ -11,6 +11,8 @@ export function DashboardNavbar() {
     const { currentView: currentDashboardView, setCurrentView: setCurrentDashboardView } = useDashboardViewContext();
 
     const showNotifications = () => {
+        console.log('showing notifications');
+
         if (currentView !== "Dashboard") {
             setCurrentView("Dashboard");
         }

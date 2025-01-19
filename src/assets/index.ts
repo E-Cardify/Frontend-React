@@ -19,9 +19,11 @@ import SlackIcon from "./icons/Slack";
 import SunIcon from "./icons/Sun";
 import UserIcon from "./icons/User";
 import XIcon from "./icons/X";
+import CheckIcon from "./icons/Check";
+import SaveIcon from "./icons/Save";
 
 export {
     AlignIcon, ArrowIcon, BellIcon, CodeSandBoxIcon, CreditCardIcon, CollapseIcon,
     DashboardIcon, EyeIcon, InformationIcon, ListIcon, MailIcon, MapPinIcon, PhoneIcon, PieChartIcon,
-    PlusIcon, RotateIcon, ShareIcon, SlackIcon, SunIcon, UserIcon, XIcon
+    PlusIcon, RotateIcon, ShareIcon, SlackIcon, SunIcon, UserIcon, XIcon, CheckIcon, SaveIcon
 }
