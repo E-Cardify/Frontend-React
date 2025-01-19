@@ -42,7 +42,7 @@ export default function CardCustomizerInputContainer(props: {
                 </label>
                 <input id={props.path} value={cardInfo.information[props.path]} onChange={e => {
                     handleValueChange(e.target.value);
-                }} className="max-w-80 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins" />
+                }} className="dark:bg-neutral-800 max-w-80 dark:border-black dark:focus:border-neutral-600 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins" />
             </div>
         }
             {
@@ -53,7 +53,7 @@ export default function CardCustomizerInputContainer(props: {
                     <textarea ref={textareaRef} id={props.path} value={cardInfo.information[props.path]} onChange={e => {
                         handleValueChange(e.target.value);
                         handleTextAreaSetHeight();
-                    }} className="max-w-80 min-h-20 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins" />
+                    }} className="dark:bg-neutral-800 max-w-80 dark:border-black dark:focus:border-neutral-600 min-h-20 focus:border-neutral-500 outline-none border-2 p-1 px-4 rounded-lg font-Poppins" />
                 </div>
             }
         </>
