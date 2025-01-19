@@ -29,6 +29,7 @@ const CardCreationComponent = {
     "Department": "Dział:",
     "Headline": "Nagłówek",
     "Card customizer": "Konfigurator karty",
+    "Card creation": "Tworzenie karty",
     "Display": "Wygląd",
     "Information": "Informacje",
     "Fields": "Linki",
@@ -54,6 +55,15 @@ const CardCreationComponent = {
     "Are you sure you want to reset": "Jesteś pewny, że chcesz wyczyścić",
     "Your data will be deleted and this can't be undone": "Twoje informacje zostaną usunięte, to nie może być odwrócone",
     "Cancel": "Anuluj",
+    "Phone": "Telefon",
+    "Shop": "Sklep",
+    "Address": "Adres",
+    "Other": "Inne",
+    "Website": "Strona",
+    "Social": "Społeczności",
+    "Communication": "Komunikacja",
+    "Payment": "Płatności",
+    "Design": "Projektowanie",
 }
 
 export default {

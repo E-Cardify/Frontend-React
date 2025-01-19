@@ -1,3 +1,5 @@
+import { CardInfoInterface } from "@typesFile/CardInfoInterface";
+
 export const getCardInfo = () => {
     const cardInfoString = localStorage.getItem("cardInfo");
 
@@ -5,12 +7,10 @@ export const getCardInfo = () => {
         try {
             const cardInfoData = JSON.parse(cardInfoString);
 
-            const obj: {
-                information: object,
-                design: object
-            } = {
+            const obj: CardInfoInterface = {
                 information: {},
-                design: {}
+                design: {},
+                fields: []
             };
 
             if (typeof cardInfoData === "object") {
@@ -20,6 +20,24 @@ export const getCardInfo = () => {
 
                 if (cardInfoData.design && (typeof cardInfoData.design === "object")) {
                     obj.design = cardInfoData.design;
+                }
+
+                if (cardInfoData.fields && Array.isArray(cardInfoData.fields)) {
+                    const array: {
+                        label: string,
+                        value: string
+                    }[] = [];
+
+                    cardInfoData.fields.forEach((field: unknown) => {
+                        if (field && typeof field === "object" && "label" in field && "value" in field) {
+                            if (field.label && field.value) {
+                                const typedField = field as { label: string; value: string };
+                                array.push(typedField);
+                            }
+                        }
+                    })
+
+                    obj.fields = array;
                 }
             }
 

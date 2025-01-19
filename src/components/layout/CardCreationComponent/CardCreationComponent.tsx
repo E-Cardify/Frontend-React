@@ -3,7 +3,8 @@ import CardPreviewCard from "../Dashboard/Overview/CardPreviewCard";
 import { DashboardInfoButton } from "../Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { CardCreationTabContext, CardInfoInterface } from "@hooks/CardCreationTabContext";
+import { CardCreationTabContext } from "@hooks/CardCreationTabContext";
+import { CardInfoInterface } from "../../../typesFile/CardInfoInterface";
 import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "./Information";
 import { getCardInfo } from "../../../helpers/getCardInfo";
@@ -17,7 +18,7 @@ export function CardCreationComponent() {
         information: {}, design: {
             color: "green-500",
             style: "solid"
-        }
+        }, fields: []
     });
     const { t } = useTranslation();
     const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Display");
@@ -39,7 +40,7 @@ export function CardCreationComponent() {
             <div className="flex flex-col gap-2 h-full">
                 <div className="border-b-2 dark:border-neutral-400 pb-3">
                     <div className="flex gap-2 items-center">
-                        <h1 className="font-Roboto font-bold text-3xl dark:text-white">Card creation</h1>
+                        <h1 className="font-Roboto font-bold text-3xl dark:text-white">{t("Card creation")}</h1>
 
                         {
                             /* right side */

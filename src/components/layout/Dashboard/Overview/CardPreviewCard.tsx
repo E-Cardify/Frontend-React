@@ -1,7 +1,7 @@
-import { MailIcon, MapPinIcon, PhoneIcon } from "@icons";
 import CardContainer from "../../../features/CardContainer";
-import { CardInfoInterface } from "@hooks/CardCreationTabContext";
+import { CardInfoInterface } from "../../../../typesFile/CardInfoInterface";
 import getLighterShade from "../../../../helpers/getLighterShade";
+import { allFields } from "@data/fields";
 
 export default function CardPreviewCard(props: {
     cardInfo?: CardInfoInterface
@@ -38,24 +38,14 @@ export default function CardPreviewCard(props: {
                     </p>
 
                     <div className="flex flex-col gap-3">
-                        <div className="flex gap-2 items-center text-neutral-700">
-                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
-                                <MailIcon />
-                            </div>
-                            <p className="font-Roboto text-sm dark:text-neutral-400">zaksiu279@gmail.com</p>
-                        </div>
-                        <div className="flex gap-2 items-center text-neutral-700">
-                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
-                                <PhoneIcon />
-                            </div>
-                            <p className="font-Roboto text-sm flex gap-1 items-center dark:text-neutral-400"><span className="text-xs dark:text-neutral-500 text-neutral-600">+48</span> 571 381 382</p>
-                        </div>
-                        <div className="flex gap-2 items-center text-neutral-700">
-                            <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
-                                <MapPinIcon />
-                            </div>
-                            <p className="font-Roboto text-sm dark:text-neutral-400">Ubiad 119, Chełmiec 33-311</p>
-                        </div>
+                        {props.cardInfo?.fields.map((field, index) => {
+                            return <a href={["Website", "Shop", "Website", "Other"].includes(field.label) && `https://${field.value}` || ""} key={`${field}-${index}`} className="flex gap-2 items-center text-neutral-700">
+                                <div className={`w-5 text-${props.cardInfo?.design?.color || "green-500"}`}>
+                                    {allFields.find(singleField => singleField.text == field.label)?.icon}
+                                </div>
+                                <p className="font-Roboto text-sm dark:text-neutral-400">{field.value}</p>
+                            </a>
+                        })}
 
                         {
                             (props.cardInfo?.information?.preferredName || props.cardInfo?.information?.pronouns) &&
