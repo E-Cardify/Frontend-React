@@ -19,7 +19,7 @@ export function CardCreationComponent() {
         }
     });
     const { t } = useTranslation();
-    const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Information");
+    const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Display");
     const { currentView, setCurrentView } = useViewContext();
     const { currentView: currentDashboardView, setCurrentView: setCurrentDashboardView } = useDashboardViewContext();
 

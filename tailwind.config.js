@@ -46,6 +46,10 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      clip: {
+        left: "polygon(0 0, 100% 0, 0 100%)",
+        right: "polygon(100% 0, 100% 100%, 0 100%)",
+      },
       fontFamily: {
         Roboto: ["Roboto", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
