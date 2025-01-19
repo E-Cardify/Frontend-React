@@ -42,7 +42,7 @@ function YourLinksLink(props: {
             <CardContainer alwaysOn={true}>
                 <div className="flex flex-col gap-2 px-3 py-2 rounded-md relative w-full bg-white dark:bg-neutral-950 cursor-auto">
                     <div className="flex justify-between gap-2">
-                        <div className="flex gap-2 items-center w-max">
+                        <div className="flex gap-2 items-center w-max text-neutral-500 dark:text-neutral-400">
                             <div className="h-6 w-6">
                                 {allFields.find(singleField => singleField.text == cardInfo.fields[props.index].label)?.icon}
                             </div>

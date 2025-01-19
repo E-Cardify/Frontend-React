@@ -16,7 +16,7 @@ export function CardCustomizerTab(props: {
     return (
         <div className="px-3 p-2 relative cursor-pointer" onClick={handleSetCurrentTab}>
             <span className="font-Poppins flex items-center justify-center gap-1">
-                {t(props.text)}
+                <p className={`${currentTab !== props.text && "text-neutral-600 dark:text-neutral-400"}`}>{t(props.text)}</p>
                 {props.isBeta && <span className="from-green-500 to-blue-500 bg-gradient-to-tr text-white text-[10px] font-Poppins font-bold rounded-sm px-1">BETA</span>}
             </span>
             <div className={`absolute -bottom-0.5 left-0 w-full h-[3px] ${currentTab == props.text && "bg-green-500"}`} />
