@@ -10,6 +10,7 @@ import { getCardInfo } from "../../../helpers/getCardInfo";
 import { Display } from "./Display";
 import useViewContext from "@hooks/useViewContext";
 import useDashboardViewContext from "@hooks/useDashboardViewContext";
+import { Fields } from "./Fields";
 
 export function CardCreationComponent() {
     const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || {
@@ -71,7 +72,7 @@ export function CardCreationComponent() {
                         <div className="flex mt-2 border-b-2">
                             <CardCustomizerTab text="Display" />
                             <CardCustomizerTab text="Information" />
-                            {/* <CardCustomizerTab text="Fields" /> */}
+                            <CardCustomizerTab isBeta={true} text="Fields" />
                         </div>
                         <div className="flex-1 px-4 py-2">
                             {currentTab == "Information" && <>
@@ -79,6 +80,9 @@ export function CardCreationComponent() {
                             </>}
                             {currentTab == "Display" && <>
                                 <Display />
+                            </>}
+                            {currentTab == "Fields" && <>
+                                <Fields />
                             </>}
                         </div>
                     </div>
