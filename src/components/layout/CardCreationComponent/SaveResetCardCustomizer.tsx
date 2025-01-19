@@ -4,8 +4,10 @@ import SaveIcon from "../../../assets/icons/Save";
 import Check from "../../../assets/icons/Check";
 import { XIcon } from "@icons";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export function SaveResetCardCustomizer() {
+    const { t } = useTranslation();
     const { cardInfo, setCardInfo } = useCardCreationTabContext();
     const [showPoppup, setShowPoppup] = useState(false);
     const [hidePoppupAnimation, setHidePoppupAnimation] = useState(false);
@@ -62,12 +64,12 @@ export function SaveResetCardCustomizer() {
                         <div className="w-11 h-11 bg-red-200 text-red-500 rounded-lg p-1.5 flex justify-center items-center">
                             <RotateIcon />
                         </div>
-                        <h1 className="text-lg font-Poppins font-bold pt-3">Are you sure you want to reset?</h1>
-                        <p className="font-Poppins text-sm text-neutral-700 dark:text-neutral-400">Your data will be deleted and this can't be undone.</p>
+                        <h1 className="text-lg font-Poppins font-bold pt-3">{t("Are you sure you want to reset")}?</h1>
+                        <p className="font-Poppins text-sm text-neutral-700 dark:text-neutral-400">{t("Your data will be deleted and this can't be undone")}.</p>
 
                         <div className="flex justify-end gap-2 pt-8">
-                            <button onClick={() => setShowResetPoppup(false)} className="px-3 py-1.5 font-Poppins text-sm border-2 rounded-lg">Cancel</button>
-                            <button onClick={handleCardInfoReset} className="px-3 py-1.5 font-Poppins text-sm text-white bg-red-500 rounded-md">Reset</button>
+                            <button onClick={() => setShowResetPoppup(false)} className="px-3 py-1.5 font-Poppins text-sm border-2 rounded-lg">{t("Cancel")}</button>
+                            <button onClick={handleCardInfoReset} className="px-3 py-1.5 font-Poppins text-sm text-white bg-red-500 rounded-md">{t("Reset")}</button>
                         </div>
                     </div>
                 </div>
@@ -78,8 +80,8 @@ export function SaveResetCardCustomizer() {
                     <Check />
                 </div>
                 <div>
-                    <h1 className="font-bold font-Poppins">Success!</h1>
-                    <p className="font-Montserrat text-sm text-neutral-800">Card has been saved successfully.</p>
+                    <h1 className="font-bold font-Poppins">{t("Success")}!</h1>
+                    <p className="font-Montserrat text-sm text-neutral-800">{t("Card has been saved successfully")}.</p>
                 </div>
                 <div className="w-5 h-5 hover:cursor-pointer text-neutral-700 hover:text-neutral-950" onClick={handleHidePoppup}>
                     <XIcon />
@@ -91,13 +93,13 @@ export function SaveResetCardCustomizer() {
                     <div className="w-8 h-8">
                         <RotateIcon />
                     </div>
-                    <span>Reset</span>
+                    <span>{t("Reset")}</span>
                 </button>
                 <button onClick={handleCardInfoSave} className="flex items-center gap-2 bg-green-500 text-white font-Poppins font-bold p-2 px-3 rounded-lg shadow shadow-neutral-300 dark:shadow-neutral-700 border-2 border-green-500">
                     <div className="w-8 h-8">
                         <SaveIcon />
                     </div>
-                    <span>Save</span>
+                    <span>{t("Save")}</span>
                 </button>
             </div>
         </>

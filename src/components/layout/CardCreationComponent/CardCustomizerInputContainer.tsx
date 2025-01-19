@@ -1,6 +1,7 @@
 import { CardInfoInterface } from "@hooks/CardCreationTabContext";
 import useCardCreationTabContext from "@hooks/useCardCreationTabContext";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CardCustomizerInputContainer(props: {
     label: string;
@@ -9,6 +10,7 @@ export default function CardCustomizerInputContainer(props: {
 }) {
     const { cardInfo, setCardInfo } = useCardCreationTabContext();
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+    const { t } = useTranslation();
 
     const handleValueChange = (newValue: string) => {
         setCardInfo((prevCardInfo) => ({
@@ -38,7 +40,7 @@ export default function CardCustomizerInputContainer(props: {
         <>{
             !props.isTextArea && <div className="flex flex-col gap-1.5">
                 <label className="font-Poppins font-semibold text-neutral-500" htmlFor={props.path}>
-                    {props.label}
+                    {t(props.label)}:
                 </label>
                 <input id={props.path} value={cardInfo.information[props.path]} onChange={e => {
                     handleValueChange(e.target.value);
@@ -48,7 +50,7 @@ export default function CardCustomizerInputContainer(props: {
             {
                 props.isTextArea && <div className="flex flex-col gap-1.5">
                     <label className="font-Poppins font-semibold text-neutral-500" htmlFor={props.path}>
-                        {props.label}
+                        {t(props.label)}:
                     </label>
                     <textarea ref={textareaRef} id={props.path} value={cardInfo.information[props.path]} onChange={e => {
                         handleValueChange(e.target.value);
