@@ -7,11 +7,11 @@ import { CreateNewCard } from "./CreateNewCard";
 import { ShareCard } from "./ShareCard";
 import TotalCardsCreated from "./TotalCardCreated";
 import { getCardInfo } from "../../../../helpers/getCardInfo";
-import { CardInfoInterface } from "@hooks/CardCreationTabContext";
+import { CardInfoInterface } from "../../../../typesFile/CardInfoInterface";
 
 export default function Overview() {
     const [showQrCodePreview, setShowQrCodePreview] = useState(false);
-    const [cardInfo] = useState<CardInfoInterface>(getCardInfo() || { information: {} });
+    const [cardInfo] = useState<CardInfoInterface>(getCardInfo() || { information: {}, design: {}, fields: [] });
 
     const handleShowQrCodePreview = () => {
         setShowQrCodePreview(true);

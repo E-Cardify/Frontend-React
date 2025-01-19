@@ -1,4 +1,4 @@
-import { CardInfoInterface } from "@hooks/CardCreationTabContext";
+import { CardInfoInterface } from "../../../typesFile/CardInfoInterface";
 import useCardCreationTabContext from "@hooks/useCardCreationTabContext";
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";

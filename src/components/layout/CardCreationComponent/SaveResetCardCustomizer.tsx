@@ -37,10 +37,12 @@ export function SaveResetCardCustomizer() {
                 headline: "",
                 motto: "",
 
-            }, design: {
+            },
+            design: {
                 color: "green-500",
                 style: "solid",
-            }
+            },
+            fields: []
         })
 
         localStorage.removeItem("cardInfo");
