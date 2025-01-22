@@ -20,10 +20,13 @@ import { viewsType } from "@hooks/ViewContext";
 
 export function SideNavBar() {
   const { t } = useTranslation();
+
   const [isCollapsed, setIsCollapsed] =
     useState(false);
+
   const [isMobile, setIsMobile] =
     useState(window.innerWidth < 640);
+
   const { setCurrentView } =
     useViewContext();
 

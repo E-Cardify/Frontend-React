@@ -21,22 +21,26 @@ import useDashboardViewContext from "@hooks/useDashboardViewContext";
 import { Fields } from "./Fields";
 
 export function CardCreationComponent() {
+  const { t } = useTranslation();
+
   const [cardInfo, setCardInfo] =
     useState<CardInfoInterface>(
       getCardInfo() ||
         getDefaultCardInterfaceObject()
     );
-  const { t } = useTranslation();
+
   const [currentTab, setCurrentTab] =
     useState<
       | "Display"
       | "Information"
       | "Fields"
     >("Display");
+
   const {
     currentView,
     setCurrentView,
   } = useViewContext();
+
   const {
     currentView: currentDashboardView,
     setCurrentView:

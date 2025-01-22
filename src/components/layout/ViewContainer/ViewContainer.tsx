@@ -31,9 +31,11 @@ export default function ViewContainer(props: {
     >
       <div className="pl-10 pr-5 py-[3vh] flex-1">
         {props.children}
+
         {currentView == "Dashboard" && (
           <Dashboard />
         )}
+
         {currentView ==
           "CardCreation" && (
           <CardCreationComponent />
