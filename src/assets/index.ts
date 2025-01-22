@@ -36,6 +36,8 @@ import TelegramIcon from "./icons/Telegram";
 import DiscordIcon from "./icons/Discord";
 import PayPalIcon from "./icons/PayPal";
 import DribbbleIcon from "./icons/Dribbble";
+import SettingsIcon from "./icons/Settings";
+import EditPenIcon from "./icons/EditPen";
 
 export {
   AlignIcon,
@@ -76,4 +78,6 @@ export {
   DiscordIcon,
   PayPalIcon,
   DribbbleIcon,
+  SettingsIcon,
+  EditPenIcon,
 };
