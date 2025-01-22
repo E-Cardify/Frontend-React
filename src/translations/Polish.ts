@@ -31,7 +31,7 @@ const Dashboard = {
 };
 
 const CardCreationComponent = {
-  Department: "Dział:",
+  Department: "Dział",
   Headline: "Nagłówek",
   "Card customizer":
     "Konfigurator karty",
