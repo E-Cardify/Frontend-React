@@ -2,7 +2,7 @@ import { SaveResetCardCustomizer } from "./SaveResetCardCustomizer";
 import { useTranslation } from "react-i18next";
 import { SingleFieldCreateButton } from "./SingleFieldCreateButton";
 import useCardCreationTabContext from "@hooks/useCardCreationTabContext";
-import CardContainer from "../../features/CardContainer";
+import CardContainer from "../../ui/CardContainer";
 import { useEffect } from "react";
 import { XIcon } from "@icons";
 import fields, {

@@ -1,4 +1,4 @@
-import CardContainer from "../../../features/CardContainer";
+import CardContainer from "../../../ui/CardContainer";
 import { CardInfoInterface } from "../../../../typesFile/CardInfoInterface";
 import getLighterShade from "../../../../helpers/getLighterShade";
 import { allFields } from "@data/fields";

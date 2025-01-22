@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import CardContainer from "../../../features/CardContainer";
+import CardContainer from "../../../ui/CardContainer";
 
 export function HistoryItem(props: {
   last?: boolean;

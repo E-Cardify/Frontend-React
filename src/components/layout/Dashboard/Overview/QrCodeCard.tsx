@@ -1,5 +1,5 @@
 import QRCode from "react-qr-code";
-import CardContainer from "../../../features/CardContainer";
+import CardContainer from "../../../ui/CardContainer";
 
 export default function QrCodeCard(props: {
   handleShowQrCodePreview: () => void;

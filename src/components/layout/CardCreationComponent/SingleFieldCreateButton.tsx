@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import CardContainer from "../../features/CardContainer";
+import CardContainer from "../../ui/CardContainer";
 
 export function SingleFieldCreateButton(props: {
   icon: JSX.Element;

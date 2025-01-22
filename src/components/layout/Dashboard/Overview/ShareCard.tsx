@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import ShareIcon from "../../../../assets/icons/Share";
-import CardContainer from "../../../features/CardContainer";
+import CardContainer from "../../../ui/CardContainer";
 
 export function ShareCard() {
   const { t } = useTranslation();

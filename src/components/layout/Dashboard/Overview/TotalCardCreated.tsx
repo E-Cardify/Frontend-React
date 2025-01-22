@@ -3,7 +3,7 @@ import {
   CreditCardIcon,
 } from "@icons";
 import { useTranslation } from "react-i18next";
-import CardContainer from "../../../features/CardContainer";
+import CardContainer from "../../../ui/CardContainer";
 import {
   useEffect,
   useState,
