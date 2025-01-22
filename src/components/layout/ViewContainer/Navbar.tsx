@@ -1,16 +1,20 @@
-import { useTranslation } from "react-i18next";
 import {
   BellIcon,
   InformationIcon,
   UserIcon,
 } from "@icons";
-import { DashboardInfoButton } from "./DashboardInfoButton";
-import { DashboardNavbarTabs } from "./DashboardNavbarTabs";
-import useDashboardViewContext from "@hooks/useDashboardViewContext";
+import { DashboardInfoButton } from "../Dashboard/DashboardInfoButton";
+import { useTranslation } from "react-i18next";
 import useViewContext from "@hooks/useViewContext";
+import useDashboardViewContext from "@hooks/useDashboardViewContext";
+import { ReactNode } from "react";
 
-export function DashboardNavbar() {
+export default function Navbar(props: {
+  children?: ReactNode;
+  text: string;
+}) {
   const { t } = useTranslation();
+
   const {
     currentView,
     setCurrentView,
@@ -41,10 +45,14 @@ export function DashboardNavbar() {
   };
 
   return (
-    <div className="border-b-2 dark:border-neutral-400">
+    <div
+      className={`border-b-2 dark:border-neutral-400 ${
+        !props.children && "pb-3"
+      }`}
+    >
       <div className="flex gap-2 items-center">
         <h1 className="font-Roboto font-bold text-3xl dark:text-white">
-          {t("Dashboard")}
+          {t(props.text)}
         </h1>
 
         {/* right side */}
@@ -70,7 +78,7 @@ export function DashboardNavbar() {
         </div>
       </div>
 
-      <DashboardNavbarTabs />
+      {props.children}
     </div>
   );
 }

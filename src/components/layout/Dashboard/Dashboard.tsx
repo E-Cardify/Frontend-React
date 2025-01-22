@@ -1,7 +1,8 @@
 import useDashboardViewContext from "@hooks/useDashboardViewContext";
-import { DashboardNavbar } from "./DashboardNavbar";
 import Overview from "./Overview/Overview";
 import History from "./History/History";
+import Navbar from "../ViewContainer/Navbar";
+import { DashboardNavbarTabs } from "./DashboardNavbarTabs";
 
 export default function Dashboard() {
   const { currentView } =
@@ -9,7 +10,9 @@ export default function Dashboard() {
 
   return (
     <>
-      <DashboardNavbar />
+      <Navbar text="Dashboard">
+        <DashboardNavbarTabs />
+      </Navbar>
       {currentView === "Overview" && (
         <Overview />
       )}

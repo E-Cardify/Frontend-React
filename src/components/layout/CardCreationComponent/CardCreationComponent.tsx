@@ -1,10 +1,4 @@
-import {
-  BellIcon,
-  InformationIcon,
-  UserIcon,
-} from "@icons";
 import CardPreviewCard from "../Dashboard/Overview/CardPreviewCard";
-import { DashboardInfoButton } from "../Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { CardCreationTabContext } from "@hooks/CardCreationTabContext";
@@ -16,9 +10,8 @@ import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "./Information";
 import { getCardInfo } from "../../../helpers/getCardInfo";
 import { Display } from "./Display";
-import useViewContext from "@hooks/useViewContext";
-import useDashboardViewContext from "@hooks/useDashboardViewContext";
 import { Fields } from "./Fields";
+import Navbar from "../ViewContainer/Navbar";
 
 export function CardCreationComponent() {
   const { t } = useTranslation();
@@ -36,32 +29,6 @@ export function CardCreationComponent() {
       | "Fields"
     >("Display");
 
-  const {
-    currentView,
-    setCurrentView,
-  } = useViewContext();
-
-  const {
-    currentView: currentDashboardView,
-    setCurrentView:
-      setCurrentDashboardView,
-  } = useDashboardViewContext();
-
-  const showNotifications = () => {
-    if (currentView !== "Dashboard") {
-      setCurrentView("Dashboard");
-    }
-
-    if (
-      currentDashboardView !==
-      "Notifications"
-    ) {
-      setCurrentDashboardView(
-        "Notifications"
-      );
-    }
-  };
-
   return (
     <CardCreationTabContext.Provider
       value={{
@@ -72,39 +39,7 @@ export function CardCreationComponent() {
       }}
     >
       <div className="flex flex-col gap-2 h-full">
-        <div className="border-b-2 dark:border-neutral-400 pb-3">
-          <div className="flex gap-2 items-center">
-            <h1 className="font-Roboto font-bold text-3xl dark:text-white">
-              {t("Card creation")}
-            </h1>
-
-            {/* right side */}
-            <div className="flex gap-2 ml-auto items-center">
-              <DashboardInfoButton
-                title={t("Help")}
-              >
-                <InformationIcon />
-              </DashboardInfoButton>
-
-              <DashboardInfoButton
-                title={t(
-                  "Notifications"
-                )}
-                onClick={
-                  showNotifications
-                }
-              >
-                <BellIcon />
-              </DashboardInfoButton>
-
-              <DashboardInfoButton
-                title={t("Account")}
-              >
-                <UserIcon />
-              </DashboardInfoButton>
-            </div>
-          </div>
-        </div>
+        <Navbar text="Card creation" />
 
         <div className="flex-1 flex justify-center items-center">
           {/* Preview */}
