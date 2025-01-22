@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import AlignIcon from "../../../assets/icons/Align";
 import ShareIcon from "../../../assets/icons/Share";
 import { DashboardNavItem } from "./DashboardNavItem";
+import ButtonRectangle from "../../ui/Buttons/ButtonRectangle";
 
 export function DashboardNavbarTabs() {
   const { t } = useTranslation();
@@ -20,12 +21,12 @@ export function DashboardNavbarTabs() {
           </div>
           <p>{t("Filter")}</p>
         </div>
-        <div className="text-white flex bg-green-500 items-center py-1.5 shadow cursor-pointer shadow-green-600 border border-green-500 px-3.5 font-Roboto text-xs gap-1.5 rounded-md">
-          <div className="w-4 h-4">
-            <ShareIcon />
-          </div>
-          <p>{t("Share")}</p>
-        </div>
+        <ButtonRectangle
+          text="Share"
+          className="text-xs px-3.5 py-1.5"
+          iconHeight={4}
+          icon={<ShareIcon />}
+        />
       </div>
     </div>
   );

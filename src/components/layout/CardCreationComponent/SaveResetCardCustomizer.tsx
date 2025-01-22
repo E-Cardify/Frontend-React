@@ -7,6 +7,7 @@ import { useState } from "react";
 // import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { getDefaultCardInterfaceObject } from "@typesFile/CardInfoInterface";
+import ButtonRectangle from "../../ui/Buttons/ButtonRectangle";
 
 export function SaveResetCardCustomizer() {
   const { t } = useTranslation();
@@ -107,14 +108,13 @@ export function SaveResetCardCustomizer() {
                 >
                   {t("Cancel")}
                 </button>
-                <button
+                <ButtonRectangle
                   onClick={
                     handleCardInfoReset
                   }
-                  className="px-3 py-1.5 font-Poppins text-sm text-white bg-red-500 rounded-md"
-                >
-                  {t("Reset")}
-                </button>
+                  className="font-normal text-sm rounded-md bg-red-500 border-red-500 shadow-none"
+                  text="Reset"
+                />
               </div>
             </div>
           </div>
@@ -164,15 +164,11 @@ export function SaveResetCardCustomizer() {
           </div>
           <span>{t("Reset")}</span>
         </button>
-        <button
+        <ButtonRectangle
           onClick={handleCardInfoSave}
-          className="flex items-center gap-2 bg-green-500 text-white font-Poppins font-bold p-2 px-3 rounded-lg shadow shadow-neutral-300 dark:shadow-neutral-700 border-2 border-green-500"
-        >
-          <div className="w-8 h-8">
-            <SaveIcon />
-          </div>
-          <span>{t("Save")}</span>
-        </button>
+          icon={<SaveIcon />}
+          text="Save"
+        />
       </div>
     </>
   );
