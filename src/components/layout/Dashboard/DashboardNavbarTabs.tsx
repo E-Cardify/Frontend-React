@@ -9,7 +9,7 @@ export function DashboardNavbarTabs() {
   return (
     <div className="flex font-Poppins pt-4 items-end flex-wrap justify-center sm:justify-normal gap-y-2">
       <DashboardNavItem text="Overview" />
-      <DashboardNavItem text="Notifications" />
+      {/* <DashboardNavItem text="Notifications" /> */}
       <DashboardNavItem text="History" />
 
       {/* right side */}
