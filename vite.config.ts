@@ -26,10 +26,6 @@ export default defineConfig({
         __dirname,
         "src/contexts"
       ),
-      "@features": path.resolve(
-        __dirname,
-        "src/features"
-      ),
       "@pages": path.resolve(
         __dirname,
         "src/pages"

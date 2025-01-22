@@ -3,7 +3,7 @@ import {
   InformationIcon,
   UserIcon,
 } from "@icons";
-import { DashboardInfoButton } from "@features/Dashboard/DashboardInfoButton";
+import { DashboardInfoButton } from "@pages/Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import useViewContext from "@contexts/useViewContext";
 import useDashboardViewContext from "@contexts/useDashboardViewContext";

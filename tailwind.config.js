@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   safelist: [
     "text-red-500",
     "text-yellow-400",
@@ -42,25 +45,47 @@ export default {
     "to-amber-300",
     "to-indigo-300",
     "to-emerald-300",
+    "bg-neutral-500",
   ],
   darkMode: "class",
   theme: {
     extend: {
       clip: {
         left: "polygon(0 0, 100% 0, 0 100%)",
-        right: "polygon(100% 0, 100% 100%, 0 100%)",
+        right:
+          "polygon(100% 0, 100% 100%, 0 100%)",
       },
       fontFamily: {
-        Roboto: ["Roboto", "sans-serif"],
-        Montserrat: ["Montserrat", "sans-serif"],
-        Poppins: ["Poppins", "sans-serif"],
-        BebasNeue: ["Bebas Neue", "sans-serif"],
+        Roboto: [
+          "Roboto",
+          "sans-serif",
+        ],
+        Montserrat: [
+          "Montserrat",
+          "sans-serif",
+        ],
+        Poppins: [
+          "Poppins",
+          "sans-serif",
+        ],
+        BebasNeue: [
+          "Bebas Neue",
+          "sans-serif",
+        ],
       },
       keyframes: {
         "slide-right": {
-          "0%": { transform: "translateX(0)" },
-          "50%": { transform: "translateX(100px)" },
-          "100%": { transform: "translateX(100px)" },
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "50%": {
+            transform:
+              "translateX(100px)",
+          },
+          "100%": {
+            transform:
+              "translateX(100px)",
+          },
         },
         "fade-left-reverse": {
           "0%": {
@@ -69,13 +94,15 @@ export default {
           },
           "100%": {
             opacity: "0",
-            transform: "translateX(20px)",
+            transform:
+              "translateX(20px)",
           },
         },
         "fade-left": {
           "0%": {
             opacity: "0",
-            transform: "translateX(20px)",
+            transform:
+              "translateX(20px)",
           },
           "100%": {
             opacity: "1",
@@ -84,11 +111,16 @@ export default {
         },
       },
       animation: {
-        "slide-right": "slide-right 2.5s ease-in-out infinite",
-        "fade-left": "fade-left 0.5s ease-out",
-        "fade-left-reverse": "fade-left-reverse 0.5s ease-out",
+        "slide-right":
+          "slide-right 2.5s ease-in-out infinite",
+        "fade-left":
+          "fade-left 0.5s ease-out",
+        "fade-left-reverse":
+          "fade-left-reverse 0.5s ease-out",
       },
     },
   },
-  plugins: [require("tailwindcss-animated")],
+  plugins: [
+    require("tailwindcss-animated"),
+  ],
 };

@@ -7,10 +7,10 @@ import {
   getDefaultCardInterfaceObject,
 } from "@interfaces/CardInfoInterface";
 import { CardCustomizerTab } from "./CardCustomizerTab";
-import { Information } from "@features/CardCreationComponent/Information/Information";
+import { Information } from "@pages/CardCreationComponent/Information/Information";
 import { getCardInfo } from "@helpers/getCardInfo";
-import { Display } from "@features/CardCreationComponent/Display/Display";
-import { Fields } from "@features/CardCreationComponent/Fields/Fields";
+import { Display } from "@pages/CardCreationComponent/Display/Display";
+import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
 import Navbar from "@layout/ViewContainer/Navbar";
 
 export function CardCreationComponent() {

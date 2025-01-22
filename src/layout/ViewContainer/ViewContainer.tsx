@@ -3,8 +3,8 @@ import {
   useState,
 } from "react";
 import useViewContext from "@contexts/useViewContext";
-import Dashboard from "@features/Dashboard/Dashboard";
-import { CardCreationComponent } from "@features/CardCreationComponent/CardCreationComponent";
+import Dashboard from "@pages/Dashboard/Dashboard";
+import { CardCreationComponent } from "@pages/CardCreationComponent/CardCreationComponent";
 import { DashboardViewContext } from "@contexts/DashboardViewContext";
 
 export default function ViewContainer(props: {
