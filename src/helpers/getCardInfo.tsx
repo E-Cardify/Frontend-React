@@ -1,7 +1,7 @@
 import {
   CardInfoInterface,
   getDefaultCardInterfaceObject,
-} from "@typesFile/CardInfoInterface";
+} from "../interfaces/CardInfoInterface";
 
 export const getCardInfo = () => {
   const cardInfoString =

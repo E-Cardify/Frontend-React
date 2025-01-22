@@ -1,8 +1,6 @@
-import {
-  SideNavBar,
-  ViewContainer,
-} from "./components";
-import { ViewProvider } from "@hooks/ViewContext";
+import { SideNavBar } from "@layout/SideNavBar/SideNavBar";
+import ViewContainer from "@layout/ViewContainer/ViewContainer";
+import { ViewProvider } from "@contexts/ViewContext";
 
 function App() {
   return (
