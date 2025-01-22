@@ -22,7 +22,7 @@ import XIcon from "./icons/X";
 import CheckIcon from "./icons/Check";
 import SaveIcon from "./icons/Save";
 import GlobeIcon from "./icons/Globe";
-import InstagramIcon from "./icons/Instagram"
+import InstagramIcon from "./icons/Instagram";
 import FacebookIcon from "./icons/Facebook";
 import GithubIcon from "./icons/Github";
 import LinkIcon from "./icons/Link";
@@ -38,9 +38,42 @@ import PayPalIcon from "./icons/PayPal";
 import DribbbleIcon from "./icons/Dribbble";
 
 export {
-    AlignIcon, ArrowIcon, BellIcon, CodeSandBoxIcon, CreditCardIcon, CollapseIcon,
-    DashboardIcon, EyeIcon, InformationIcon, ListIcon, MailIcon, MapPinIcon, PhoneIcon, PieChartIcon,
-    PlusIcon, RotateIcon, ShareIcon, SlackIcon, SunIcon, UserIcon, XIcon, CheckIcon, SaveIcon, GlobeIcon,
-    InstagramIcon, FacebookIcon, GithubIcon, LinkIcon, TwitchIcon, ShoppingCardIcon, FileIcon, TiktokIcon,
-    PinterestIcon, WhatsAppIcon, TelegramIcon, DiscordIcon, PayPalIcon, DribbbleIcon
-}
+  AlignIcon,
+  ArrowIcon,
+  BellIcon,
+  CodeSandBoxIcon,
+  CreditCardIcon,
+  CollapseIcon,
+  DashboardIcon,
+  EyeIcon,
+  InformationIcon,
+  ListIcon,
+  MailIcon,
+  MapPinIcon,
+  PhoneIcon,
+  PieChartIcon,
+  PlusIcon,
+  RotateIcon,
+  ShareIcon,
+  SlackIcon,
+  SunIcon,
+  UserIcon,
+  XIcon,
+  CheckIcon,
+  SaveIcon,
+  GlobeIcon,
+  InstagramIcon,
+  FacebookIcon,
+  GithubIcon,
+  LinkIcon,
+  TwitchIcon,
+  ShoppingCardIcon,
+  FileIcon,
+  TiktokIcon,
+  PinterestIcon,
+  WhatsAppIcon,
+  TelegramIcon,
+  DiscordIcon,
+  PayPalIcon,
+  DribbbleIcon,
+};

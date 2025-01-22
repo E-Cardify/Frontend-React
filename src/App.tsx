@@ -1,5 +1,8 @@
-import { SideNavBar, ViewContainer } from "./components"
-import { ViewProvider } from "@hooks/ViewContext"
+import {
+  SideNavBar,
+  ViewContainer,
+} from "./components";
+import { ViewProvider } from "@hooks/ViewContext";
 
 function App() {
   return (
@@ -9,7 +12,7 @@ function App() {
         <ViewContainer />
       </ViewProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
