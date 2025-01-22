@@ -1,10 +1,17 @@
-import { BellIcon, InformationIcon, UserIcon } from "@icons";
+import {
+  BellIcon,
+  InformationIcon,
+  UserIcon,
+} from "@icons";
 import CardPreviewCard from "../Dashboard/Overview/CardPreviewCard";
 import { DashboardInfoButton } from "../Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { CardCreationTabContext } from "@hooks/CardCreationTabContext";
-import { CardInfoInterface } from "../../../typesFile/CardInfoInterface";
+import {
+  CardInfoInterface,
+  getDefaultCardInterfaceObject,
+} from "@typesFile/CardInfoInterface";
 import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "./Information";
 import { getCardInfo } from "../../../helpers/getCardInfo";
@@ -14,82 +21,135 @@ import useDashboardViewContext from "@hooks/useDashboardViewContext";
 import { Fields } from "./Fields";
 
 export function CardCreationComponent() {
-    const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || {
-        information: {}, design: {
-            color: "green-500",
-            style: "solid"
-        }, fields: []
-    });
-    const { t } = useTranslation();
-    const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Display");
-    const { currentView, setCurrentView } = useViewContext();
-    const { currentView: currentDashboardView, setCurrentView: setCurrentDashboardView } = useDashboardViewContext();
+  const { t } = useTranslation();
 
-    const showNotifications = () => {
-        if (currentView !== "Dashboard") {
-            setCurrentView("Dashboard");
-        }
+  const [cardInfo, setCardInfo] =
+    useState<CardInfoInterface>(
+      getCardInfo() ||
+        getDefaultCardInterfaceObject()
+    );
 
-        if (currentDashboardView !== "Notifications") {
-            setCurrentDashboardView("Notifications");
-        }
+  const [currentTab, setCurrentTab] =
+    useState<
+      | "Display"
+      | "Information"
+      | "Fields"
+    >("Display");
+
+  const {
+    currentView,
+    setCurrentView,
+  } = useViewContext();
+
+  const {
+    currentView: currentDashboardView,
+    setCurrentView:
+      setCurrentDashboardView,
+  } = useDashboardViewContext();
+
+  const showNotifications = () => {
+    if (currentView !== "Dashboard") {
+      setCurrentView("Dashboard");
     }
 
-    return (
-        <CardCreationTabContext.Provider value={{ cardInfo, setCardInfo, currentTab, setCurrentTab }}>
-            <div className="flex flex-col gap-2 h-full">
-                <div className="border-b-2 dark:border-neutral-400 pb-3">
-                    <div className="flex gap-2 items-center">
-                        <h1 className="font-Roboto font-bold text-3xl dark:text-white">{t("Card creation")}</h1>
+    if (
+      currentDashboardView !==
+      "Notifications"
+    ) {
+      setCurrentDashboardView(
+        "Notifications"
+      );
+    }
+  };
 
-                        {
-                            /* right side */
-                        }
-                        <div className="flex gap-2 ml-auto items-center">
-                            <DashboardInfoButton title={t("Help")}>
-                                <InformationIcon />
-                            </DashboardInfoButton>
+  return (
+    <CardCreationTabContext.Provider
+      value={{
+        cardInfo,
+        setCardInfo,
+        currentTab,
+        setCurrentTab,
+      }}
+    >
+      <div className="flex flex-col gap-2 h-full">
+        <div className="border-b-2 dark:border-neutral-400 pb-3">
+          <div className="flex gap-2 items-center">
+            <h1 className="font-Roboto font-bold text-3xl dark:text-white">
+              {t("Card creation")}
+            </h1>
 
-                            <DashboardInfoButton title={t("Notifications")} onClick={showNotifications}>
-                                <BellIcon />
-                            </DashboardInfoButton>
+            {/* right side */}
+            <div className="flex gap-2 ml-auto items-center">
+              <DashboardInfoButton
+                title={t("Help")}
+              >
+                <InformationIcon />
+              </DashboardInfoButton>
 
-                            <DashboardInfoButton title={t("Account")}>
-                                <UserIcon />
-                            </DashboardInfoButton>
-                        </div>
-                    </div>
-                </div>
+              <DashboardInfoButton
+                title={t(
+                  "Notifications"
+                )}
+                onClick={
+                  showNotifications
+                }
+              >
+                <BellIcon />
+              </DashboardInfoButton>
 
-                <div className="flex-1 flex justify-center items-center">
-                    {/* Preview */}
-                    <div className="p-20">
-                        <CardPreviewCard cardInfo={cardInfo} />
-                    </div>
-
-                    {/* Information Inputs */}
-                    <div className="flex-1 bg-white dark:bg-neutral-900 dark:border-black dark:text-white flex flex-col rounded-lg border-2 p-2 ute">
-                        <h1 className="font-Montserrat font-bold text-3xl">{t("Card customizer")}</h1>
-                        <div className="flex mt-2 border-b-2">
-                            <CardCustomizerTab text="Display" />
-                            <CardCustomizerTab text="Information" />
-                            <CardCustomizerTab isBeta={true} text="Fields" />
-                        </div>
-                        <div className="flex-1 px-4 py-2">
-                            {currentTab == "Information" && <>
-                                <Information />
-                            </>}
-                            {currentTab == "Display" && <>
-                                <Display />
-                            </>}
-                            {currentTab == "Fields" && <>
-                                <Fields />
-                            </>}
-                        </div>
-                    </div>
-                </div>
-
+              <DashboardInfoButton
+                title={t("Account")}
+              >
+                <UserIcon />
+              </DashboardInfoButton>
             </div>
-        </CardCreationTabContext.Provider>
-    );
+          </div>
+        </div>
+
+        <div className="flex-1 flex justify-center items-center">
+          {/* Preview */}
+          <div className="p-20">
+            <CardPreviewCard
+              cardInfo={cardInfo}
+            />
+          </div>
+
+          {/* Information Inputs */}
+          <div className="flex-1 bg-white dark:bg-neutral-900 dark:border-black dark:text-white flex flex-col rounded-lg border-2 p-2 ute">
+            <h1 className="font-Montserrat font-bold text-3xl">
+              {t("Card customizer")}
+            </h1>
+            <div className="flex mt-2 border-b-2">
+              <CardCustomizerTab text="Display" />
+              <CardCustomizerTab text="Information" />
+              <CardCustomizerTab
+                isBeta={true}
+                text="Fields"
+              />
+            </div>
+            <div className="flex-1 px-4 py-2">
+              {currentTab ==
+                "Information" && (
+                <>
+                  <Information />
+                </>
+              )}
+              {currentTab ==
+                "Display" && (
+                <>
+                  <Display />
+                </>
+              )}
+              {currentTab ==
+                "Fields" && (
+                <>
+                  <Fields />
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </CardCreationTabContext.Provider>
+  );
 }
