@@ -35,7 +35,7 @@ export default function Overview() {
           toggleVisibility={
             setShowQrCodePreview
           }
-          value="sohskjgh"
+          value="left"
         />
       )}
 

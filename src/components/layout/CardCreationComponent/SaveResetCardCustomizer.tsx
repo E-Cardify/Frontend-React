@@ -44,7 +44,7 @@ export function SaveResetCardCustomizer() {
   };
 
   const handleCardInfoReset = () => {
-    // console.log("Card info reseting");
+    // console.log("Card info resetting");
     // console.log("Default card interface: ");
     // console.log(defaultCardInterfaceObject);
     localStorage.setItem(
