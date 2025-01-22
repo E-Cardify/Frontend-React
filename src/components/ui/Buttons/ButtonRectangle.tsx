@@ -7,6 +7,7 @@ export default function ButtonRectangle(props: {
   iconHeight?: number;
   text: string;
   className?: string;
+  primary?: boolean;
 }) {
   const { t } = useTranslation();
 
@@ -14,7 +15,13 @@ export default function ButtonRectangle(props: {
     <button
       type="button"
       onClick={props.onClick}
-      className={`${props.className} flex items-center gap-2 bg-green-500 text-white font-Poppins font-bold p-2 px-3 rounded-lg shadow shadow-neutral-300 dark:shadow-neutral-700 border-2 border-green-500`}
+      className={`${
+        props.className
+      } flex items-center gap-2 font-Poppins font-bold p-2 px-3 rounded-lg shadow shadow-neutral-300 dark:shadow-neutral-700 border-2 ${
+        props.primary
+          ? "border-green-500 bg-green-500 text-white"
+          : "shadow-none text-neutral-600 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-white"
+      }`}
     >
       {props.icon && (
         <div

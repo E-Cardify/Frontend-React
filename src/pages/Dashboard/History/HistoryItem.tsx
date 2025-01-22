@@ -20,15 +20,15 @@ export function HistoryItem(props: {
             {props.icon}
           </div>
           {!props.last && (
-            <div className="flex-1 bg-neutral-300 w-[3px]" />
+            <div className="flex-1 bg-neutral-300 w-[3px] dark:bg-neutral-700" />
           )}
         </div>
         <CardContainer>
-          <div className="items-center relative rounded-md p-2 px-5 bg-gray-200">
+          <div className="items-center relative rounded-md p-2 px-5 bg-gray-200 dark:bg-neutral-900 dark:text-white">
             <p className="font-Poppins text-neutral-600 flex items-center gap-1">
               {props.date}
               {!props.seen && (
-                <div className="bg-green-500 rounded-full w-3 h-3 -translate-y-[10%]" />
+                <div className="bg-green-500 rounded-full w-3 h-3 -translate-y-[10%] " />
               )}
             </p>
             <h1 className="font-Poppins font-bold text-lg">
@@ -41,7 +41,7 @@ export function HistoryItem(props: {
         </CardContainer>
       </div>
       {!props.last && (
-        <div className="bg-neutral-300 w-[3px] h-10 ml-[22.5px] mb-2" />
+        <div className="bg-neutral-300 dark:bg-neutral-700 w-[3px] h-10 ml-[22.5px] mb-2" />
       )}
     </>
   );

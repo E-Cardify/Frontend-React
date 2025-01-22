@@ -98,20 +98,20 @@ export function SaveResetCardCustomizer() {
               </p>
 
               <div className="flex justify-end gap-2 pt-8">
-                <button
+                <ButtonRectangle
                   onClick={() =>
                     setShowResetPoppup(
                       false
                     )
                   }
-                  className="px-3 py-1.5 font-Poppins text-sm border-2 rounded-lg"
-                >
-                  {t("Cancel")}
-                </button>
+                  text="Cancel"
+                  className="font-normal text-sm rounded-md"
+                />
                 <ButtonRectangle
                   onClick={
                     handleCardInfoReset
                   }
+                  primary={true}
                   className="font-normal text-sm rounded-md bg-red-500 border-red-500 shadow-none"
                   text="Reset"
                 />
@@ -153,18 +153,15 @@ export function SaveResetCardCustomizer() {
       )}
 
       <div className="pt-2 flex items-center gap-2 flex-row-reverse">
-        <button
+        <ButtonRectangle
           onClick={() => {
             setShowResetPoppup(true);
           }}
-          className="dark:border-black dark:text-neutral-400 dark:hover:text-white hover:text-neutral-800 p-2 px-3 border-2 flex items-center gap-2 text-neutral-600 font-Poppins font-bold rounded-lg"
-        >
-          <div className="w-8 h-8">
-            <RotateIcon />
-          </div>
-          <span>{t("Reset")}</span>
-        </button>
+          icon={<RotateIcon />}
+          text="Reset"
+        />
         <ButtonRectangle
+          primary={true}
           onClick={handleCardInfoSave}
           icon={<SaveIcon />}
           text="Save"
