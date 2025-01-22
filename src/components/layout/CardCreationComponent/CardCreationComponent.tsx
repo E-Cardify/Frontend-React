@@ -4,7 +4,7 @@ import { DashboardInfoButton } from "../Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { CardCreationTabContext } from "@hooks/CardCreationTabContext";
-import { CardInfoInterface } from "../../../typesFile/CardInfoInterface";
+import { CardInfoInterface, getDefaultCardInterfaceObject } from "@typesFile/CardInfoInterface";
 import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "./Information";
 import { getCardInfo } from "../../../helpers/getCardInfo";
@@ -14,12 +14,7 @@ import useDashboardViewContext from "@hooks/useDashboardViewContext";
 import { Fields } from "./Fields";
 
 export function CardCreationComponent() {
-    const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || {
-        information: {}, design: {
-            color: "green-500",
-            style: "solid"
-        }, fields: []
-    });
+    const [cardInfo, setCardInfo] = useState<CardInfoInterface>(getCardInfo() || getDefaultCardInterfaceObject());
     const { t } = useTranslation();
     const [currentTab, setCurrentTab] = useState<"Display" | "Information" | "Fields">("Display");
     const { currentView, setCurrentView } = useViewContext();

@@ -4,7 +4,9 @@ import SaveIcon from "../../../assets/icons/Save";
 import Check from "../../../assets/icons/Check";
 import { XIcon } from "@icons";
 import { useState } from "react";
+// import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { getDefaultCardInterfaceObject } from "@typesFile/CardInfoInterface";
 
 export function SaveResetCardCustomizer() {
     const { t } = useTranslation();
@@ -19,34 +21,30 @@ export function SaveResetCardCustomizer() {
 
         setHidePoppupAnimation(false);
         setShowPoppup(true);
+
+        setTimeout(() => {
+            setHidePoppupAnimation(true);
+
+            setTimeout(() => {
+                setShowPoppup(false);
+                setHidePoppupAnimation(false);
+            }, 450)
+        }, 3000)
     };
 
     const handleCardInfoReset = () => {
+        // console.log("Card info reseting");
+        // console.log("Default card interface: ");
+        // console.log(defaultCardInterfaceObject);
+        localStorage.setItem("cardInfo", JSON.stringify(getDefaultCardInterfaceObject()));
+
+        setCardInfo(getDefaultCardInterfaceObject())
         setShowResetPoppup(false);
-        setCardInfo({
-            information: {
-                firstName: "",
-                middleName: "",
-                lastName: "",
-                preferredName: "",
-                maidenName: "",
-                pronouns: "",
-                title: "",
-                department: "",
-                company: "",
-                headline: "",
-                motto: "",
-
-            },
-            design: {
-                color: "green-500",
-                style: "solid",
-            },
-            fields: []
-        })
-
-        localStorage.removeItem("cardInfo");
     }
+
+    // useEffect(() => {
+    //     console.log(cardInfo)
+    // }, [setCardInfo, cardInfo])
 
     const handleHidePoppup = () => {
         setHidePoppupAnimation(true);
