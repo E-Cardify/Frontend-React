@@ -1,16 +1,46 @@
+import { SideNavBar } from "@layout/SideNavBar/SideNavBar";
+import ViewContainer from "@layout/ViewContainer/ViewContainer";
+import { ViewProvider } from "@contexts/ViewContext";
 import {
-  SideNavBar,
-  ViewContainer,
-} from "./components";
-import { ViewProvider } from "@hooks/ViewContext";
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import ComponentPreview from "@pages/ComponentPreview/ComponentPreview";
 
 function App() {
   return (
     <div className="min-h-[100svh] bg-gray-100 dark:bg-neutral-800 flex">
-      <ViewProvider>
-        <SideNavBar />
-        <ViewContainer />
-      </ViewProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<div>Hello</div>}
+          />
+
+          <Route
+            path="/management/*"
+            element={
+              <ViewProvider>
+                <SideNavBar />
+                <ViewContainer />
+              </ViewProvider>
+            }
+          />
+
+          <Route
+            path="/components-preview"
+            element={
+              <ComponentPreview />
+            }
+          />
+
+          <Route
+            path="*"
+            element={<div>404</div>}
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
