@@ -1,13 +1,8 @@
 import CardPreviewCard from "@components/CardPreviewCard";
-import { CardInfoInterface } from "@interfaces/CardInfoInterface";
-import { useQuery } from "@tanstack/react-query";
+import { useFetchCardInfo } from "../../services/CardInfo/useFetchAllCardInfo";
 
 export default function Cards() {
-  const { data, isLoading } = useQuery<CardInfoInterface[]>({
-    queryFn: async () =>
-      fetch(`http://localhost:5000/api/v1/card-info`).then((res) => res.json()),
-    queryKey: ["card-info"],
-  });
+  const { data, isLoading } = useFetchCardInfo();
 
   return (
     <>
@@ -15,7 +10,12 @@ export default function Cards() {
       {data && (
         <div className="flex flex-wrap gap-2 items-start">
           {data.map((SingleCardInfo) => {
-            return <CardPreviewCard cardInfo={SingleCardInfo} />;
+            return (
+              <CardPreviewCard
+                key={`${SingleCardInfo.id}${SingleCardInfo.information.title}${SingleCardInfo.information.lastName}`}
+                cardInfo={SingleCardInfo}
+              />
+            );
           })}
         </div>
       )}

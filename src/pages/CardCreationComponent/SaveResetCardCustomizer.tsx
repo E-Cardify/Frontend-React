@@ -8,31 +8,23 @@ import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 import ButtonX from "@components/ui/Buttons/ButtonX";
+import { createCard } from "../../services/CardInfo/useCreateCard";
 
 export function SaveResetCardCustomizer() {
   const { t } = useTranslation();
-  const { cardInfo, setCardInfo } =
-    useCardCreationTabContext();
-  const [showPoppup, setShowPoppup] =
-    useState(false);
-  const [
-    hidePoppupAnimation,
-    setHidePoppupAnimation,
-  ] = useState(false);
+  const { cardInfo, setCardInfo } = useCardCreationTabContext();
+  const [showPoppup, setShowPoppup] = useState(false);
+  const [hidePoppupAnimation, setHidePoppupAnimation] = useState(false);
 
-  const [
-    showResetPoppup,
-    setShowResetPoppup,
-  ] = useState(false);
+  const [showResetPoppup, setShowResetPoppup] = useState(false);
 
   const handleCardInfoSave = () => {
-    localStorage.setItem(
-      "cardInfo",
-      JSON.stringify(cardInfo)
-    );
+    localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
 
     setHidePoppupAnimation(false);
     setShowPoppup(true);
+
+    createCard(cardInfo);
 
     setTimeout(() => {
       setHidePoppupAnimation(true);
@@ -47,14 +39,10 @@ export function SaveResetCardCustomizer() {
   const handleCardInfoReset = () => {
     localStorage.setItem(
       "cardInfo",
-      JSON.stringify(
-        getDefaultCardInterfaceObject()
-      )
+      JSON.stringify(getDefaultCardInterfaceObject())
     );
 
-    setCardInfo(
-      getDefaultCardInterfaceObject()
-    );
+    setCardInfo(getDefaultCardInterfaceObject());
     setShowResetPoppup(false);
   };
 
@@ -78,32 +66,20 @@ export function SaveResetCardCustomizer() {
                 <RotateIcon />
               </div>
               <h1 className="text-lg font-Poppins font-bold pt-3">
-                {t(
-                  "Are you sure you want to reset"
-                )}
-                ?
+                {t("Are you sure you want to reset")}?
               </h1>
               <p className="font-Poppins text-sm text-neutral-700 dark:text-neutral-400">
-                {t(
-                  "Your data will be deleted and this can't be undone"
-                )}
-                .
+                {t("Your data will be deleted and this can't be undone")}.
               </p>
 
               <div className="flex justify-end gap-2 pt-8">
                 <ButtonRectangle
-                  onClick={() =>
-                    setShowResetPoppup(
-                      false
-                    )
-                  }
+                  onClick={() => setShowResetPoppup(false)}
                   text="Cancel"
                   className="font-normal text-sm rounded-md"
                 />
                 <ButtonRectangle
-                  onClick={
-                    handleCardInfoReset
-                  }
+                  onClick={handleCardInfoReset}
                   primary={true}
                   className="font-normal text-sm rounded-md bg-red-500 border-red-500 shadow-none"
                   text="Reset"
@@ -126,19 +102,12 @@ export function SaveResetCardCustomizer() {
             <CheckIcon />
           </div>
           <div>
-            <h1 className="font-bold font-Poppins">
-              {t("Success")}!
-            </h1>
+            <h1 className="font-bold font-Poppins">{t("Success")}!</h1>
             <p className="font-Montserrat text-sm text-neutral-800">
-              {t(
-                "Card has been saved successfully"
-              )}
-              .
+              {t("Card has been saved successfully")}.
             </p>
           </div>
-          <ButtonX
-            onClick={handleHidePoppup}
-          />
+          <ButtonX onClick={handleHidePoppup} />
         </div>
       )}
 
