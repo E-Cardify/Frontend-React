@@ -3,11 +3,11 @@ import {
   InformationIcon,
   UserIcon,
 } from "@icons";
-import { DashboardInfoButton } from "@pages/Dashboard/DashboardInfoButton";
 import { useTranslation } from "react-i18next";
 import useViewContext from "@contexts/useViewContext";
 import useDashboardViewContext from "@contexts/useDashboardViewContext";
 import { ReactNode } from "react";
+import { ButtonCircle } from "@components/ui/Buttons/ButtonCircle";
 
 export default function Navbar(props: {
   children?: ReactNode;
@@ -57,24 +57,24 @@ export default function Navbar(props: {
 
         {/* right side */}
         <div className="flex gap-2 ml-auto items-center">
-          <DashboardInfoButton
+          <ButtonCircle
             title={t("Help")}
           >
             <InformationIcon />
-          </DashboardInfoButton>
+          </ButtonCircle>
 
-          <DashboardInfoButton
+          <ButtonCircle
             onClick={showNotifications}
             title={t("Notifications")}
           >
             <BellIcon />
-          </DashboardInfoButton>
+          </ButtonCircle>
 
-          <DashboardInfoButton
+          <ButtonCircle
             title={t("Account")}
           >
             <UserIcon />
-          </DashboardInfoButton>
+          </ButtonCircle>
         </div>
       </div>
 

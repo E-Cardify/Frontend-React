@@ -2,13 +2,12 @@ import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { RotateIcon } from "@icons";
 import { SaveIcon } from "@icons";
 import { CheckIcon } from "@icons";
-import { XIcon } from "@icons";
 import { useState } from "react";
-// import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
+import ButtonX from "@components/ui/Buttons/ButtonX";
 
 export function SaveResetCardCustomizer() {
   const { t } = useTranslation();
@@ -46,9 +45,6 @@ export function SaveResetCardCustomizer() {
   };
 
   const handleCardInfoReset = () => {
-    // console.log("Card info resetting");
-    // console.log("Default card interface: ");
-    // console.log(defaultCardInterfaceObject);
     localStorage.setItem(
       "cardInfo",
       JSON.stringify(
@@ -61,10 +57,6 @@ export function SaveResetCardCustomizer() {
     );
     setShowResetPoppup(false);
   };
-
-  // useEffect(() => {
-  //     console.log(cardInfo)
-  // }, [setCardInfo, cardInfo])
 
   const handleHidePoppup = () => {
     setHidePoppupAnimation(true);
@@ -144,12 +136,9 @@ export function SaveResetCardCustomizer() {
               .
             </p>
           </div>
-          <div
-            className="w-5 h-5 hover:cursor-pointer text-neutral-700 hover:text-neutral-950"
+          <ButtonX
             onClick={handleHidePoppup}
-          >
-            <XIcon />
-          </div>
+          />
         </div>
       )}
 

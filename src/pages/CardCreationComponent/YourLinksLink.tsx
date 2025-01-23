@@ -1,9 +1,9 @@
 import { allFields } from "@data/fields";
 import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { useTranslation } from "react-i18next";
-import { XIcon } from "@icons";
 import CardContainer from "@components/ui/CardContainer";
 import Input from "@components/ui/Input";
+import ButtonX from "@components/ui/Buttons/ButtonX";
 
 export function YourLinksLink(props: {
   index: number;
@@ -73,14 +73,11 @@ export function YourLinksLink(props: {
                 )}
               </label>
             </div>
-            <div
-              className="w-6 h-6 cursor-pointer text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200"
+            <ButtonX
               onClick={
                 handleFieldDelete
               }
-            >
-              <XIcon />
-            </div>
+            />
           </div>
           <Input
             wFull={true}

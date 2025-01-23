@@ -1,10 +1,10 @@
 import { SaveResetCardCustomizer } from "../SaveResetCardCustomizer";
 import { useTranslation } from "react-i18next";
-import { SingleFieldCreateButton } from "../SingleFieldCreateButton";
 import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { useEffect } from "react";
 import fields from "@data/fields";
 import { YourLinksLink } from "../YourLinksLink";
+import { ButtonHoverEffect } from "@components/ui/Buttons/ButtonHoverEffect";
 
 export function Fields() {
   const { t } = useTranslation();
@@ -84,7 +84,7 @@ export function Fields() {
                             );
                           }}
                         >
-                          <SingleFieldCreateButton
+                          <ButtonHoverEffect
                             text={
                               field.text
                             }
