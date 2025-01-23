@@ -6,42 +6,23 @@ import QrCodeCard from "./QrCodeCard";
 import { CreateNewCard } from "./CreateNewCard";
 import { ShareCard } from "./ShareCard";
 import TotalCardsCreated from "./TotalCardCreated";
-import { getCardInfo } from "@helpers/getCardInfo";
-import {
-  CardInfoInterface,
-  getDefaultCardInterfaceObject,
-} from "@interfaces/CardInfoInterface";
+import { useFetchMainCardInfo } from "../../../services/CardInfo/useFetchMainCardInfo";
 
 export default function Overview() {
-  const [
-    showQrCodePreview,
-    setShowQrCodePreview,
-  ] = useState(false);
-  const [cardInfo] =
-    useState<CardInfoInterface>(
-      getCardInfo() ||
-        getDefaultCardInterfaceObject()
-    );
+  const [showQrCodePreview, setShowQrCodePreview] = useState(false);
+  const { data } = useFetchMainCardInfo();
 
-  const handleShowQrCodePreview =
-    () => {
-      setShowQrCodePreview(true);
-    };
+  const handleShowQrCodePreview = () => {
+    setShowQrCodePreview(true);
+  };
 
   return (
     <div className="mt-3 flex gap-2 flex-wrap items-start">
       {showQrCodePreview && (
-        <QrCodePreview
-          toggleVisibility={
-            setShowQrCodePreview
-          }
-          value="left"
-        />
+        <QrCodePreview toggleVisibility={setShowQrCodePreview} value="left" />
       )}
 
-      <CardPreviewCard
-        cardInfo={cardInfo}
-      />
+      <CardPreviewCard cardInfo={data} />
 
       <div className="flex flex-col h-max gap-2">
         <div className="flex gap-2 flex-wrap">
@@ -50,11 +31,7 @@ export default function Overview() {
         </div>
 
         <div className="flex gap-2 flex-wrap justify-center">
-          <QrCodeCard
-            handleShowQrCodePreview={
-              handleShowQrCodePreview
-            }
-          />
+          <QrCodeCard handleShowQrCodePreview={handleShowQrCodePreview} />
           <CreateNewCard />
           <ShareCard />
         </div>

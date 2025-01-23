@@ -64,4 +64,5 @@ export interface CardInfoInterface {
   };
   fields: Field[];
   id?: string;
+  isMain?: boolean;
 }

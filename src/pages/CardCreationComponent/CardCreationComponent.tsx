@@ -7,7 +7,6 @@ import {
   getDefaultCardInterfaceObject,
 } from "@interfaces/CardInfoInterface";
 import { Information } from "@pages/CardCreationComponent/Information/Information";
-import { getCardInfo } from "@helpers/getCardInfo";
 import { Display } from "@pages/CardCreationComponent/Display/Display";
 import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
 import Navbar from "@layout/ViewContainer/Navbar";
@@ -16,24 +15,16 @@ import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalN
 export function CardCreationComponent() {
   const { t } = useTranslation();
 
-  const [cardInfo, setCardInfo] =
-    useState<CardInfoInterface>(
-      getCardInfo() ||
-        getDefaultCardInterfaceObject()
-    );
+  const [cardInfo, setCardInfo] = useState<CardInfoInterface>(
+    getDefaultCardInterfaceObject()
+  );
 
-  const [currentTab, setCurrentTab] =
-    useState<
-      | "Display"
-      | "Information"
-      | "Fields"
-    >("Display");
+  const [currentTab, setCurrentTab] = useState<
+    "Display" | "Information" | "Fields"
+  >("Information");
 
   const handleSetCurrentTab = (
-    newTab:
-      | "Display"
-      | "Information"
-      | "Fields"
+    newTab: "Display" | "Information" | "Fields"
   ) => {
     setCurrentTab(newTab);
   };
@@ -53,9 +44,7 @@ export function CardCreationComponent() {
         <div className="flex-1 flex justify-center items-center">
           {/* Preview */}
           <div className="p-20">
-            <CardPreviewCard
-              cardInfo={cardInfo}
-            />
+            <CardPreviewCard cardInfo={cardInfo} />
           </div>
 
           {/* Information Inputs */}
@@ -68,18 +57,14 @@ export function CardCreationComponent() {
                 text="Display"
                 currentView={currentTab}
                 onClick={() => {
-                  handleSetCurrentTab(
-                    "Display"
-                  );
+                  handleSetCurrentTab("Display");
                 }}
               />
               <ButtonHorizontalNavBar
                 text="Information"
                 currentView={currentTab}
                 onClick={() => {
-                  handleSetCurrentTab(
-                    "Information"
-                  );
+                  handleSetCurrentTab("Information");
                 }}
               />
               <ButtonHorizontalNavBar
@@ -87,27 +72,22 @@ export function CardCreationComponent() {
                 text="Fields"
                 currentView={currentTab}
                 onClick={() => {
-                  handleSetCurrentTab(
-                    "Fields"
-                  );
+                  handleSetCurrentTab("Fields");
                 }}
               />
             </div>
             <div className="flex-1 px-4 py-2">
-              {currentTab ==
-                "Information" && (
+              {currentTab == "Information" && (
                 <>
                   <Information />
                 </>
               )}
-              {currentTab ==
-                "Display" && (
+              {currentTab == "Display" && (
                 <>
                   <Display />
                 </>
               )}
-              {currentTab ==
-                "Fields" && (
+              {currentTab == "Fields" && (
                 <>
                   <Fields />
                 </>

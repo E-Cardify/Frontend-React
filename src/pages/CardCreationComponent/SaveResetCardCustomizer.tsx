@@ -37,11 +37,6 @@ export function SaveResetCardCustomizer() {
   };
 
   const handleCardInfoReset = () => {
-    localStorage.setItem(
-      "cardInfo",
-      JSON.stringify(getDefaultCardInterfaceObject())
-    );
-
     setCardInfo(getDefaultCardInterfaceObject());
     setShowResetPoppup(false);
   };
