@@ -6,42 +6,15 @@ import path from "path";
 export default defineConfig({
   resolve: {
     alias: {
-      "@icons": path.resolve(
-        __dirname,
-        "src/assets"
-      ),
-      "@hooks": path.resolve(
-        __dirname,
-        "src/hooks"
-      ),
-      "@interfaces": path.resolve(
-        __dirname,
-        "src/interfaces"
-      ),
-      "@data": path.resolve(
-        __dirname,
-        "src/data"
-      ),
-      "@contexts": path.resolve(
-        __dirname,
-        "src/contexts"
-      ),
-      "@pages": path.resolve(
-        __dirname,
-        "src/pages"
-      ),
-      "@layout": path.resolve(
-        __dirname,
-        "src/layout"
-      ),
-      "@components": path.resolve(
-        __dirname,
-        "src/components"
-      ),
-      "@helpers": path.resolve(
-        __dirname,
-        "src/helpers"
-      ),
+      "@icons": path.resolve(__dirname, "src/assets"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@interfaces": path.resolve(__dirname, "src/interfaces"),
+      "@data": path.resolve(__dirname, "src/data"),
+      "@contexts": path.resolve(__dirname, "src/contexts"),
+      "@pages": path.resolve(__dirname, "src/pages"),
+      "@layout": path.resolve(__dirname, "src/layout"),
+      "@components": path.resolve(__dirname, "src/components"),
+      "@helpers": path.resolve(__dirname, "src/helpers"),
     },
   },
   server: {
