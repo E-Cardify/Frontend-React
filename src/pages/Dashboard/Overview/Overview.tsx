@@ -19,7 +19,10 @@ export default function Overview() {
   return (
     <div className="mt-3 flex gap-2 flex-wrap items-start">
       {showQrCodePreview && (
-        <QrCodePreview toggleVisibility={setShowQrCodePreview} value="left" />
+        <QrCodePreview
+          toggleVisibility={setShowQrCodePreview}
+          value={data?.id}
+        />
       )}
 
       <CardPreviewCard cardInfo={data} />
@@ -31,7 +34,10 @@ export default function Overview() {
         </div>
 
         <div className="flex gap-2 flex-wrap justify-center">
-          <QrCodeCard handleShowQrCodePreview={handleShowQrCodePreview} />
+          <QrCodeCard
+            handleShowQrCodePreview={handleShowQrCodePreview}
+            value={data?.id}
+          />
           <CreateNewCard />
           <ShareCard />
         </div>
