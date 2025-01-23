@@ -6,12 +6,12 @@ import {
   CardInfoInterface,
   getDefaultCardInterfaceObject,
 } from "@interfaces/CardInfoInterface";
-import { CardCustomizerTab } from "./CardCustomizerTab";
 import { Information } from "@pages/CardCreationComponent/Information/Information";
 import { getCardInfo } from "@helpers/getCardInfo";
 import { Display } from "@pages/CardCreationComponent/Display/Display";
 import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
 import Navbar from "@layout/ViewContainer/Navbar";
+import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalNavBar";
 
 export function CardCreationComponent() {
   const { t } = useTranslation();
@@ -28,6 +28,15 @@ export function CardCreationComponent() {
       | "Information"
       | "Fields"
     >("Display");
+
+  const handleSetCurrentTab = (
+    newTab:
+      | "Display"
+      | "Information"
+      | "Fields"
+  ) => {
+    setCurrentTab(newTab);
+  };
 
   return (
     <CardCreationTabContext.Provider
@@ -55,11 +64,33 @@ export function CardCreationComponent() {
               {t("Card customizer")}
             </h1>
             <div className="flex mt-2 border-b-2">
-              <CardCustomizerTab text="Display" />
-              <CardCustomizerTab text="Information" />
-              <CardCustomizerTab
+              <ButtonHorizontalNavBar
+                text="Display"
+                currentView={currentTab}
+                onClick={() => {
+                  handleSetCurrentTab(
+                    "Display"
+                  );
+                }}
+              />
+              <ButtonHorizontalNavBar
+                text="Information"
+                currentView={currentTab}
+                onClick={() => {
+                  handleSetCurrentTab(
+                    "Information"
+                  );
+                }}
+              />
+              <ButtonHorizontalNavBar
                 isBeta={true}
                 text="Fields"
+                currentView={currentTab}
+                onClick={() => {
+                  handleSetCurrentTab(
+                    "Fields"
+                  );
+                }}
               />
             </div>
             <div className="flex-1 px-4 py-2">

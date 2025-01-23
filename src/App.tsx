@@ -6,6 +6,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import ComponentPreview from "@pages/ComponentPreview/ComponentPreview";
 
 function App() {
   return (
@@ -24,6 +25,13 @@ function App() {
                 <SideNavBar />
                 <ViewContainer />
               </ViewProvider>
+            }
+          />
+
+          <Route
+            path="/components-preview"
+            element={
+              <ComponentPreview />
             }
           />
 

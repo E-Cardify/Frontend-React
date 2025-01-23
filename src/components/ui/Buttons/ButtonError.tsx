@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function ButtonRectangle(props: {
+export default function ButtonError(props: {
   onClick?: () => void;
   icon?: ReactNode;
   iconHeight?: number;
@@ -15,13 +15,7 @@ export default function ButtonRectangle(props: {
     <button
       type="button"
       onClick={props.onClick}
-      className={`${
-        props.className
-      } flex items-center gap-2 font-Poppins text-sm font-bold p-1.5 px-2.5 rounded-md border-2 ${
-        props.primary
-          ? "border-green-500 bg-green-500 text-white"
-          : "shadow-none text-neutral-600 hover:text-neutral-800 dark:text-neutral-200 dark:hover:text-white"
-      }`}
+      className={`${props.className} flex items-center gap-2 font-Poppins font-bold p-1.5 px-2.5 rounded-md text-sm border-red-500 from-red-500 to-red-400 bg-gradient-to-br text-white`}
     >
       {props.icon && (
         <div

@@ -1,11 +1,11 @@
 export default function Input(props: {
   wFull?: boolean;
-  onChange: (
+  onChange?: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void;
-  value: string;
-  id: string;
-  title: string;
+  value?: string;
+  id?: string;
+  title?: string;
 }) {
   return (
     <input

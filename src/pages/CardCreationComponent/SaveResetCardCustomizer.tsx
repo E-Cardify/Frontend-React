@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
+import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 
 export function SaveResetCardCustomizer() {
   const { t } = useTranslation();
@@ -160,8 +161,7 @@ export function SaveResetCardCustomizer() {
           icon={<RotateIcon />}
           text="Reset"
         />
-        <ButtonRectangle
-          primary={true}
+        <ButtonPrimary
           onClick={handleCardInfoSave}
           icon={<SaveIcon />}
           text="Save"

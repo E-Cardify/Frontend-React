@@ -3,7 +3,6 @@ import {
   useState,
 } from "react";
 import { CollapseSideNavBarContext } from "@contexts/CollapseSideNavBarContext";
-import { SideNavBarItem } from "./SideNavBarItem";
 import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
 import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
@@ -17,6 +16,7 @@ import {
 import { useTranslation } from "react-i18next";
 import useViewContext from "@contexts/useViewContext";
 import { viewsType } from "@contexts/ViewContext";
+import ButtonSideNavBar from "@components/ui/Buttons/ButtonSideNavBar";
 
 export function SideNavBar() {
   const { t } = useTranslation();
@@ -99,17 +99,17 @@ export function SideNavBar() {
         </div>
 
         <div className="gap-2 pt-6 flex flex-col overflow-x-auto items-center">
-          <SideNavBarItem text="Dashboard">
+          <ButtonSideNavBar text="Dashboard">
             <DashboardIcon />
-          </SideNavBarItem>
+          </ButtonSideNavBar>
 
-          <SideNavBarItem text="Cards">
+          <ButtonSideNavBar text="Cards">
             <CreditCardIcon />
-          </SideNavBarItem>
+          </ButtonSideNavBar>
 
-          <SideNavBarItem text="Analytics">
+          <ButtonSideNavBar text="Analytics">
             <PieChartIcon />
-          </SideNavBarItem>
+          </ButtonSideNavBar>
         </div>
 
         <div

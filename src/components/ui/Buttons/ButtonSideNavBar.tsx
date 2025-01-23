@@ -3,7 +3,7 @@ import useViewContext from "@contexts/useViewContext";
 import useCollapseSideNavBarContext from "@contexts/useCollapseSideNavBarContext";
 import { useTranslation } from "react-i18next";
 
-export function SideNavBarItem(props: {
+export default function ButtonSideNavBar(props: {
   active?: boolean;
   children?: ReactNode;
   text:
@@ -18,7 +18,6 @@ export function SideNavBarItem(props: {
     currentView,
     setCurrentView,
   } = useViewContext();
-
   const handleViewChange = () => {
     setCurrentView(props.text);
   };
