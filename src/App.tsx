@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="min-h-[100svh] bg-gray-100 dark:bg-neutral-800 flex">
       <Router>
-        <Routes>
+        <Routes> 
           <Route path="/" element={<div>Hello</div>} />
 
           <Route path="/card/:id" element={<Card />} />

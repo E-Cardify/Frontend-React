@@ -1,55 +1,37 @@
 import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { RotateIcon } from "@icons";
 import { SaveIcon } from "@icons";
-import { CheckIcon } from "@icons";
+// import { CheckIcon } from "@icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
-import ButtonX from "@components/ui/Buttons/ButtonX";
+// import ButtonX from "@components/ui/Buttons/ButtonX";
 import { createCard } from "../../services/CardInfo/useCreateCard";
+import { useModal } from "@contexts/useModelContext";
+import useViewContext from "@contexts/useViewContext";
 
 export function SaveResetCardCustomizer() {
   const { t } = useTranslation();
   const { cardInfo, setCardInfo } = useCardCreationTabContext();
-  const [showPoppup, setShowPoppup] = useState(false);
-  const [hidePoppupAnimation, setHidePoppupAnimation] = useState(false);
+  const { showModal } = useModal();
+  const { setCurrentView } = useViewContext();
 
   const [showResetPoppup, setShowResetPoppup] = useState(false);
 
   const handleCardInfoSave = () => {
     localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
 
-    setHidePoppupAnimation(false);
-    setShowPoppup(true);
-
     createCard(cardInfo);
-
-    setTimeout(() => {
-      setHidePoppupAnimation(true);
-
-      setTimeout(() => {
-        setShowPoppup(false);
-        setHidePoppupAnimation(false);
-      }, 450);
-    }, 3000);
+    showModal("Success!", "Card has been saved successfully", 3000);
+    setCurrentView("Cards");
   };
 
   const handleCardInfoReset = () => {
     setCardInfo(getDefaultCardInterfaceObject());
     setShowResetPoppup(false);
   };
-
-  const handleHidePoppup = () => {
-    setHidePoppupAnimation(true);
-
-    setTimeout(() => {
-      setShowPoppup(false);
-      setHidePoppupAnimation(false);
-    }, 450);
-  };
-
   return (
     <>
       {showResetPoppup && (
@@ -82,27 +64,6 @@ export function SaveResetCardCustomizer() {
               </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {showPoppup && (
-        <div
-          className={`fixed top-5 right-5 text-black bg-green-200 border-green-300 border-2 flex items-center gap-3 py-2.5 px-3 rounded-lg shadow-xl ${
-            hidePoppupAnimation
-              ? "animate-fade-left-reverse"
-              : "animate-fade-left"
-          }`}
-        >
-          <div className="w-8 h-8 bg-green-500 text-white rounded-full p-1">
-            <CheckIcon />
-          </div>
-          <div>
-            <h1 className="font-bold font-Poppins">{t("Success")}!</h1>
-            <p className="font-Montserrat text-sm text-neutral-800">
-              {t("Card has been saved successfully")}.
-            </p>
-          </div>
-          <ButtonX onClick={handleHidePoppup} />
         </div>
       )}
 
