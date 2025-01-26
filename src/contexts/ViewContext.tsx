@@ -5,6 +5,8 @@ import {
 import { createContext, ReactNode, useState } from "react";
 import { ModalProvider } from "./ModelContext";
 import Poppup from "@components/ui/Poppup";
+import { ConfirmationPoppupProvider } from "./ConfirmationPoppupContext";
+import ConfirmationPoppup from "@components/ui/ConfirmationPoppup";
 
 export type viewsType =
   | "Dashboard"
@@ -38,8 +40,11 @@ function ViewProvider(props: { children: ReactNode }) {
       }}
     >
       <ModalProvider>
-        {props.children}
-        <Poppup />
+        <ConfirmationPoppupProvider>
+          {props.children}
+          <Poppup />
+          <ConfirmationPoppup />
+        </ConfirmationPoppupProvider>
       </ModalProvider>
     </ViewContext.Provider>
   );
