@@ -1,6 +1,9 @@
+import { useModal } from "@contexts/useModelContext";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const useChangeMainCard = () => {
+  const { showModal } = useModal();
+
   const queryClient = useQueryClient();
 
   const changeMainCard = async (newId: string) => {
@@ -10,6 +13,7 @@ export const useChangeMainCard = () => {
 
     if (response.ok) {
       queryClient.invalidateQueries({ queryKey: ["card-info", "main"] });
+      showModal("Success!", "Main card has been changed successfully", 3000);
     }
   };
 
