@@ -7,13 +7,29 @@ export const useChangeMainCard = () => {
   const queryClient = useQueryClient();
 
   const changeMainCard = async (newId: string) => {
-    const response = await fetch(
-      `http://localhost:5000/api/v1/card-info/change-main-card/${newId}`
-    );
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/v1/card-info/change-main-card/${newId}`
+      );
 
-    if (response.ok) {
-      queryClient.invalidateQueries({ queryKey: ["card-info", "main"] });
-      showModal("Success!", "Main card has been changed successfully", 3000);
+      if (response.ok) {
+        queryClient.invalidateQueries({ queryKey: ["card-info", "main"] });
+        showModal("Success!", "Main card has been changed successfully", 3000);
+      } else {
+        showModal(
+          "No success!",
+          "Main card has not been changed successfully. Try again",
+          5000,
+          false
+        );
+      }
+    } catch {
+      showModal(
+        "No success!",
+        "Main card has not been changed successfully. Try again",
+        5000,
+        false
+      );
     }
   };
 

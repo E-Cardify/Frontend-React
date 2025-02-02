@@ -68,7 +68,9 @@ export default function Cards() {
                           "fill-current"
                         }`}
                         onClick={() => {
-                          changeMainCard(SingleCardInfo.id || "");
+                          if (SingleCardInfo.id !== mainCardInfo?.id) {
+                            changeMainCard(SingleCardInfo.id || "");
+                          }
                         }}
                       >
                         <StartIcon />
