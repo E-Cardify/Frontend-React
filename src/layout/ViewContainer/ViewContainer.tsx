@@ -4,6 +4,7 @@ import Dashboard from "@pages/Dashboard/Dashboard";
 import { CardCreationComponent } from "@pages/CardCreationComponent/CardCreationComponent";
 import { DashboardViewContext } from "@contexts/DashboardViewContext";
 import Cards from "@pages/Cards/Cards";
+import { CardEditingComponent } from "@pages/CardEditingComponent/CardEditingComponent";
 
 export default function ViewContainer(props: { children?: ReactNode }) {
   const { currentView } = useViewContext();
@@ -26,6 +27,8 @@ export default function ViewContainer(props: { children?: ReactNode }) {
         {currentView == "Cards" && <Cards />}
 
         {currentView == "CardCreation" && <CardCreationComponent />}
+
+        {currentView == "CardEditing" && <CardEditingComponent />}
       </div>
     </DashboardViewContext.Provider>
   );

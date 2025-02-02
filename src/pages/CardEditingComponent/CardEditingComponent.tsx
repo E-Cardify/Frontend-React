@@ -2,22 +2,19 @@ import CardPreviewCard from "@components/CardPreviewCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { CardCreationTabContext } from "@contexts/CardCreationTabContext";
-import {
-  CardInfoInterface,
-  getDefaultCardInterfaceObject,
-} from "@interfaces/CardInfoInterface";
+import { CardInfoInterface } from "@interfaces/CardInfoInterface";
 import { Information } from "@pages/CardCreationComponent/Information/Information";
 import { Display } from "@pages/CardCreationComponent/Display/Display";
 import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
 import Navbar from "@layout/ViewContainer/Navbar";
 import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalNavBar";
+import useViewContext from "@contexts/useViewContext";
 
-export function CardCreationComponent() {
+export function CardEditingComponent() {
   const { t } = useTranslation();
+  const { editingCardInfo } = useViewContext();
 
-  const [cardInfo, setCardInfo] = useState<CardInfoInterface>(
-    getDefaultCardInterfaceObject()
-  );
+  const [cardInfo, setCardInfo] = useState<CardInfoInterface>(editingCardInfo);
 
   const [currentTab, setCurrentTab] = useState<
     "Display" | "Information" | "Fields"

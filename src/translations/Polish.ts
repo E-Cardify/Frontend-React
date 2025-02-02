@@ -14,27 +14,22 @@ const Dashboard = {
   History: "Historia",
   Filter: "Filtruj",
   Share: "Udostępnij",
-  "Create New Card":
-    "Utwórz nową kartę",
+  "Create New Card": "Utwórz nową kartę",
   "Your Qr Code": "Twój kod Qr",
   "Total views": "Wyświetlenia:",
-  "Compared to last month":
-    "Względem tamtego miesiąca",
+  "Compared to last month": "Względem tamtego miesiąca",
   Help: "Pomoc",
   Account: "Konto",
-  "Hide sidebar":
-    "Schowaj pasek boczny",
+  "Hide sidebar": "Schowaj pasek boczny",
   "Show sidebar": "Pokaż pasek boczny",
   "Add card": "Dodaj kartę",
-  "Total cards created:":
-    "Stworzone wizytówki:",
+  "Total cards created:": "Stworzone wizytówki:",
 };
 
 const CardCreationComponent = {
   Department: "Dział",
   Headline: "Nagłówek",
-  "Card customizer":
-    "Konfigurator karty",
+  "Card customizer": "Konfigurator karty",
   "Card creation": "Tworzenie karty",
   Display: "Wygląd",
   Information: "Informacje",
@@ -48,20 +43,17 @@ const CardCreationComponent = {
   "First Name": "Imię",
   "Middle Name": "Drugie Imię",
   "Last Name": "Nazwisko",
-  "Preferred Name":
-    "Preferowane Przydomek",
+  "Preferred Name": "Preferowane Przydomek",
   "Maiden Name": "Nazwisko Panieńskie",
   Pronouns: "Przyimki",
   Motto: "Motto",
   Title: "Tytuł",
   Company: "Firma",
-  Success: "Sukces",
-  "Card has been saved successfully":
-    "Karta została poprawnie zapisana",
+  "Success!": "Sukces!",
+  "Card has been saved successfully": "Karta została poprawnie zapisana",
   Reset: "Wyczyść",
   Save: "Zapisz",
-  "Are you sure you want to reset":
-    "Jesteś pewny, że chcesz wyczyścić",
+  "Are you sure you want to reset": "Jesteś pewny, że chcesz wyczyścić",
   "Your data will be deleted and this can't be undone":
     "Twoje informacje zostaną usunięte, to nie może być odwrócone",
   Cancel: "Anuluj",

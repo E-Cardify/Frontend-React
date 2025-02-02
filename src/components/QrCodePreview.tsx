@@ -1,22 +1,16 @@
 import { XIcon } from "@icons";
-import {
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import QRCode from "react-qr-code";
 
 export default function QrCodePreview(props: {
-  toggleVisibility: Dispatch<
-    SetStateAction<boolean>
-  >;
-  value: string;
+  toggleVisibility: Dispatch<SetStateAction<boolean>>;
+  value?: string | undefined;
 }) {
   const { t } = useTranslation();
-  const handleHideQrCodePreview =
-    () => {
-      props.toggleVisibility(false);
-    };
+  const handleHideQrCodePreview = () => {
+    props.toggleVisibility(false);
+  };
 
   return (
     <div className="fixed inset-0 z-30">
@@ -24,9 +18,7 @@ export default function QrCodePreview(props: {
         {/* backdrop and darken */}
         <div
           className="absolute inset-0 cursor-pointer z-10 backdrop-blur-sm bg-black/80"
-          onClick={
-            handleHideQrCodePreview
-          }
+          onClick={handleHideQrCodePreview}
         />
 
         {/* qr code in the middle */}
@@ -34,9 +26,7 @@ export default function QrCodePreview(props: {
           <div className="flex items-center gap-1 w-full p-5 mb-8">
             <div
               className="w-10 h-10 text-red-500 hover:text-red-800 z-50 relative cursor-pointer"
-              onClick={
-                handleHideQrCodePreview
-              }
+              onClick={handleHideQrCodePreview}
             >
               <XIcon />
             </div>
@@ -47,7 +37,7 @@ export default function QrCodePreview(props: {
           </div>
           <div className="w-full h-full relative z-50 px-10 pb-10">
             <QRCode
-              value={props.value}
+              value={`http://192.168.1.112:3000/card/${props.value}`}
               className="mx-auto max-w-80 max-h-80 border-4 border-white rounded-lg shadow shadow-neutral-700 box-content"
             />
           </div>

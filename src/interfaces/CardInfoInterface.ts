@@ -21,29 +21,28 @@ import Field from "./Field";
 //     fields: [],
 // }
 
-export const getDefaultCardInterfaceObject: () => CardInfoInterface =
-  () => {
-    return {
-      information: {
-        firstName: "",
-        middleName: "",
-        lastName: "",
-        preferredName: "",
-        maidenName: "",
-        pronouns: "",
-        title: "",
-        department: "",
-        company: "",
-        headline: "",
-        motto: "",
-      },
-      design: {
-        color: "green-500",
-        style: "solid",
-      },
-      fields: [],
-    };
+export const getDefaultCardInterfaceObject: () => CardInfoInterface = () => {
+  return {
+    information: {
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      preferredName: "",
+      maidenName: "",
+      pronouns: "",
+      title: "",
+      department: "",
+      company: "",
+      headline: "",
+      motto: "",
+    },
+    design: {
+      color: "green-500",
+      style: "solid",
+    },
+    fields: [],
   };
+};
 
 export interface CardInfoInterface {
   information: {
@@ -64,4 +63,6 @@ export interface CardInfoInterface {
     style: string;
   };
   fields: Field[];
+  id?: string;
+  isMain?: boolean;
 }

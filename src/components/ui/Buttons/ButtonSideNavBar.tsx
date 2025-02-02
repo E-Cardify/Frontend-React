@@ -6,31 +6,20 @@ import { useTranslation } from "react-i18next";
 export default function ButtonSideNavBar(props: {
   active?: boolean;
   children?: ReactNode;
-  text:
-    | "Dashboard"
-    | "Cards"
-    | "Analytics";
+  text: "Dashboard" | "Cards" | "Analytics";
 }) {
   const { t } = useTranslation();
-  const { isCollapsed } =
-    useCollapseSideNavBarContext();
-  const {
-    currentView,
-    setCurrentView,
-  } = useViewContext();
+  const { isCollapsed } = useCollapseSideNavBarContext();
+  const { currentView, setCurrentView } = useViewContext();
   const handleViewChange = () => {
     setCurrentView(props.text);
   };
 
   return (
     <div
-      title={
-        isCollapsed ? t(props.text) : ""
-      }
+      title={isCollapsed ? t(props.text) : ""}
       className={`flex gap-x-1 cursor-pointer items-center ${
-        !isCollapsed
-          ? "w-full"
-          : "w-max"
+        !isCollapsed ? "w-full" : "w-max"
       } py-2 rounded-md px-1 font-Roboto text-sm ${
         currentView == props.text
           ? "bg-green-500 text-white"
@@ -40,9 +29,7 @@ export default function ButtonSideNavBar(props: {
     >
       <div
         className={`${
-          !isCollapsed
-            ? "h-5 w-5"
-            : "h-10 w-10 p-1"
+          !isCollapsed ? "h-5 w-5" : "h-10 w-10 p-1"
         } flex items-center justify-center`}
       >
         {props.children}
