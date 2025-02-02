@@ -11,6 +11,7 @@ export default function ConfirmationPoppup() {
     hideModal,
     modalSecondaryText,
     onConfirm,
+    icon,
   } = useConfirmationPoppup();
 
   return (
@@ -20,7 +21,7 @@ export default function ConfirmationPoppup() {
           <div className="absolute inset-0 bg-black/50 -z-10" />
           <div className="flex flex-col dark:bg-neutral-800 dark:border-black bg-white py-6 px-8 rounded-lg shadow border-2">
             <div className="w-11 h-11 bg-red-200 text-red-500 rounded-lg p-1.5 flex justify-center items-center">
-              <RotateIcon />
+              {icon ? icon : <RotateIcon />}
             </div>
             <h1 className="text-lg font-Poppins font-bold pt-3">
               {t(modalContent || "")}?

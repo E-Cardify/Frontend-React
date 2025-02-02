@@ -38,6 +38,7 @@ import PayPalIcon from "./icons/PayPal";
 import DribbbleIcon from "./icons/Dribbble";
 import SettingsIcon from "./icons/Settings";
 import EditPenIcon from "./icons/EditPen";
+import TrashIcon from "./icons/Trash";
 
 export {
   AlignIcon,
@@ -80,4 +81,5 @@ export {
   DribbbleIcon,
   SettingsIcon,
   EditPenIcon,
+  TrashIcon,
 };

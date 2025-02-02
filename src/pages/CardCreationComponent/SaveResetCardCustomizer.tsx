@@ -4,7 +4,7 @@ import { SaveIcon } from "@icons";
 import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
-import { createCard } from "../../services/CardInfo/useCreateCard";
+import { useCreateCard } from "../../services/CardInfo/useCreateCard";
 import { useModal } from "@contexts/useModelContext";
 import useViewContext from "@contexts/useViewContext";
 import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
@@ -14,6 +14,7 @@ export function SaveResetCardCustomizer() {
   const { showModal } = useModal();
   const { showModal: showConfirmationPoppup } = useConfirmationPoppup();
   const { setCurrentView } = useViewContext();
+  const createCard = useCreateCard();
 
   const handleCardInfoSave = () => {
     localStorage.setItem("cardInfo", JSON.stringify(cardInfo));

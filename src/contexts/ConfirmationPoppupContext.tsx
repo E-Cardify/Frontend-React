@@ -5,6 +5,7 @@ export interface ConfirmationPoppupContextType {
     content: string,
     text: string,
     onConfirm?: () => void,
+    icon?: ReactNode,
     hideAfter?: number
   ) => void;
   hideModal: () => void;
@@ -13,6 +14,7 @@ export interface ConfirmationPoppupContextType {
   isModalVisible: boolean;
   hidePoppupAnimation: boolean;
   onConfirm: (() => void) | null;
+  icon?: ReactNode;
 }
 
 const ConfirmationPoppupContext = createContext<
@@ -29,6 +31,7 @@ const ConfirmationPoppupProvider: React.FC<{ children: ReactNode }> = ({
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [hidePoppupAnimation, setHidePoppupAnimation] = useState(false);
   const [onConfirm, setOnConfirm] = useState<(() => void) | null>(null);
+  const [icon, setIcon] = useState<ReactNode | null>(null);
 
   const hideModal = () => {
     setHidePoppupAnimation(true);
@@ -43,12 +46,14 @@ const ConfirmationPoppupProvider: React.FC<{ children: ReactNode }> = ({
     setModalContent(null);
     setModalSecondaryText(null);
     setOnConfirm(null);
+    setIcon(null);
   };
 
   const showModal = (
     content: string,
     text: string,
     onConfirm?: () => void,
+    icon?: ReactNode,
     hideAfter?: number
   ) => {
     setModalContent(content);
@@ -56,6 +61,7 @@ const ConfirmationPoppupProvider: React.FC<{ children: ReactNode }> = ({
     setIsModalVisible(true);
     setHidePoppupAnimation(false);
     setOnConfirm(() => onConfirm);
+    setIcon(icon);
 
     if (hideAfter) {
       setTimeout(() => {
@@ -74,6 +80,7 @@ const ConfirmationPoppupProvider: React.FC<{ children: ReactNode }> = ({
         isModalVisible,
         modalSecondaryText,
         onConfirm,
+        icon,
       }}
     >
       {children}
