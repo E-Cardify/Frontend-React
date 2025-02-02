@@ -1,14 +1,18 @@
 import CardPreviewCard from "@components/CardPreviewCard";
 import { useFetchCardInfo } from "../../services/CardInfo/useFetchCardInfo";
 import Navbar from "@layout/ViewContainer/Navbar";
-import { EditPenIcon, TrashIcon } from "@icons";
+import { EditPenIcon, StartIcon, TrashIcon } from "@icons";
 import useViewContext from "@contexts/useViewContext";
 import { CardInfoInterface } from "@interfaces/CardInfoInterface";
 import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
 import { useDeleteCard } from "../../services/CardInfo/deleteCard";
+import { useFetchMainCardInfo } from "../../services/CardInfo/useFetchMainCardInfo";
+import { useChangeMainCard } from "../../services/CardInfo/useChangeMainCard";
 
 export default function Cards() {
   const { data, isLoading } = useFetchCardInfo();
+  const { data: mainCardInfo } = useFetchMainCardInfo();
+  const changeMainCard = useChangeMainCard();
   const { setCurrentView, setEditingCardInfo } = useViewContext();
   const { showModal } = useConfirmationPoppup();
   const deleteCard = useDeleteCard();
@@ -36,7 +40,7 @@ export default function Cards() {
                     <div className="relative w-full h-full px-3 py-2 rounded-md overflow-hidden shadow shadow-black flex gap-2">
                       <div className="absolute bg-black/80 inset-0" />
                       <div
-                        className="w-6 h-6 cursor-pointer relative hover:text-red-500"
+                        className="w-6 h-6 cursor-pointer relative text-neutral-300 hover:text-white"
                         onClick={() => {
                           showModal(
                             "Do you want to delete this card",
@@ -51,12 +55,23 @@ export default function Cards() {
                         <TrashIcon />
                       </div>
                       <div
-                        className="w-6 h-6 cursor-pointer relative hover:text-green-500"
+                        className="w-6 h-6 cursor-pointer relative text-neutral-300 hover:text-white"
                         onClick={() => {
                           handleCardEditing(SingleCardInfo);
                         }}
                       >
                         <EditPenIcon />
+                      </div>
+                      <div
+                        className={`w-6 h-6 cursor-pointer relative text-yellow-300 hover:text-yellow-400 ${
+                          mainCardInfo?.id == SingleCardInfo.id &&
+                          "fill-current"
+                        }`}
+                        onClick={() => {
+                          changeMainCard(SingleCardInfo.id || "");
+                        }}
+                      >
+                        <StartIcon />
                       </div>
                     </div>
                   </div>

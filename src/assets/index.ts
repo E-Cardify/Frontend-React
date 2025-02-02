@@ -39,8 +39,10 @@ import DribbbleIcon from "./icons/Dribbble";
 import SettingsIcon from "./icons/Settings";
 import EditPenIcon from "./icons/EditPen";
 import TrashIcon from "./icons/Trash";
+import StartIcon from "./icons/Star";
 
 export {
+  StartIcon,
   AlignIcon,
   ArrowIcon,
   BellIcon,
