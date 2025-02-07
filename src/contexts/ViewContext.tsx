@@ -13,7 +13,8 @@ export type viewsType =
   | "Cards"
   | "Analytics"
   | "CardCreation"
-  | "CardEditing";
+  | "CardEditing"
+  | "Account";
 
 interface ViewContextType {
   currentView: viewsType;
