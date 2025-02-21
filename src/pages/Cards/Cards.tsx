@@ -8,18 +8,18 @@ import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
 import { useDeleteCard } from "../../services/CardInfo/deleteCard";
 import { useFetchMainCardInfo } from "../../services/CardInfo/useFetchMainCardInfo";
 import { useChangeMainCard } from "../../services/CardInfo/useChangeMainCard";
+import { Link } from "react-router-dom";
 
 export default function Cards() {
   const { data, isLoading } = useFetchCardInfo();
   const { data: mainCardInfo } = useFetchMainCardInfo();
   const changeMainCard = useChangeMainCard();
-  const { setCurrentView, setEditingCardInfo } = useViewContext();
+  const { setEditingCardInfo } = useViewContext();
   const { showModal } = useConfirmationPoppup();
   const deleteCard = useDeleteCard();
 
   const handleCardEditing = (cardInfo: CardInfoInterface) => {
     setEditingCardInfo(cardInfo);
-    setCurrentView("CardEditing");
   };
 
   return (
@@ -54,14 +54,15 @@ export default function Cards() {
                       >
                         <TrashIcon />
                       </div>
-                      <div
+                      <Link
+                        to="/management/edit-card"
                         className="w-6 h-6 cursor-pointer relative text-neutral-300 hover:text-white"
                         onClick={() => {
                           handleCardEditing(SingleCardInfo);
                         }}
                       >
                         <EditPenIcon />
-                      </div>
+                      </Link>
                       <div
                         className={`w-6 h-6 cursor-pointer relative text-yellow-300 hover:text-yellow-400 ${
                           mainCardInfo?.id == SingleCardInfo.id &&

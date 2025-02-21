@@ -1,31 +1,39 @@
-import { ReactNode } from "react";
-import useViewContext from "@contexts/useViewContext";
+import { ReactNode, useEffect, useState } from "react";
 import useCollapseSideNavBarContext from "@contexts/useCollapseSideNavBarContext";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 
 export default function ButtonSideNavBar(props: {
   active?: boolean;
   children?: ReactNode;
-  text: "Dashboard" | "Cards" | "Analytics";
+  text: string;
+  to: string;
 }) {
   const { t } = useTranslation();
   const { isCollapsed } = useCollapseSideNavBarContext();
-  const { currentView, setCurrentView } = useViewContext();
-  const handleViewChange = () => {
-    setCurrentView(props.text);
-  };
+
+  const location = useLocation();
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname == props.to) {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+    }
+  }, [location, setIsActive, isActive, props.to]);
 
   return (
-    <div
+    <Link
+      to={props.to}
       title={isCollapsed ? t(props.text) : ""}
       className={`flex gap-x-1 cursor-pointer items-center ${
         !isCollapsed ? "w-full" : "w-max"
       } py-2 rounded-md px-1 font-Roboto text-sm ${
-        currentView == props.text
+        isActive
           ? "bg-green-500 text-white"
           : "text-neutral-500 hover:text-neutral-700 hover:dark:text-neutral-400"
       }`}
-      onClick={handleViewChange}
     >
       <div
         className={`${
@@ -39,6 +47,6 @@ export default function ButtonSideNavBar(props: {
           {t(props.text)}
         </h1>
       )}
-    </div>
+    </Link>
   );
 }

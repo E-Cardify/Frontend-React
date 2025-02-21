@@ -5,21 +5,21 @@ import { getDefaultCardInterfaceObject } from "@interfaces/CardInfoInterface";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 import { useCreateCard } from "../../services/CardInfo/useCreateCard";
-import useViewContext from "@contexts/useViewContext";
 import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
+import { useNavigate } from "react-router-dom";
 
 export function SaveResetCardCustomizer() {
   const { cardInfo, setCardInfo } = useCardCreationTabContext();
   const { showModal: showConfirmationPoppup } = useConfirmationPoppup();
-  const { setCurrentView } = useViewContext();
   const createCard = useCreateCard();
+  const navigate = useNavigate();
 
   const handleCardInfoSave = async () => {
     localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
 
     const isOk = await createCard(cardInfo);
     if (isOk) {
-      setCurrentView("Cards");
+      navigate("/management/cards");
     }
   };
 

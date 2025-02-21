@@ -5,7 +5,7 @@ export const useDeleteCard = () => {
   const queryClient = useQueryClient();
   const { showModal } = useModal();
 
-  const deleteCard = async (id?: string) => {
+  const deleteCard = async (id: string | undefined) => {
     if (!id) return;
 
     try {
@@ -20,7 +20,7 @@ export const useDeleteCard = () => {
         queryClient.invalidateQueries({ queryKey: ["card-info"] });
         showModal(
           "Success!",
-          "Main card has not been changed successfully. Try again",
+          "Main card has been deleted successfully.",
           3000,
           true
         );
@@ -32,7 +32,8 @@ export const useDeleteCard = () => {
           false
         );
       }
-    } catch {
+    } catch (error) {
+      console.error("Failed to delete card:", error);
       showModal(
         "Error!",
         "Failed to delete main card. Please try again",

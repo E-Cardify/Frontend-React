@@ -5,14 +5,9 @@ import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalN
 import useDashboardViewContext from "@contexts/useDashboardViewContext";
 
 export function DashboardNavbarTabs() {
-  const {
-    currentView,
-    setCurrentView,
-  } = useDashboardViewContext();
+  const { currentView, setCurrentView } = useDashboardViewContext();
 
-  const handleViewChange = (
-    newView: "Overview" | "History"
-  ) => {
+  const handleViewChange = (newView: "Overview" | "History") => {
     setCurrentView(newView);
   };
 
@@ -26,14 +21,14 @@ export function DashboardNavbarTabs() {
         }}
       />
 
-      <ButtonHorizontalNavBar
+      {/* <ButtonHorizontalNavBar
         text="History"
         currentView={currentView}
         onClick={() => {
           handleViewChange("History");
         }}
         isBeta={true}
-      />
+      /> */}
 
       {/* right side */}
       <div className="ml-auto flex gap-3 pb-2 items-center">

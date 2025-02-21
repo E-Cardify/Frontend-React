@@ -4,16 +4,17 @@ import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
 import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
 import {
+  BellIcon,
   CollapseIcon,
   CreditCardIcon,
   DashboardIcon,
-  PieChartIcon,
+  // PieChartIcon,
   PlusIcon,
+  UserIcon,
 } from "@icons";
 import { useTranslation } from "react-i18next";
-import useViewContext from "@contexts/useViewContext";
-import { viewsType } from "@contexts/ViewContext";
 import ButtonSideNavBar from "@components/ui/Buttons/ButtonSideNavBar";
+import { Link } from "react-router-dom";
 
 export function SideNavBar() {
   const { t } = useTranslation();
@@ -21,8 +22,6 @@ export function SideNavBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-
-  const { setCurrentView } = useViewContext();
 
   const handleCollapseSideNavBar = () => {
     setIsCollapsed(!isCollapsed);
@@ -41,10 +40,6 @@ export function SideNavBar() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleViewChange = (text: viewsType) => {
-    setCurrentView(text);
-  };
 
   return (
     <CollapseSideNavBarContext.Provider
@@ -72,28 +67,34 @@ export function SideNavBar() {
         </div>
 
         <div className="gap-2 pt-6 flex flex-col overflow-x-auto items-center">
-          <ButtonSideNavBar text="Dashboard">
+          <ButtonSideNavBar text="Dashboard" to="/management/dashboard">
             <DashboardIcon />
           </ButtonSideNavBar>
 
-          <ButtonSideNavBar text="Cards">
+          <ButtonSideNavBar text="Cards" to="/management/cards">
             <CreditCardIcon />
           </ButtonSideNavBar>
 
-          <ButtonSideNavBar text="Analytics">
-            <PieChartIcon />
+          <ButtonSideNavBar text="Notifications" to="/management/notifications">
+            <BellIcon />
           </ButtonSideNavBar>
+
+          <ButtonSideNavBar text="Account" to="/management/account">
+            <UserIcon />
+          </ButtonSideNavBar>
+
+          {/* <ButtonSideNavBar text="Analytics">
+            <PieChartIcon />
+          </ButtonSideNavBar> */}
         </div>
 
-        <div
-          onClick={() => {
-            handleViewChange("CardCreation");
-          }}
+        <Link
+          to="/management/create-card"
           title={t("Add card")}
           className="h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500"
         >
           <PlusIcon />
-        </div>
+        </Link>
 
         {/* bottom */}
         <div className="mt-auto">

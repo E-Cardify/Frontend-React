@@ -1,4 +1,4 @@
-import { BellIcon, InformationIcon, UserIcon } from "@icons";
+import { BellIcon, InformationIcon } from "@icons";
 import { useTranslation } from "react-i18next";
 import useViewContext from "@contexts/useViewContext";
 import useDashboardViewContext from "@contexts/useDashboardViewContext";
@@ -47,14 +47,14 @@ export default function Navbar(props: { children?: ReactNode; text: string }) {
             <BellIcon />
           </ButtonCircle>
 
-          <ButtonCircle
+          {/* <ButtonCircle
             title={t("Account")}
             onClick={() => {
               setCurrentView("Account");
             }}
           >
             <UserIcon />
-          </ButtonCircle>
+          </ButtonCircle> */}
         </div>
       </div>
 

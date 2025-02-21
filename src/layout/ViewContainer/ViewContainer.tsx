@@ -1,14 +1,13 @@
 import { ReactNode, useState } from "react";
-import useViewContext from "@contexts/useViewContext";
 import Dashboard from "@pages/Dashboard/Dashboard";
 import { CardCreationComponent } from "@pages/CardCreationComponent/CardCreationComponent";
 import { DashboardViewContext } from "@contexts/DashboardViewContext";
 import Cards from "@pages/Cards/Cards";
 import { CardEditingComponent } from "@pages/CardEditingComponent/CardEditingComponent";
 import Account from "@pages/Account/Account";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 export default function ViewContainer(props: { children?: ReactNode }) {
-  const { currentView } = useViewContext();
   const [currentDashboardView, setCurrentView] = useState<
     "Overview" | "Notifications" | "History"
   >("Overview");
@@ -23,15 +22,16 @@ export default function ViewContainer(props: { children?: ReactNode }) {
       <div className="pl-10 pr-5 py-[3vh] flex-1">
         {props.children}
 
-        {currentView == "Dashboard" && <Dashboard />}
-
-        {currentView == "Cards" && <Cards />}
-
-        {currentView == "CardCreation" && <CardCreationComponent />}
-
-        {currentView == "CardEditing" && <CardEditingComponent />}
-
-        {currentView == "Account" && <Account />}
+        <Routes>
+          <Route path="/dashboard" index element={<Dashboard />} />
+          <Route path="/analytics" index element={<Dashboard />} />
+          <Route path="/cards" element={<Cards />} />
+          <Route path="/create-card" element={<CardCreationComponent />} />
+          <Route path="/edit-card" element={<CardEditingComponent />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/notifications" element={<Account />} />
+          <Route path="/*" element={<Navigate to="/management/dashboard" />} />
+        </Routes>
       </div>
     </DashboardViewContext.Provider>
   );
