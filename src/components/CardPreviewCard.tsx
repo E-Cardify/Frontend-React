@@ -26,7 +26,7 @@ export default function CardPreviewCard(props: {
         )}
 
         <div className="px-4 py-2">
-          <h1 className="font-Poppins font-bold text-3xl dark:text-white">
+          <h1 className="font-Poppins font-bold text-3xl dark:text-white break-words">
             {`${props.cardInfo?.information?.firstName || ""} `}
             {`${props.cardInfo?.information?.middleName || ""} `}
             {`${props.cardInfo?.information?.lastName || ""} `}
@@ -34,23 +34,23 @@ export default function CardPreviewCard(props: {
               `(${props.cardInfo?.information?.maidenName}) `}
           </h1>
 
-          <p className="text-sm text-neutral-600 font-Roboto pt-1.5">
+          <p className="text-sm text-neutral-600 font-Roboto pt-1.5 break-words">
             {props.cardInfo?.information?.title}
           </p>
 
           <p
             className={`text-${
               props.cardInfo?.design?.color || "green-500"
-            } font-Poppins font-bold text-lg`}
+            } font-Poppins font-bold text-lg break-words`}
           >
             {props.cardInfo?.information?.department}
           </p>
 
-          <p className="font-Roboto italic text-xl text-neutral-600">
+          <p className="font-Roboto italic text-xl text-neutral-600 break-words">
             {props.cardInfo?.information?.company}
           </p>
 
-          <p className="font-Roboto py-5 text-neutral-600 whitespace-pre-wrap">
+          <p className="font-Roboto py-5 text-neutral-600 whitespace-pre-wrap break-words">
             {props.cardInfo?.information?.headline}
           </p>
 
@@ -79,7 +79,7 @@ export default function CardPreviewCard(props: {
                       )?.icon
                     }
                   </div>
-                  <p className="font-Roboto text-sm dark:text-neutral-400">
+                  <p className="font-Roboto text-sm dark:text-neutral-400 break-words">
                     {field.value}
                   </p>
                 </a>
@@ -88,7 +88,7 @@ export default function CardPreviewCard(props: {
 
             {(props.cardInfo?.information?.preferredName ||
               props.cardInfo?.information?.pronouns) && (
-              <div className="font-Poppins text-neutral-400 pt-5">
+              <div className="font-Poppins text-neutral-400 pt-5 break-words">
                 <span>Goes by </span>
                 <span className="font-bold">
                   <span>{props.cardInfo.information.preferredName} </span>
@@ -102,7 +102,7 @@ export default function CardPreviewCard(props: {
             )}
 
             {props.cardInfo?.information?.motto && (
-              <p className="text-center italic font-Roboto font-bold dark:text-white">
+              <p className="text-center italic font-Roboto font-bold dark:text-white break-words">
                 &bdquo;
                 {props.cardInfo?.information?.motto}
                 &quot;
