@@ -24,12 +24,11 @@ export default function ViewContainer(props: { children?: ReactNode }) {
 
         <Routes>
           <Route path="/dashboard" index element={<Dashboard />} />
-          <Route path="/analytics" index element={<Dashboard />} />
           <Route path="/cards" element={<Cards />} />
           <Route path="/create-card" element={<CardCreationComponent />} />
           <Route path="/edit-card" element={<CardEditingComponent />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/notifications" element={<Account />} />
+          {/* <Route path="/notifications" element={<Account />} /> */}
           <Route path="/*" element={<Navigate to="/management/dashboard" />} />
         </Routes>
       </div>

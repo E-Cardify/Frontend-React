@@ -13,6 +13,9 @@ export const useDeleteCard = () => {
         `http://localhost:5000/api/v1/card-info/${id}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
 

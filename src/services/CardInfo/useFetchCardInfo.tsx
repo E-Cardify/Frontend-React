@@ -12,9 +12,11 @@ export function useFetchCardInfo(): ReturnType<
 export function useFetchCardInfo(id?: string) {
   return useQuery({
     queryFn: () =>
-      fetch(`http://localhost:5000/api/v1/card-info/${id ? id : ""}`).then(
-        (res) => res.json()
-      ),
+      fetch(`http://localhost:5000/api/v1/card-info/${id ? id : ""}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }).then((res) => res.json()),
     queryKey: id ? ["card-info", id] : ["card-info"],
   });
 }

@@ -4,7 +4,7 @@ import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
 import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
 import {
-  BellIcon,
+  // BellIcon,
   CollapseIcon,
   CreditCardIcon,
   DashboardIcon,
@@ -75,9 +75,9 @@ export function SideNavBar() {
             <CreditCardIcon />
           </ButtonSideNavBar>
 
-          <ButtonSideNavBar text="Notifications" to="/management/notifications">
-            <BellIcon />
-          </ButtonSideNavBar>
+          {/* <ButtonSideNavBar text="Notifications" to="/management/notifications"> */}
+          {/* <BellIcon /> */}
+          {/* </ButtonSideNavBar> */}
 
           <ButtonSideNavBar text="Account" to="/management/account">
             <UserIcon />

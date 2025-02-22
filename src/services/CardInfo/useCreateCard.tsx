@@ -11,8 +11,10 @@ export const useCreateCard = () => {
       const response = await fetch("http://localhost:5000/api/v1/card-info/", {
         method: "POST",
         body: JSON.stringify(cardInfo),
+
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 

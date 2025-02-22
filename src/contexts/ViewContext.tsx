@@ -3,10 +3,6 @@ import {
   getDefaultCardInterfaceObject,
 } from "@interfaces/CardInfoInterface";
 import { createContext, ReactNode, useState } from "react";
-import { ModalProvider } from "./ModelContext";
-import Poppup from "@components/ui/Poppup";
-import { ConfirmationPoppupProvider } from "./ConfirmationPoppupContext";
-import ConfirmationPoppup from "@components/ui/ConfirmationPoppup";
 
 export type viewsType =
   | "Dashboard"
@@ -40,13 +36,7 @@ function ViewProvider(props: { children: ReactNode }) {
         setEditingCardInfo,
       }}
     >
-      <ModalProvider>
-        <ConfirmationPoppupProvider>
-          {props.children}
-          <Poppup />
-          <ConfirmationPoppup />
-        </ConfirmationPoppupProvider>
-      </ModalProvider>
+      {props.children}
     </ViewContext.Provider>
   );
 }

@@ -39,7 +39,7 @@ export default function Overview() {
             value={data?.id}
           />
           <CreateNewCard />
-          <ShareCard />
+          <ShareCard link={data?.id} />
         </div>
       </div>
     </div>

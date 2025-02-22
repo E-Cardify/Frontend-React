@@ -1,7 +1,7 @@
 {
   "name": "cardify",
   "private": true,
-  "version": "3.13.1",
+  "version": "pre 4.0.0 unstable",
   "type": "module",
   "scripts": {
     "dev": "vite",

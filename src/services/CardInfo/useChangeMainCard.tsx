@@ -9,7 +9,12 @@ export const useChangeMainCard = () => {
   const changeMainCard = async (newId: string) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/card-info/change-main-card/${newId}`
+        `http://localhost:5000/api/v1/card-info/change-main-card/${newId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
 
       if (response.ok) {

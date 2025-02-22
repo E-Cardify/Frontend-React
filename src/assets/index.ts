@@ -40,6 +40,7 @@ import SettingsIcon from "./icons/Settings";
 import EditPenIcon from "./icons/EditPen";
 import TrashIcon from "./icons/Trash";
 import StartIcon from "./icons/Star";
+import LogoutIcon from "./icons/Logout";
 
 export {
   StartIcon,
@@ -84,4 +85,5 @@ export {
   SettingsIcon,
   EditPenIcon,
   TrashIcon,
+  LogoutIcon,
 };
