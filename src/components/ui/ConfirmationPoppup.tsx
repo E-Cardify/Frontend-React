@@ -16,7 +16,7 @@ export default function ConfirmationPoppup() {
 
   return (
     isModalVisible && (
-      <div className="fixed inset-0 dark:text-white">
+      <div className="fixed inset-0 dark:text-white z-50">
         <div className="relative w-full h-full flex justify-center items-center">
           <div className="absolute inset-0 bg-black/50 -z-10" />
           <div className="flex flex-col dark:bg-neutral-800 dark:border-black bg-white py-6 px-8 rounded-lg shadow border-2">

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 import Input from "@components/ui/Input";
 import { UserIcon } from "@icons";
-import { useAuth } from "../../services/auth/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "../../lib/api";
 
 export default function Register() {
   const { t } = useTranslation();
@@ -13,14 +14,23 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { register } = useAuth();
+  const navigate = useNavigate();
+
+  const { mutate, isPending, isError } = useMutation({
+    mutationFn: register,
+    onSuccess: () => {
+      navigate("/login", {
+        replace: true,
+      });
+    },
+  });
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       return;
     }
-    register.mutate({ email, password, firstName, lastName });
+    mutate({ email, password, firstName, lastName });
   };
 
   return (
@@ -155,7 +165,11 @@ export default function Register() {
             text={t("Create Account")}
             type="submit"
             className="w-full justify-center"
+            isLoading={isPending}
           />
+          <p className="text-red-500 text-sm">
+            {isError && "Invalid email or password."}
+          </p>
         </form>
 
         {/* Login Link */}

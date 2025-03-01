@@ -15,6 +15,10 @@ import {
 import { useTranslation } from "react-i18next";
 import ButtonSideNavBar from "@components/ui/Buttons/ButtonSideNavBar";
 import { Link } from "react-router-dom";
+import useAuth from "@hooks/useAuth";
+import { useModal } from "@contexts/useModelContext";
+import { useQuery } from "@tanstack/react-query";
+import { getCards } from "../../lib/api";
 
 export function SideNavBar() {
   const { t } = useTranslation();
@@ -26,6 +30,14 @@ export function SideNavBar() {
   const handleCollapseSideNavBar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  const { user } = useAuth();
+  const { showModal: showToast } = useModal();
+
+  const { data: cards } = useQuery({
+    queryKey: ["cards"],
+    queryFn: () => getCards(),
+  });
 
   useEffect(() => {
     if (isMobile) {
@@ -89,9 +101,33 @@ export function SideNavBar() {
         </div>
 
         <Link
-          to="/management/create-card"
-          title={t("Add card")}
-          className="h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500"
+          to={
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? ""
+              : "/management/create-card"
+          }
+          title={
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? t("Max cards reached")
+              : t("Add card")
+          }
+          className={`h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500 ${
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? `
+            border-red-500 text-red-500 hover:bg-red-500 cursor-not-allowed`
+              : `
+            border-green-500 text-green-500 hover:bg-green-500`
+          }`}
+          onClick={() => {
+            if (cards?.data && cards?.data.length >= user?.data.maxCards) {
+              showToast(
+                t("Max cards reached"),
+                "Upgrade to pro or delete cards.",
+                3000,
+                false
+              );
+            }
+          }}
         >
           <PlusIcon />
         </Link>

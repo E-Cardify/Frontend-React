@@ -1,12 +1,32 @@
-import { UserIcon, EditPenIcon, LogoutIcon } from "@icons";
+import { UserIcon } from "@icons";
 import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
-import { useAuth } from "../../../services/auth/useAuth";
 import { useTranslation } from "react-i18next";
+import queryClient from "../../../config/queryClient";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import useAuth from "@hooks/useAuth";
+import { logout as logoutFn } from "../../../lib/api";
 
 export default function ProfileHeader() {
-  const { logout } = useAuth();
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
+
+  const { mutate: logout } = useMutation({
+    mutationFn: logoutFn,
+    onSuccess: () => {
+      queryClient.clear();
+      navigate("/login", { replace: true });
+    },
+    onError: (error) => {
+      console.log(error);
+      queryClient.clear();
+      navigate("/login", { replace: true });
+    },
+  });
 
   return (
     <div className="flex items-center gap-6 pb-6 border-b dark:border-neutral-800">
@@ -20,16 +40,15 @@ export default function ProfileHeader() {
       </div>
       <div className="flex-1">
         <h2 className="font-Poppins font-bold text-2xl dark:text-white">
-          John Doe
+          {user.data.firstName} {user.data.lastName}
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400">
-          john.doe@example.com
+          {user.data.email}
         </p>
         <div className="flex gap-2 mt-3">
-          <ButtonPrimary text={t("Edit Profile")} icon={<EditPenIcon />} />
+          <ButtonPrimary text={t("Edit Profile")} />
           <ButtonRectangle
             text={t("Logout")}
-            icon={<LogoutIcon />}
             onClick={logout}
             className="bg-red-500 border-red-500 text-white hover:text-white hover:bg-red-600 hover:border-red-600"
           />

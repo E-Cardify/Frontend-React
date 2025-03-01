@@ -1,39 +1,101 @@
-import CardPreviewCard from "@components/CardPreviewCard";
-import { useFetchCardInfo } from "../../services/CardInfo/useFetchCardInfo";
 import Navbar from "@layout/ViewContainer/Navbar";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCards, getMainCard } from "../../lib/api";
 import { EditPenIcon, StartIcon, TrashIcon } from "@icons";
-import useViewContext from "@contexts/useViewContext";
 import { CardInfoInterface } from "@interfaces/CardInfoInterface";
 import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
-import { useDeleteCard } from "../../services/CardInfo/deleteCard";
-import { useFetchMainCardInfo } from "../../services/CardInfo/useFetchMainCardInfo";
-import { useChangeMainCard } from "../../services/CardInfo/useChangeMainCard";
-import { Link } from "react-router-dom";
+import CardPreviewCard from "@components/CardPreviewCard";
+import {
+  deleteCard as deleteCardFn,
+  changeMainCard as changeMainCardFn,
+} from "../../lib/api";
+import { useModal } from "@contexts/useModelContext";
+import useAuth, { AUTH } from "@hooks/useAuth";
+import useViewContext from "@contexts/useViewContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Cards() {
-  const { data, isLoading } = useFetchCardInfo();
-  const { data: mainCardInfo } = useFetchMainCardInfo();
-  const changeMainCard = useChangeMainCard();
-  const { setEditingCardInfo } = useViewContext();
   const { showModal } = useConfirmationPoppup();
-  const deleteCard = useDeleteCard();
+  const { showModal: showToast } = useModal();
+  const { setEditingCardInfo } = useViewContext();
+  const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const { data: mainCard } = useQuery({
+    queryKey: ["mainCard"],
+    queryFn: () => getMainCard(),
+    staleTime: Infinity,
+  });
+
+  const { data: cards, isLoading } = useQuery({
+    queryKey: ["cards"],
+    queryFn: () => getCards(),
+    refetchInterval: 1000 * 60,
+    staleTime: Infinity,
+  });
+
+  const { mutate: changeMainCard } = useMutation({
+    mutationFn: (cardId: string) => changeMainCardFn(cardId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [AUTH],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["mainCard"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["cards"],
+      });
+      showToast("Main card changed successfully", "success", 3000, true);
+    },
+    onError: () => {
+      showToast("Error changing main card", "error", 3000, false);
+    },
+  });
+  const { mutate: deleteCard } = useMutation({
+    mutationFn: (cardId: string) => deleteCardFn(cardId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["mainCard"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["cards"],
+      });
+      showToast("Card deleted successfully", "success", 3000, true);
+    },
+    onError: () => {
+      showToast("Error deleting card", "error", 3000, false);
+    },
+  });
 
   const handleCardEditing = (cardInfo: CardInfoInterface) => {
     setEditingCardInfo(cardInfo);
+    navigate("/management/edit-card");
   };
+
+  const { user } = useAuth();
 
   return (
     <>
       <Navbar text="Your cards" />
       <div className="mt-3">
         {isLoading && <div>Loading...</div>}
-        {data && (
+        {cards && (
+          <div className="flex gap-2 items-center mb-2">
+            <h1 className="font-bold text-xl">Your cards:</h1>
+            <p className="text-neutral-500">
+              {cards.data.length} / {user.data.maxCards}
+            </p>
+          </div>
+        )}
+        {cards && (
           <div className="flex flex-wrap gap-2 items-start">
-            {data.map((SingleCardInfo) => {
+            {cards.data.map((SingleCardInfo: CardInfoInterface) => {
               return (
                 <div
                   className="relative"
-                  key={`${SingleCardInfo.id}${SingleCardInfo.information.title}${SingleCardInfo.information.lastName}`}
+                  key={`${SingleCardInfo._id}${SingleCardInfo.information.title}${SingleCardInfo.information.lastName}`}
                 >
                   <CardPreviewCard cardInfo={SingleCardInfo} />
                   <div className="absolute left-3 top-3 text-white">
@@ -46,7 +108,7 @@ export default function Cards() {
                             "Do you want to delete this card",
                             "This process is not irreversible",
                             () => {
-                              deleteCard(SingleCardInfo.id);
+                              deleteCard(SingleCardInfo._id || "");
                             },
                             <TrashIcon />
                           );
@@ -54,23 +116,22 @@ export default function Cards() {
                       >
                         <TrashIcon />
                       </div>
-                      <Link
-                        to="/management/edit-card"
+                      <div
                         className="w-6 h-6 cursor-pointer relative text-neutral-300 hover:text-white"
                         onClick={() => {
                           handleCardEditing(SingleCardInfo);
                         }}
                       >
                         <EditPenIcon />
-                      </Link>
+                      </div>
                       <div
                         className={`w-6 h-6 cursor-pointer relative text-yellow-300 hover:text-yellow-400 ${
-                          mainCardInfo?.id == SingleCardInfo.id &&
+                          mainCard?.data._id == SingleCardInfo._id &&
                           "fill-current"
                         }`}
                         onClick={() => {
-                          if (SingleCardInfo.id !== mainCardInfo?.id) {
-                            changeMainCard(SingleCardInfo.id || "");
+                          if (SingleCardInfo._id !== mainCard?.data._id) {
+                            changeMainCard(SingleCardInfo._id || "");
                           }
                         }}
                       >

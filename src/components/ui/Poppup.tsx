@@ -17,7 +17,7 @@ export default function Poppup() {
   return (
     isModalVisible && (
       <div
-        className={`fixed top-5 right-5 text-black ${
+        className={`fixed top-5 right-5 text-black z-50 ${
           isOk ? "bg-green-200 border-green-300" : "bg-red-200 border-red-300"
         } border-2 flex items-center gap-3 py-2.5 px-3 rounded-lg shadow-xl ${
           hidePoppupAnimation

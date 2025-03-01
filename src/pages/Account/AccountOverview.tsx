@@ -8,7 +8,7 @@ import useTheme from "@contexts/useTheme";
 
 export default function AccountOverview() {
   const [currentTab, setCurrentTab] = useState("Personal");
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
     setTheme(theme === "light" ? "dark" : "light");
@@ -25,7 +25,7 @@ export default function AccountOverview() {
           <PreferencesTab theme={theme} onThemeChange={handleThemeChange} />
         )}
         {currentTab === "Subscription" && <SubscriptionTab />}
-      </div> 
+      </div>
     </div>
   );
 }
