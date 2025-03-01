@@ -3,31 +3,32 @@ import { initReactI18next } from "react-i18next";
 import Polish from "../translations/Polish";
 import English from "../translations/English";
 
-let userLang = navigator.language.split("-")[0];
+const userLang = "en";
+// let userLang = navigator.language.split("-")[0];
 
-if (userLang !== "pl" && userLang !== "en") {
-    userLang = "en";
-}
+// if (userLang !== "pl" && userLang !== "en") {
+//     userLang = "en";
+// }
 
-const localStorageLang = localStorage.getItem("userLang");
-if (localStorageLang == "en" || localStorageLang == "pl") {
-    userLang = localStorageLang;
-}
+// const localStorageLang = localStorage.getItem("userLang");
+// if (localStorageLang == "en" || localStorageLang == "pl") {
+//     userLang = localStorageLang;
+// }
 
 i18n.use(initReactI18next).init({
-    lng: userLang,
-    fallbackLng: "en",
-    interpolation: {
-        escapeValue: false,
+  lng: userLang,
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+  resources: {
+    en: {
+      translation: English,
     },
-    resources: {
-        en: {
-            translation: English
-        },
-        pl: {
-            translation: Polish
-        }
-    }
+    pl: {
+      translation: Polish,
+    },
+  },
 });
 
 export default i18n;

@@ -4,16 +4,21 @@ import { SideNavBarLogo } from "./SideNavBarLogo";
 import { SideNavBarToggleTheme } from "./SideNavBarToggleTheme";
 import { SideNavBarUpgradeNowButton } from "./SideNavBarUpgradeButton";
 import {
+  // BellIcon,
   CollapseIcon,
   CreditCardIcon,
   DashboardIcon,
-  PieChartIcon,
+  // PieChartIcon,
   PlusIcon,
+  UserIcon,
 } from "@icons";
 import { useTranslation } from "react-i18next";
-import useViewContext from "@contexts/useViewContext";
-import { viewsType } from "@contexts/ViewContext";
 import ButtonSideNavBar from "@components/ui/Buttons/ButtonSideNavBar";
+import { Link } from "react-router-dom";
+import useAuth from "@hooks/useAuth";
+import { useModal } from "@contexts/useModelContext";
+import { useQuery } from "@tanstack/react-query";
+import { getCards } from "../../lib/api";
 
 export function SideNavBar() {
   const { t } = useTranslation();
@@ -22,11 +27,17 @@ export function SideNavBar() {
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
-  const { setCurrentView } = useViewContext();
-
   const handleCollapseSideNavBar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  const { user } = useAuth();
+  const { showModal: showToast } = useModal();
+
+  const { data: cards } = useQuery({
+    queryKey: ["cards"],
+    queryFn: () => getCards(),
+  });
 
   useEffect(() => {
     if (isMobile) {
@@ -41,10 +52,6 @@ export function SideNavBar() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const handleViewChange = (text: viewsType) => {
-    setCurrentView(text);
-  };
 
   return (
     <CollapseSideNavBarContext.Provider
@@ -72,28 +79,58 @@ export function SideNavBar() {
         </div>
 
         <div className="gap-2 pt-6 flex flex-col overflow-x-auto items-center">
-          <ButtonSideNavBar text="Dashboard">
+          <ButtonSideNavBar text="Dashboard" to="/management/dashboard">
             <DashboardIcon />
           </ButtonSideNavBar>
 
-          <ButtonSideNavBar text="Cards">
+          <ButtonSideNavBar text="Cards" to="/management/cards">
             <CreditCardIcon />
           </ButtonSideNavBar>
 
-          <ButtonSideNavBar text="Analytics">
-            <PieChartIcon />
+          {/* <ButtonSideNavBar text="Notifications" to="/management/notifications"> */}
+          {/* <BellIcon /> */}
+          {/* </ButtonSideNavBar> */}
+
+          <ButtonSideNavBar text="Account" to="/management/account">
+            <UserIcon />
           </ButtonSideNavBar>
+
+          {/* <ButtonSideNavBar text="Analytics">
+            <PieChartIcon />
+          </ButtonSideNavBar> */}
         </div>
 
-        <div
+        <Link
+          to={
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? ""
+              : "/management/create-card"
+          }
+          title={
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? t("Max cards reached")
+              : t("Add card")
+          }
+          className={`h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500 ${
+            cards?.data && cards?.data.length >= user?.data.maxCards
+              ? `
+            border-red-500 text-red-500 hover:bg-red-500 cursor-not-allowed`
+              : `
+            border-green-500 text-green-500 hover:bg-green-500`
+          }`}
           onClick={() => {
-            handleViewChange("CardCreation");
+            if (cards?.data && cards?.data.length >= user?.data.maxCards) {
+              showToast(
+                t("Max cards reached"),
+                "Upgrade to pro or delete cards.",
+                3000,
+                false
+              );
+            }
           }}
-          title={t("Add card")}
-          className="h-8 w-8 mt-5 mb-2 text-green-500 hover:text-white overflow-hidden mx-auto border-2 border-green-500 rounded-lg cursor-pointer relative group hover:bg-green-500"
         >
           <PlusIcon />
-        </div>
+        </Link>
 
         {/* bottom */}
         <div className="mt-auto">

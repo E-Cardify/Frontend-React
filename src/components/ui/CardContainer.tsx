@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export default function CardContainer(props: {
   children: ReactNode;
   alwaysOn?: boolean;
+  noBorder?: boolean;
 }) {
   return (
     <div className="relative group cursor-pointer">

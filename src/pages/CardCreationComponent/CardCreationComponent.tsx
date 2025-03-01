@@ -48,7 +48,7 @@ export function CardCreationComponent() {
           </div>
 
           {/* Information Inputs */}
-          <div className="flex-1 bg-white dark:bg-neutral-900 dark:border-black dark:text-white flex flex-col rounded-lg border-2 p-2 ute">
+          <div className="flex-1 bg-white dark:bg-neutral-900 dark:border-black dark:text-white flex flex-col rounded-lg border-2 p-2 max-w-[1000px]">
             <h1 className="font-Montserrat font-bold text-3xl">
               {t("Card customizer")}
             </h1>
