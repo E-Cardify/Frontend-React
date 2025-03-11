@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from "react";
-import useCollapseSideNavBarContext from "@contexts/useCollapseSideNavBarContext";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
@@ -10,7 +9,6 @@ export default function ButtonSideNavBar(props: {
   to: string;
 }) {
   const { t } = useTranslation();
-  const { isCollapsed } = useCollapseSideNavBarContext();
 
   const location = useLocation();
   const [isActive, setIsActive] = useState(false);
@@ -26,23 +24,16 @@ export default function ButtonSideNavBar(props: {
   return (
     <Link
       to={props.to}
-      title={isCollapsed ? t(props.text) : ""}
-      className={`flex gap-x-1 cursor-pointer items-center ${
-        !isCollapsed ? "w-full" : "w-max"
-      } py-2 rounded-md px-1 font-Roboto text-sm ${
+      className={`flex gap-x-1 cursor-pointer items-center  py-2 rounded-md px-1 font-Roboto text-sm ${
         isActive
           ? "bg-green-500 text-white"
           : "text-neutral-500 hover:text-neutral-700 hover:dark:text-neutral-400"
       }`}
     >
-      <div
-        className={`${
-          !isCollapsed ? "h-5 w-5" : "h-10 w-10 p-1"
-        } flex items-center justify-center`}
-      >
+      <div className={` flex items-center justify-center`}>
         {props.children}
       </div>
-      {props.text && !isCollapsed && (
+      {props.text && (
         <h1 className="flex items-center justify-center select-none">
           {t(props.text)}
         </h1>

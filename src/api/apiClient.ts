@@ -2,6 +2,8 @@ import axios from "axios";
 import queryClient from "../config/queryClient";
 import { navigate } from "../lib/navigation";
 
+export const defaultErrorMessage = "An error occurred";
+
 const API = axios.create({
   baseURL: "http://localhost:5000/api/v1",
   withCredentials: true,
@@ -18,15 +20,23 @@ const TokenRefreshClient = axios.create({
   },
 });
 
+export type ErrorResponse = {
+  status: number;
+  message: string;
+  data: unknown;
+};
+
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const { status, data } = error.response;
-    console.log(error);
+    const message: string = (data?.message as string) || "Server error.";
+
+    console.log(status, data);
 
     if (status === 401) {
       try {
-        await TokenRefreshClient.post("/auth/refresh-tokens");
+        await TokenRefreshClient.get("/auth/refresh");
         return TokenRefreshClient(error.config);
       } catch {
         queryClient.clear();
@@ -38,7 +48,8 @@ API.interceptors.response.use(
         });
       }
     }
-    return Promise.reject({ status, ...data });
+
+    return Promise.reject({ status, message, ...data });
   }
 );
 

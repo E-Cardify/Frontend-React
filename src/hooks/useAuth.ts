@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 
 export const AUTH = "auth";
 
-type UserPrivateDataResponseType = {
+export type UserPrivateDataResponseType = {
   _id: string;
   mainCard: string;
   cards: string[];

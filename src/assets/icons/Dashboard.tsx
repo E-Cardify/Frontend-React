@@ -1,8 +1,12 @@
-export default function Dashboard() {
+export default function Dashboard({ size }: { size?: number }) {
+  const newSize = (size && size * 2) || 24;
+
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
+      width={`${size && newSize}px`}
+      height={`${size && newSize}px`}
       strokeWidth="1.25"
       stroke="currentColor"
       strokeLinecap="round"

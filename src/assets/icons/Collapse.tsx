@@ -1,9 +1,13 @@
-export default function Collapse() {
+export default function Collapse({ size }: { size?: number }) {
+  const newSize = (size && size * 1.5) || 24;
+
   return (
     <svg
       fill="none"
       strokeWidth="1.5"
       viewBox="0 0 24 24"
+      width={size && newSize + "px"}
+      height={size && newSize + "px"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

@@ -1,34 +1,4 @@
-import { SunIcon } from "@icons";
 import { useTranslation } from "react-i18next";
-
-interface PreferencesTabProps {
-  theme: string;
-  onThemeChange: () => void;
-}
-
-const ThemeToggle = ({ theme, onThemeChange }: PreferencesTabProps) => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex items-center px-2 text-neutral-500 text-sm font-Roboto gap-2 max-w-max">
-      <div className="w-5 h-5 dark:fill-current fill-transparent">
-        <SunIcon />
-      </div>
-      <p className="select-none">{t("Light Mode")}</p>
-      <button
-        type="button"
-        title="Toggle Light/Dark Mode"
-        className="relative bg-neutral-200 dark:bg-neutral-700 w-8 h-4 cursor-pointer ml-auto shadow-inner shadow-neutral-300 dark:shadow-neutral-800 rounded-full border dark:border-black"
-        onClick={onThemeChange}
-      >
-        <div
-          className={`w-3.5 h-3.5 dark:bg-neutral-300 transition-all absolute ${
-            theme == "light" ? "left-0" : "left-full -translate-x-full"
-          } top-0 bg-white rounded-full shadow shadow-bg-neutral-300`}
-        />
-      </button>
-    </div>
-  );
-};
 
 const LanguageSelector = () => {
   const { t } = useTranslation();
@@ -74,13 +44,9 @@ const NotificationSettings = () => {
   );
 };
 
-export default function PreferencesTab({
-  theme,
-  onThemeChange,
-}: PreferencesTabProps) {
+export default function PreferencesTab() {
   return (
     <div className="space-y-4">
-      <ThemeToggle theme={theme} onThemeChange={onThemeChange} />
       <LanguageSelector />
       <NotificationSettings />
     </div>

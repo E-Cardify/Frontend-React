@@ -1,24 +1,24 @@
 import Navbar from "@layout/ViewContainer/Navbar";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCards, getMainCard } from "../../lib/api";
+import { getMainCard } from "../../lib/api";
 import { EditPenIcon, StartIcon, TrashIcon } from "@icons";
 import { CardInfoInterface } from "@interfaces/CardInfoInterface";
 import { useConfirmationPoppup } from "@contexts/useConfirmationPoppupContext";
 import CardPreviewCard from "@components/CardPreviewCard";
+
 import {
   deleteCard as deleteCardFn,
   changeMainCard as changeMainCardFn,
 } from "../../lib/api";
 import { useModal } from "@contexts/useModelContext";
 import useAuth, { AUTH } from "@hooks/useAuth";
-import useViewContext from "@contexts/useViewContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import useCards from "@hooks/useCards";
 
 export default function Cards() {
   const { showModal } = useConfirmationPoppup();
   const { showModal: showToast } = useModal();
-  const { setEditingCardInfo } = useViewContext();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
@@ -28,12 +28,7 @@ export default function Cards() {
     staleTime: Infinity,
   });
 
-  const { data: cards, isLoading } = useQuery({
-    queryKey: ["cards"],
-    queryFn: () => getCards(),
-    refetchInterval: 1000 * 60,
-    staleTime: Infinity,
-  });
+  const { cards, isLoading } = useCards();
 
   const { mutate: changeMainCard } = useMutation({
     mutationFn: (cardId: string) => changeMainCardFn(cardId),
@@ -69,10 +64,10 @@ export default function Cards() {
     },
   });
 
-  const handleCardEditing = (cardInfo: CardInfoInterface) => {
-    setEditingCardInfo(cardInfo);
-    navigate("/management/edit-card");
-  };
+  // const handleCardEditing = (/*cardInfo: CardInfoInterface*/) => {
+  // setEditingCardInfo(cardInfo);
+  // navigate("/management/edit-card");
+  // };
 
   const { user } = useAuth();
 
@@ -81,7 +76,7 @@ export default function Cards() {
       <Navbar text="Your cards" />
       <div className="mt-3">
         {isLoading && <div>Loading...</div>}
-        {cards && (
+        {cards && !isLoading && (
           <div className="flex gap-2 items-center mb-2">
             <h1 className="font-bold text-xl">Your cards:</h1>
             <p className="text-neutral-500">
@@ -119,7 +114,7 @@ export default function Cards() {
                       <div
                         className="w-6 h-6 cursor-pointer relative text-neutral-300 hover:text-white"
                         onClick={() => {
-                          handleCardEditing(SingleCardInfo);
+                          // handleCardEditing(SingleCardInfo);
                         }}
                       >
                         <EditPenIcon />

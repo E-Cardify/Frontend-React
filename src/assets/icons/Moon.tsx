@@ -1,6 +1,10 @@
-export default function Check({ size }: { size?: number }) {
-  const newSize = (size && size * 1.5) || 14;
-
+export default function Moon({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
       fill="none"
@@ -8,12 +12,12 @@ export default function Check({ size }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2"
-      width={size && `${newSize}px`}
-      height={size && `${newSize}px`}
       viewBox="0 0 24 24"
+      width={width || "1em"}
+      height={height || "1em"}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <polyline points="20 6 9 17 4 12" />
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
     </svg>
   );
 }

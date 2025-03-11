@@ -20,9 +20,7 @@ export function CreateNewCard() {
   return (
     <Link
       to={
-        cards && cards.data.length >= user.data.maxCards
-          ? ""
-          : "/management/create-card"
+        cards && cards.data.length >= user.data.maxCards ? "" : "/create-card"
       }
       className={`flex-1 flex justify-center items-center flex-col  bg-gradient-to-br text-white p-3 rounded-xl shadow shadow-neutral-400 dark:shadow-neutral-700 ${
         cards && cards.data.length >= user.data.maxCards

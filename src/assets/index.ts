@@ -42,6 +42,7 @@ import TrashIcon from "./icons/Trash";
 import StartIcon from "./icons/Star";
 import LogoutIcon from "./icons/Logout";
 import EyeOffIcon from "./icons/EyeOff";
+import MoonIcon from "./icons/Moon";
 
 export {
   StartIcon,
@@ -88,4 +89,5 @@ export {
   TrashIcon,
   LogoutIcon,
   EyeOffIcon,
+  MoonIcon,
 };

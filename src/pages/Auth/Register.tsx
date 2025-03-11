@@ -1,11 +1,67 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
-import Input from "@components/ui/Input";
-import { UserIcon } from "@icons";
+import { UserIcon, CheckIcon, XIcon } from "@icons";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../../lib/api";
+import {
+  Paper,
+  PasswordInput,
+  Stack,
+  TextInput,
+  ThemeIcon,
+  Title,
+  Text,
+  Box,
+  Progress,
+  Popover,
+  Checkbox,
+  Anchor,
+  Button,
+  Group,
+} from "@mantine/core";
+import { Center } from "@mantine/core";
+import { ErrorResponse } from "../../api/apiClient";
+import { emailRegex } from "../../utils/REGEX";
+
+function PasswordRequirement({
+  meets,
+  label,
+}: {
+  meets: boolean;
+  label: string;
+}) {
+  return (
+    <Text
+      c={meets ? "teal" : "red"}
+      style={{ display: "flex", alignItems: "center" }}
+      mt={7}
+      size="sm"
+    >
+      {meets ? <CheckIcon size={14} /> : <XIcon size={14} />}
+      <Box ml={10}>{label}</Box>
+    </Text>
+  );
+}
+
+const requirements = [
+  { re: /[0-9]/, label: "Includes number" },
+  { re: /[a-z]/, label: "Includes lowercase letter" },
+  { re: /[A-Z]/, label: "Includes uppercase letter" },
+  { re: /[$&+,:;=?@#|'<>.^*()%!-]/, label: "Includes special symbol" },
+];
+
+function getStrength(password: string) {
+  let multiplier = password.length > 5 ? 0 : 1;
+
+  requirements.forEach((requirement) => {
+    if (!requirement.re.test(password)) {
+      multiplier += 1;
+    }
+  });
+
+  return Math.max(100 - (100 / (requirements.length + 1)) * multiplier, 10);
+}
 
 export default function Register() {
   const { t } = useTranslation();
@@ -14,175 +70,222 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [popoverOpened, setPopoverOpened] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const checks = requirements.map((requirement, index) => (
+    <PasswordRequirement
+      key={index}
+      label={requirement.label}
+      meets={requirement.re.test(password)}
+    />
+  ));
   const navigate = useNavigate();
 
-  const { mutate, isPending, isError } = useMutation({
+  const strength = getStrength(password);
+  const color = strength === 100 ? "teal" : strength > 50 ? "yellow" : "red";
+
+  const { mutate, isPending } = useMutation({
     mutationFn: register,
     onSuccess: () => {
       navigate("/login", {
         replace: true,
       });
     },
+    onError: (error: ErrorResponse) => {
+      setError({ message: error.message, input: "general" });
+    },
   });
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (firstName === "") {
+      setError({ message: "First name is required", input: "firstName" });
+      return;
+    }
+    if (lastName === "") {
+      setError({ message: "Last name is required", input: "lastName" });
+      return;
+    }
+    if (email === "") {
+      setError({ message: "Email is required", input: "email" });
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      setError({ message: "Invalid email", input: "email" });
+      return;
+    }
     if (password !== confirmPassword) {
+      setError({ message: "Passwords do not match", input: "confirmPassword" });
+      return;
+    }
+    if (getStrength(password) < 100) {
+      setError({
+        message: "Password doesn't meet the requirements",
+        input: "password",
+      });
+      return;
+    }
+    if (!terms) {
+      setError({ message: "You must accept the terms", input: "terms" });
       return;
     }
     mutate({ email, password, firstName, lastName });
   };
 
+  const [error, setError] = useState<{
+    message: string;
+    input: string;
+  }>();
+
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-neutral-800 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-neutral-900 p-8 rounded-lg shadow-lg w-full max-w-md">
-        {/* Logo and Title */}
-        <div className="flex items-center justify-center mb-8 flex-col gap-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-            <div className="w-6 h-6 text-white">
-              <UserIcon />
-            </div>
-          </div>
-          <h1 className="text-2xl font-bold font-Poppins text-center dark:text-white">
-            {t("Create your account")}
-          </h1>
-        </div>
+    <Center w="100%">
+      <Paper shadow="lg" p="xl" radius="md">
+        <Stack align="center" mb="xl">
+          <ThemeIcon size="xl" radius="md" color="blue">
+            <UserIcon />
+          </ThemeIcon>
+
+          <Title order={2} ta="center">
+            {t("Register")}
+          </Title>
+        </Stack>
 
         {/* Register Form */}
         <form onSubmit={handleRegister} className="space-y-6">
-          <div>
-            <label
-              htmlFor="firstName"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
-            >
-              {t("First Name")}
-            </label>
-            <Input
+          <Stack>
+            <TextInput
               id="firstName"
-              type="text"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                setError(undefined);
+              }}
               placeholder={t("John")}
+              label={t("First Name")}
+              withAsterisk
+              error={error?.input === "firstName" && error?.message}
             />
-          </div>
 
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
-            >
-              {t("Last Name")}
-            </label>
-            <Input
+            <TextInput
               id="lastName"
-              type="text"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
+              onChange={(e) => {
+                setLastName(e.target.value);
+                setError(undefined);
+              }}
               placeholder={t("Doe")}
+              label={t("Last Name")}
+              withAsterisk
+              error={error?.input === "lastName" && error?.message}
             />
-          </div>
 
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
-            >
-              {t("Email")}
-            </label>
-            <Input
+            <TextInput
               id="email"
-              type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError(undefined);
+              }}
               placeholder="john@example.com"
+              label="Email"
+              withAsterisk
+              error={error?.input === "email" && error?.message}
             />
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
+            <Popover
+              opened={popoverOpened}
+              position="bottom"
+              width="target"
+              transitionProps={{ transition: "pop-top-left" }}
             >
-              {t("Password")}
-            </label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
+              <Popover.Target>
+                <div
+                  onFocusCapture={() => setPopoverOpened(true)}
+                  onBlurCapture={() => setPopoverOpened(false)}
+                >
+                  <PasswordInput
+                    id="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setError(undefined);
+                    }}
+                    placeholder="••••••••"
+                    label="Password"
+                    withAsterisk
+                    error={error?.input === "password" && error?.message}
+                  />
+                </div>
+              </Popover.Target>
+              <Popover.Dropdown>
+                <Progress color={color} value={strength} size={5} mb="xs" />
+                <PasswordRequirement
+                  label="Includes at least 6 characters"
+                  meets={password.length > 5}
+                />
+                {checks}
+              </Popover.Dropdown>
+            </Popover>
 
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1"
-            >
-              {t("Confirm Password")}
-            </label>
-            <Input
+            <PasswordInput
               id="confirmPassword"
-              type="password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
+              onChange={(e) => {
+                setError(undefined);
+                setConfirmPassword(e.target.value);
+              }}
               placeholder="••••••••"
+              label="Confirm Password"
+              withAsterisk
+              error={error?.input === "confirmPassword" && error?.message}
             />
-          </div>
 
-          <div className="flex items-center">
-            <input
+            <Checkbox
               id="terms"
-              type="checkbox"
-              required
-              className="rounded border-gray-300 text-green-500 focus:ring-green-500"
-              aria-label={t("Accept Terms and Privacy Policy")}
+              label={
+                <Text size="xs">
+                  {t("Accept")}{" "}
+                  <Link to="/terms" target="_blank">
+                    <Anchor>{t("Terms")}</Anchor>
+                  </Link>{" "}
+                  {t("and")}{" "}
+                  <Link to="/privacy" target="_blank">
+                    <Anchor>{t("Privacy Policy")}</Anchor>
+                  </Link>
+                </Text>
+              }
+              onChange={() => {
+                setError(undefined);
+                setTerms(!terms);
+              }}
+              size="sm"
+              error={error?.input === "terms" && error?.message}
             />
-            <label
-              htmlFor="terms"
-              className="ml-2 text-sm text-neutral-600 dark:text-neutral-400"
-            >
-              {t("I agree to the")}{" "}
-              <Link to="/terms" className="text-green-500 hover:text-green-600">
-                {t("Terms")}
-              </Link>{" "}
-              {t("and")}{" "}
-              <Link
-                to="/privacy"
-                className="text-green-500 hover:text-green-600"
-              >
-                {t("Privacy Policy")}
-              </Link>
-            </label>
-          </div>
 
-          <ButtonPrimary
-            text={t("Create Account")}
-            type="submit"
-            className="w-full justify-center"
-            isLoading={isPending}
-          />
-          <p className="text-red-500 text-sm">
-            {isError && "Invalid email or password."}
-          </p>
+            <Text size="sm" c="red">
+              {error?.input === "general" && error?.message}
+            </Text>
+
+            <Button
+              variant="gradient"
+              gradient={{ from: "blue", to: "cyan" }}
+              loaderProps={{ type: "dots" }}
+              loading={isPending}
+              type="submit"
+              className="w-full"
+              onClick={handleRegister}
+            >
+              {t("Create Account")}
+            </Button>
+          </Stack>
         </form>
 
-        {/* Login Link */}
-        <p className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
-          {t("Already have an account?")}{" "}
-          <Link
-            to="/login"
-            className="font-medium text-green-500 hover:text-green-600"
-          >
-            {t("Sign in")}
+        <Group c="dimmed" justify="center" gap="5" mt="lg">
+          <Text size="xs">{t("Already have an account?")}</Text>
+          <Link to="/login">
+            <Anchor size="xs">{t("Login")}</Anchor>
           </Link>
-        </p>
-      </div>
-    </div>
+        </Group>
+      </Paper>
+    </Center>
   );
 }

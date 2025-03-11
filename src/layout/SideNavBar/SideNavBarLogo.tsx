@@ -1,9 +1,7 @@
 import { SlackIcon } from "@icons";
-import useCollapseSideNavBarContext from "@contexts/useCollapseSideNavBarContext";
-
+import { useTranslation } from "react-i18next";
 export function SideNavBarLogo() {
-  const { isCollapsed } =
-    useCollapseSideNavBarContext();
+  const { t } = useTranslation();
 
   return (
     <div>
@@ -11,11 +9,7 @@ export function SideNavBarLogo() {
         <div className="w-8 h-8 text-green-500 group-hover:text-green-600">
           <SlackIcon />
         </div>
-        {!isCollapsed && (
-          <h1 className="select-none">
-            Cardify
-          </h1>
-        )}
+        <h1 className="select-none">{t("Cardify")}</h1>
       </div>
     </div>
   );
