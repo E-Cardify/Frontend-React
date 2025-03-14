@@ -1,44 +1,49 @@
-import { UserIcon } from "@icons";
-import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
-import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 import { useTranslation } from "react-i18next";
-import queryClient from "../../../config/queryClient";
-import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+// import queryClient from "../../../config/queryClient";
+// import { useNavigate } from "react-router-dom";
+// import { useMutation } from "@tanstack/react-query";
 import useAuth from "@hooks/useAuth";
-import { logout as logoutFn } from "../../../lib/api";
+// import { logout as logoutFn } from "../../../lib/api";
+import { Avatar, Group, Stack, Text, Title, Tooltip } from "@mantine/core";
+// import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
+// import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 
 export default function ProfileHeader() {
   const { t } = useTranslation();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { user } = useAuth();
 
-  const { mutate: logout } = useMutation({
-    mutationFn: logoutFn,
-    onSuccess: () => {
-      queryClient.clear();
-      navigate("/login", { replace: true });
-    },
-    onError: (error) => {
-      console.log(error);
-      queryClient.clear();
-      navigate("/login", { replace: true });
-    },
-  });
+  // const { mutate: logout } = useMutation({
+  //   mutationFn: logoutFn,
+  //   onSuccess: () => {
+  //     queryClient.clear();
+  //     navigate("/login", { replace: true });
+  //   },
+  //   onError: (error) => {
+  //     console.log(error);
+  //     queryClient.clear();
+  //     navigate("/login", { replace: true });
+  //   },
+  // });
 
   return (
-    <div className="flex items-center gap-6 pb-6 border-b dark:border-neutral-800">
-      <div className="relative group">
-        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-green-500 to-blue-500" />
-        <div className="absolute inset-0 rounded-full flex items-center justify-center bg-black/0 group-hover:bg-black/40 transition-all">
-          <div className="w-8 h-8 text-white/0 group-hover:text-white/100 transition-all">
-            <UserIcon />
-          </div>
-        </div>
-      </div>
-      <div className="flex-1">
+    <Group>
+      <Tooltip label={t("Your profile picture")} openDelay={750}>
+        <Avatar name={user.data.firstName + user.data.lastName} size={100} />
+      </Tooltip>
+
+      <Stack gap="0">
+        <Title order={1}>
+          {user.data.firstName} {user.data.lastName}
+        </Title>
+        <Text size="sm" c="dimmed">
+          {user.data.email}
+        </Text>
+      </Stack>
+
+      {/* <div className="flex-1">
         <h2 className="font-Poppins font-bold text-2xl dark:text-white">
           {user.data.firstName} {user.data.lastName}
         </h2>
@@ -53,7 +58,7 @@ export default function ProfileHeader() {
             className="bg-red-500 border-red-500 text-white hover:text-white hover:bg-red-600 hover:border-red-600"
           />
         </div>
-      </div>
-    </div>
+      </div> */}
+    </Group>
   );
 }

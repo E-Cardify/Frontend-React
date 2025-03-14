@@ -1,51 +1,56 @@
-import { SideNavBar } from "@layout/SideNavBar/SideNavBar";
-import ViewContainer from "@layout/ViewContainer/ViewContainer";
-import { ViewProvider } from "@contexts/ViewContext";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ComponentPreview from "@pages/ComponentPreview/ComponentPreview";
 import Card from "@pages/Card/Card";
-import Login from "@pages/Auth/Login";
-import Register from "@pages/Auth/Register";
+import Login from "@pages/Login/Login";
+import Register from "@pages/Register/Register";
 import { ModalProvider } from "@contexts/ModelContext";
 import ConfirmationPoppup from "@components/ui/ConfirmationPoppup";
 import Poppup from "@components/ui/Poppup";
 import { ConfirmationPoppupProvider } from "@contexts/ConfirmationPoppupContext";
 import { setNavigate } from "./lib/navigation";
+import { MantineProvider } from "@mantine/core";
+import theme from "./lib/theme";
+import AppContainer from "@components/AppContainer/AppContainer";
+import Account from "@pages/Account/Account";
+import Dashboard from "@pages/Dashboard/Dashboard";
+import { CardEditingComponent } from "@pages/CardEditingComponent/CardEditingComponent";
+import { CardCreationComponent } from "@pages/CardCreationComponent/CardCreationComponent";
+import Cards from "@pages/Cards/Cards";
+import { Notifications } from "@mantine/notifications";
+import { ModalsProvider } from "@mantine/modals";
 
 function App() {
   const navigate = useNavigate();
   setNavigate(navigate);
 
   return (
-    <div className="min-h-[100svh] bg-gray-100 dark:bg-neutral-800 flex">
-      <ModalProvider>
-        <ConfirmationPoppupProvider>
-          <Poppup />
-          <ConfirmationPoppup />
+    <MantineProvider defaultColorScheme="light" theme={theme}>
+      <ModalsProvider>
+        <Notifications position="top-right" />
+        <ModalProvider>
+          <ConfirmationPoppupProvider>
+            <Poppup />
+            <ConfirmationPoppup />
 
-          <Routes>
-            <Route path="/" element={<div>Hello</div>} />
+            <Routes>
+              <Route path="/card/:id" element={<Card />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            <Route path="/card/:id" element={<Card />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route
-              path="/management/*"
-              element={
-                <ViewProvider>
-                  <SideNavBar />
-                  <ViewContainer />
-                </ViewProvider>
-              }
-            />
+              <Route path="/" element={<AppContainer />}>
+                <Route index element={<Dashboard />} />
+                <Route path="notifications" element={<Notifications />} />
+                <Route path="cards" element={<Cards />} />
+                <Route path="create-card" element={<CardCreationComponent />} />
+                <Route path="edit-card" element={<CardEditingComponent />} />
+                <Route path="account" element={<Account />} />
+              </Route>
 
-            <Route path="/components-preview" element={<ComponentPreview />} />
-
-            <Route path="*" element={<div>404</div>} />
-          </Routes>
-        </ConfirmationPoppupProvider>
-      </ModalProvider>
-    </div>
+              <Route path="*" element={<div>404</div>} />
+            </Routes>
+          </ConfirmationPoppupProvider>
+        </ModalProvider>
+      </ModalsProvider>
+    </MantineProvider>
   );
 }
 

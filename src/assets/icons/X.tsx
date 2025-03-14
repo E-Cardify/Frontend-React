@@ -1,26 +1,19 @@
-export default function X() {
+export default function X({ size }: { size?: number }) {
+  const newSize = (size && size * 1.5) || 14;
+
   return (
     <svg
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      width={size && `${newSize}px`}
+      height={size && `${newSize}px`}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line
-        x1="18"
-        x2="6"
-        y1="6"
-        y2="18"
-      />
-      <line
-        x1="6"
-        x2="18"
-        y1="6"
-        y2="18"
-      />
+      <line x1="18" x2="6" y1="6" y2="18" />
+      <line x1="6" x2="18" y1="6" y2="18" />
     </svg>
   );
 }

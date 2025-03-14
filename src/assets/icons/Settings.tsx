@@ -1,4 +1,10 @@
-export default function Settings() {
+export default function Settings({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
       fill="none"
@@ -7,6 +13,8 @@ export default function Settings() {
       strokeLinejoin="round"
       strokeWidth="2"
       viewBox="0 0 24 24"
+      width={width || "1em"}
+      height={height || "1em"}
       xmlns="http://www.w3.org/2000/svg"
     >
       <circle cx="12" cy="12" r="3" />

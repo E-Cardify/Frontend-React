@@ -1,0 +1,18 @@
+.wrapper {
+  background-image: url("/images/login-page-image.jpg");
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.loginForm {
+  border-right: 1px solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+  min-height: 900px;
+  max-width: 450px;
+  padding-top: 80px;
+
+  @media (max-width: $mantine-breakpoint-md) {
+    max-width: 100%;
+  }
+}

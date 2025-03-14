@@ -32,7 +32,7 @@ export function SaveResetCardCustomizer() {
       queryClient.invalidateQueries({
         queryKey: ["cards"],
       });
-      navigate("/management/cards");
+      navigate("/cards");
       setCardInfo({ _id: cardInfo._id, ...getDefaultCardInterfaceObject() });
     },
     onError: () => {
@@ -51,7 +51,7 @@ export function SaveResetCardCustomizer() {
       queryClient.invalidateQueries({
         queryKey: ["cards"],
       });
-      navigate("/management/cards");
+      navigate("/cards");
       setCardInfo({ _id: cardInfo._id, ...getDefaultCardInterfaceObject() });
     },
     onError: () => {

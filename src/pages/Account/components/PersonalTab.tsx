@@ -1,6 +1,12 @@
 import Input from "@components/ui/Input";
 import useAuth from "@hooks/useAuth";
+import { Button, Divider, Stack, Title } from "@mantine/core";
 import { useTranslation } from "react-i18next";
+import CustomInputWithSave from "./CustomInputWithSave";
+import { useMemo } from "react";
+import { UpdateUserDataKeys, logout as logoutFn } from "../../../lib/api";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 interface FormFieldProps {
   id: string;
@@ -10,7 +16,7 @@ interface FormFieldProps {
   useBlurFocusEffects?: boolean;
 }
 
-const FormField = ({
+export const FormField = ({
   id,
   label,
   type = "text",
@@ -51,53 +57,81 @@ const FormField = ({
   );
 };
 
-const Header = () => {
-  const { t } = useTranslation();
-  return (
-    <h1 className="text-xl font-Poppins font-bold p-2 px-3 border-b-2 border-neutral-200">
-      {t("General")}
-    </h1>
-  );
+export type InputInfoType = {
+  label: string;
+  placeholder: string;
+  objectKey: UpdateUserDataKeys;
+  type?: "password" | "text";
 };
 
 export default function PersonalTab() {
   const { user } = useAuth();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { mutate: logout, isPending } = useMutation({
+    mutationFn: logoutFn,
+    onSettled: () => {
+      navigate("/login");
+    },
+  });
+
+  const inputsInfo = useMemo<InputInfoType[]>(() => {
+    return [
+      {
+        label: "First Name",
+        placeholder: user.data.firstName,
+        objectKey: "firstName",
+      },
+      {
+        label: "Last Name",
+        placeholder: user.data.lastName,
+        objectKey: "lastName",
+      },
+      {
+        label: "Email",
+        placeholder: user.data.email,
+        objectKey: "email",
+      },
+      {
+        label: "Password",
+        placeholder: "••••••••",
+        objectKey: "password",
+        type: "password",
+      },
+    ];
+  }, [user.data.email, user.data.firstName, user.data.lastName]);
 
   return (
     <>
-      <Header />
-      <div className="flex gap-5 flex-col px-3 py-3">
-        <FormField
-          id="email"
-          label="Email"
-          placeholder={user?.data.email}
-          useBlurFocusEffects
-        />
-        <FormField
-          id="name"
-          label="Name"
-          placeholder={user?.data.firstName}
-          useBlurFocusEffects
-        />
-        <FormField
-          id="lastName"
-          label="Last Name"
-          placeholder={user?.data.lastName}
-          useBlurFocusEffects
-        />
-        <FormField
-          id="password"
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-        />
-        <FormField
-          id="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          placeholder="••••••••"
-        />
-      </div>
+      <Title order={2}>{t("General")}</Title>
+      <Divider size="xs" pb="20" />
+      <Stack maw="500">
+        {inputsInfo.map((inputInfo, index) => {
+          const { label, placeholder, objectKey, type } = inputInfo;
+
+          return (
+            <CustomInputWithSave
+              label={label}
+              placeholder={placeholder}
+              objectKey={objectKey}
+              type={type}
+              key={index}
+            />
+          );
+        })}
+
+        <Button
+          w="max-content"
+          color="red"
+          loading={isPending}
+          onClick={() => {
+            logout();
+          }}
+        >
+          {t("Logout")}
+        </Button>
+      </Stack>
     </>
   );
 }
