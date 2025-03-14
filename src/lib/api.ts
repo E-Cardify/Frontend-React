@@ -1,6 +1,7 @@
 import { UserPrivateDataResponseType } from "@hooks/useAuth";
 import API from "../api/apiClient";
 import { CardInfoInterface } from "@interfaces/CardInfoInterface";
+import socket from "./socket.io";
 
 interface LoginData {
   email: string;
@@ -13,6 +14,7 @@ interface RegisterData {
   password: string;
   lastName: string;
   firstName: string;
+  privacyPolicy: boolean;
 }
 
 type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Omit<T, Keys> & {
@@ -65,4 +67,10 @@ export const resendEmail = async () => API.get<null>("/auth/resend-email");
 
 export const updateUserData = async (updateUserData: UpdateUserDataProps) => {
   return API.patch("/user/update-user-data", updateUserData);
+};
+
+export const rewriteCardDescription = async (message: string) => {
+  socket.emit("rewrite-card-description", {
+    message,
+  });
 };

@@ -13,7 +13,15 @@ const NavbarToggle = ({ toggleDesktop, toggleMobile }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <Tooltip label={t("Toggle navbar")} openDelay={500}>
+    <Tooltip
+      label={
+        // <Group>
+        <>{t("Toggle navbar")}</>
+        // <div>{/* <Kbd size="xs">ctrl</Kbd> + <Kbd size="xs">b</Kbd> */}</div>
+        // {/* </Group> */}
+      }
+      openDelay={500}
+    >
       <Group>
         <ActionIcon
           variant="subtle"

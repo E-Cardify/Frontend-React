@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import postcssSimpleVars from "postcss-simple-vars";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
       "@layout": path.resolve(__dirname, "src/layout"),
       "@components": path.resolve(__dirname, "src/components"),
       "@helpers": path.resolve(__dirname, "src/helpers"),
+      "@public": path.resolve(__dirname, "public"),
     },
   },
   server: {
@@ -23,4 +25,22 @@ export default defineConfig({
     open: true,
   },
   plugins: [react()],
+  css: {
+    modules: {
+      scopeBehaviour: "local",
+    },
+    postcss: {
+      plugins: [
+        postcssSimpleVars({
+          variables: {
+            "mantine-breakpoint-xs": "36em",
+            "mantine-breakpoint-sm": "48em",
+            "mantine-breakpoint-md": "62em",
+            "mantine-breakpoint-lg": "75em",
+            "mantine-breakpoint-xl": "88em",
+          },
+        }),
+      ],
+    },
+  },
 });

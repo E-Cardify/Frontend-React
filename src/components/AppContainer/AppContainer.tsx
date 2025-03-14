@@ -1,5 +1,5 @@
 import useAuth from "@hooks/useAuth";
-import { AppShell, Container, Loader, Notification } from "@mantine/core";
+import { Alert, AppShell, Container, Loader } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Navigate, Outlet } from "react-router-dom";
 import Header from "./Header";
@@ -14,10 +14,12 @@ const MailNotVerifiedNotification = () => {
   return (
     <>
       {isVisible && (
-        <Notification
+        <Alert
+          variant="light"
           color="yellow"
           title="Email Verification Required"
           mb="30"
+          withCloseButton
           onClose={() => {
             setIsVisible(false);
           }}
@@ -25,7 +27,7 @@ const MailNotVerifiedNotification = () => {
           {t(
             "Check your email and please verify your email to access all features."
           )}
-        </Notification>
+        </Alert>
       )}
     </>
   );

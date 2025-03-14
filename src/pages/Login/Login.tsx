@@ -1,38 +1,53 @@
-import { useState } from "react";
+import { Group, Paper } from "@mantine/core";
+import { FC, FormEvent } from "react";
+import classes from "./Login.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../lib/api";
-import { useLocation, useNavigate, Link } from "react-router-dom";
-import {
-  Anchor,
-  Button,
-  Center,
-  Checkbox,
-  Paper,
-  PasswordInput,
-  Stack,
-  TextInput,
-  ThemeIcon,
-  Title,
-  Text,
-  Group,
-} from "@mantine/core";
-import { useTranslation } from "react-i18next";
-import { UserIcon } from "@icons";
-import { emailRegex } from "../../utils/REGEX";
+import { emailSchema, passwordSchema } from "../../lib/schemas";
+import { notifications } from "@mantine/notifications";
+import { APIErrorResponse } from "../../api/apiClient";
+import LoginWithOAuth from "@components/LoginWithOAuth/LoginWIthOAuth";
+import { LoginFormProvider, useLoginForm } from "./context/LoginContext";
+import GeneralTextInput from "@components/Inputs/GeneralTextInput/GeneralTextInput";
+import GeneralPasswordInput from "@components/Inputs/GeneralPasswordInput/GeneralPasswordInput";
+import GeneralCheckbox from "@components/Inputs/GeneralCheckbox/GeneralCheckbox";
+import FormSubmitButton from "@components/Buttons/FormSubmitButton";
+import ForgotPasswordLink from "@components/Links/ForgotPasswordLink/ForgotPasswordLink";
+import ChangeSignForm from "@components/Links/ChangeSignForm/ChangeSignForm";
+import SignForm from "@components/Typography/SignForm/SignForm";
 
-export default function Login() {
-  const location = useLocation();
+const Login: FC = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const [error, setError] = useState<{
-    message: string;
-    input: string;
-  }>();
-
+  const location = useLocation();
   const redirect = location.state?.redirect || "/";
+
+  const form = useLoginForm({
+    validateInputOnBlur: true,
+    mode: "uncontrolled",
+    initialValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
+
+    validate: {
+      email: (value) => {
+        const parsed = emailSchema.safeParse(value);
+
+        if (parsed.success) return null;
+        return parsed.error.issues[0].message;
+      },
+
+      password: (value) => {
+        const parsed = passwordSchema.safeParse(value);
+
+        if (parsed.success) return null;
+        return parsed.error.issues[0].message;
+      },
+    },
+  });
 
   const { mutate, isPending } = useMutation({
     mutationFn: login,
@@ -41,110 +56,84 @@ export default function Login() {
         replace: true,
       });
     },
-    onError: (error) => {
-      console.log(error);
-      setError({ message: error.message, input: "general" });
+    onError: (error: APIErrorResponse) => {
+      form.setValues({
+        password: "",
+        rememberMe: false,
+      });
+
+      if (error.status === 500) {
+        notifications.show({
+          message: error.message,
+          color: "red",
+        });
+
+        return;
+      }
+
+      form.setErrors({
+        email: error.message,
+      });
     },
   });
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { email, password, rememberMe } = form.getValues();
+    const { hasErrors } = form.validate();
 
-    if (!emailRegex.test(email)) {
-      setError({ message: "You must input a valid email.", input: "email" });
-      return;
-    }
-
-    if (password == "") {
-      setError({
-        message: "You must input a password.",
-        input: "password",
-      });
+    if (hasErrors) {
       return;
     }
 
     mutate({ email, password, rememberMe });
   };
 
-  const { t } = useTranslation();
-
   return (
-    <Center w="100%">
-      <Paper shadow="lg" p="xl" radius="md">
-        <Stack align="center" mb="xl">
-          <ThemeIcon size="xl" radius="md" color="blue">
-            <UserIcon />
-          </ThemeIcon>
+    <LoginFormProvider form={form}>
+      <Group w="100%" h="100svh" className={classes.wrapper}>
+        <Paper p={30} h="100%" className={classes.loginForm}>
+          <form onSubmit={handleLogin}>
+            <SignForm text="Welcome back to Cardify" />
+            <LoginWithOAuth />
 
-          <Title order={2} ta="center">
-            {t("Login")}
-          </Title>
-        </Stack>
-
-        <form onSubmit={handleLogin} className="space-y-6">
-          <Stack>
-            <TextInput
-              id="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setError(undefined);
-              }}
-              placeholder="john@example.com"
-              label="Email"
+            <GeneralTextInput
+              key={form.key("email")}
+              {...form.getInputProps("email")}
+              placeholder="Your email address"
+              label="Email address"
               withAsterisk
-              error={error?.input === "email" && error?.message}
             />
 
-            <PasswordInput
-              id="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setError(undefined);
-              }}
-              placeholder="••••••••"
+            <GeneralPasswordInput
+              key={form.key("password")}
+              {...form.getInputProps("password")}
+              placeholder="Your password"
               label="Password"
               withAsterisk
-              error={error?.input === "password" && error?.message}
             />
 
-            <Text size="sm" c="red">
-              {error?.input === "general" && error?.message}
-            </Text>
-
-            <Checkbox
-              checked={rememberMe}
-              onChange={(e) => setRememberMe(e.target.checked)}
+            <GeneralCheckbox
+              key={form.key("rememberMe")}
+              {...form.getInputProps("rememberMe")}
               label="Remember me"
-              size="sm"
+              mt="xl"
             />
 
-            <Stack gap="5">
-              <Button
-                variant="gradient"
-                gradient={{ from: "blue", to: "cyan" }}
-                loaderProps={{ type: "dots" }}
-                loading={isPending}
-                type="submit"
-                className="w-full"
-              >
-                {t("Login")}
-              </Button>
-              <Anchor href="/forgot-password" size="xs">
-                {t("Forgot password?")}
-              </Anchor>
-            </Stack>
-          </Stack>
-        </form>
+            <FormSubmitButton text="Login" loading={isPending} />
 
-        <Group c="dimmed" justify="center" gap="5" mt="lg">
-          <Text size="xs">{t("Don't have an account?")}</Text>
-          <Link to="/register">
-            <Anchor size="xs">{t("Register")}</Anchor>
-          </Link>
-        </Group>
-      </Paper>
-    </Center>
+            <ForgotPasswordLink />
+
+            <ChangeSignForm
+              text="Don't have an account?"
+              to="/register"
+              linkText="Register"
+            />
+          </form>
+        </Paper>
+      </Group>
+    </LoginFormProvider>
   );
-}
+};
+
+export default Login;

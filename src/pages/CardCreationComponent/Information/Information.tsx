@@ -13,18 +13,12 @@ export function Information() {
             {t("Personal")}
           </h1>
           <div className="px-3 flex flex-col gap-5 py-3">
-            <CardCustomizerInputContainer
-              label="First Name"
-              path="firstName"
-            />
+            <CardCustomizerInputContainer label="First Name" path="firstName" />
             <CardCustomizerInputContainer
               label="Middle Name"
               path="middleName"
             />
-            <CardCustomizerInputContainer
-              label="Last Name"
-              path="lastName"
-            />
+            <CardCustomizerInputContainer label="Last Name" path="lastName" />
             <CardCustomizerInputContainer
               label="Preferred Name"
               path="preferredName"
@@ -33,10 +27,7 @@ export function Information() {
               label="Maiden Name"
               path="maidenName"
             />
-            <CardCustomizerInputContainer
-              label="Pronouns"
-              path="pronouns"
-            />
+            <CardCustomizerInputContainer label="Pronouns" path="pronouns" />
             <CardCustomizerInputContainer
               label="Motto"
               path="motto"
@@ -59,13 +50,11 @@ export function Information() {
               label="Department"
               path="department"
             />
-            <CardCustomizerInputContainer
-              label="Company"
-              path="company"
-            />
+            <CardCustomizerInputContainer label="Company" path="company" />
             <CardCustomizerInputContainer
               label="Headline"
               path="headline"
+              useAi={true}
               isTextArea={true}
             />
           </div>
