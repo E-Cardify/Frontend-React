@@ -5,7 +5,7 @@ import PersonalTab from "./components/PersonalTab";
 import { Stack, Tabs } from "@mantine/core";
 export default function Account() {
   return (
-    <Stack>
+    <Stack p="md">
       <ProfileHeader />
 
       <Tabs orientation="horizontal" defaultValue="personal">

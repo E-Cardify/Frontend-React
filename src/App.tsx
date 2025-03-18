@@ -8,7 +8,7 @@ import theme from "./lib/theme";
 import AppContainer from "@components/AppContainer/AppContainer";
 import Account from "@pages/Account/Account";
 import Dashboard from "@pages/Dashboard/Dashboard";
-import { CardEditingComponent } from "@pages/CardEditingComponent/CardEditingComponent";
+// import { CardEditingComponent } from "@pages/CardEditingComponent/CardEditingComponent";
 import { CardCreationComponent } from "@pages/CardCreationComponent/CardCreationComponent";
 import Cards from "@pages/Cards/Cards";
 import { Notifications } from "@mantine/notifications";
@@ -33,7 +33,7 @@ function App() {
             <Route path="notifications" element={<Notifications />} />
             <Route path="cards" element={<Cards />} />
             <Route path="create-card" element={<CardCreationComponent />} />
-            <Route path="edit-card" element={<CardEditingComponent />} />
+            {/* <Route path="edit-card" element={<CardEditingComponent />} /> */}
             <Route path="account" element={<Account />} />
           </Route>
 

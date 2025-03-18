@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   Title,
   Text,
+  Box,
   Divider,
   Stack,
   Group,
@@ -26,7 +27,7 @@ import { ArrowUp, IdCard, Info, Plus, Route, Share, User } from "lucide-react";
 import { useWindowScroll } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { useState } from "react";
-import ScrollingPage from "@components/ScrollingPage/ScrollingPage";
+import EmailNotVerifiedNotification from "@components/Notifications/EmailNotVerifiedNotification/EmailNotVerifiedNotification";
 
 export default function Dashboard() {
   const [scroll, scrollTo] = useWindowScroll();
@@ -55,86 +56,80 @@ export default function Dashboard() {
     });
 
   return (
-    <ScrollingPage>
-      <Stack>
-        <Title order={2}>Hello, {user.data.firstName}</Title>
-        <Text>{t("Manage your cards in Cardify")}</Text>
-        <Divider />
-        <Group align="start">
-          {mainCard && <CardPreviewCard cardInfo={mainCard.data} />}
-          <Stack>
-            <Paper maw={150} mah={150}>
-              <QrCodeCard />
-            </Paper>
-            <Button
-              variant="light"
-              onClick={openModal}
-              rightSection={<Share size={17} />}
-            >
-              Share
-            </Button>
-          </Stack>
-
-          {isVisible && (
-            <Alert
-              maw="max-content"
-              icon={<Route />}
-              variant="light"
-              withCloseButton
-              title="Quick actions"
-              onClose={() => {
-                setIsVisible(false);
-              }}
-            >
-              <Stack>
-                <Button variant="outline" color="black" rightSection={<Plus />}>
-                  Create new card
-                </Button>
-                <Button
-                  variant="outline"
-                  color="black"
-                  rightSection={<IdCard />}
-                >
-                  See your cards
-                </Button>
-                <Button variant="outline" color="black" rightSection={<User />}>
-                  Edit your profile
-                </Button>
-              </Stack>
-            </Alert>
-          )}
-
-          <Blockquote
-            color="blue"
-            cite="– Forrest Gump"
-            icon={<Info />}
-            mt="xl"
+    <Stack p="md">
+      {!user.data.isVerified && (
+        <Box>
+          <EmailNotVerifiedNotification />
+        </Box>
+      )}
+      <Title order={2}>Hello, {user.data.firstName}</Title>
+      <Text>{t("Manage your cards in Cardify")}</Text>
+      <Divider />
+      <Group align="start">
+        {mainCard && <CardPreviewCard cardInfo={mainCard.data} />}
+        <Stack>
+          <Paper maw={150} mah={150}>
+            <QrCodeCard />
+          </Paper>
+          <Button
+            variant="light"
+            onClick={openModal}
+            rightSection={<Share size={17} />}
           >
-            Life is like an npm install – you never know what you are going to
-            get.
-          </Blockquote>
-        </Group>
-        <Divider />
-        <StatsGrid />
-        <Graph />
-        <Divider />
-        <TableSort />
-        <Divider />
-        <RecentActivity />
-        <Affix position={{ bottom: 20, right: 20 }}>
-          <Transition transition="slide-up" mounted={scroll.y > 0}>
-            {(transitionStyles) => (
-              <Button
-                leftSection={<ArrowUp size={16} />}
-                style={transitionStyles}
-                onClick={() => scrollTo({ y: 0 })}
-              >
-                Scroll to top
+            Share
+          </Button>
+        </Stack>
+
+        {isVisible && (
+          <Alert
+            maw="max-content"
+            icon={<Route />}
+            variant="light"
+            withCloseButton
+            title="Quick actions"
+            onClose={() => {
+              setIsVisible(false);
+            }}
+          >
+            <Stack>
+              <Button variant="outline" color="black" rightSection={<Plus />}>
+                Create new card
               </Button>
-            )}
-          </Transition>
-        </Affix>
-      </Stack>
-    </ScrollingPage>
+              <Button variant="outline" color="black" rightSection={<IdCard />}>
+                See your cards
+              </Button>
+              <Button variant="outline" color="black" rightSection={<User />}>
+                Edit your profile
+              </Button>
+            </Stack>
+          </Alert>
+        )}
+
+        <Blockquote color="blue" cite="– Forrest Gump" icon={<Info />} mt="xl">
+          Life is like an npm install – you never know what you are going to
+          get.
+        </Blockquote>
+      </Group>
+      <Divider />
+      <StatsGrid />
+      <Graph />
+      <Divider />
+      <TableSort />
+      <Divider />
+      <RecentActivity />
+      <Affix position={{ bottom: 20, right: 20 }}>
+        <Transition transition="slide-up" mounted={scroll.y > 0}>
+          {(transitionStyles) => (
+            <Button
+              leftSection={<ArrowUp size={16} />}
+              style={transitionStyles}
+              onClick={() => scrollTo({ y: 0 })}
+            >
+              Scroll to top
+            </Button>
+          )}
+        </Transition>
+      </Affix>
+    </Stack>
   );
 }

@@ -3,12 +3,14 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   text: string;
+  type?: "submit" | "button";
   c?: MantineColor;
+  onClick?: () => void;
 }
 
 const FormSubmitButton = (props: Props & ButtonProps) => {
   const { t } = useTranslation();
-  const { c, text, ...rest } = props;
+  const { c, text, type, onClick, ...rest } = props;
 
   return (
     <Button
@@ -21,8 +23,9 @@ const FormSubmitButton = (props: Props & ButtonProps) => {
               to: c,
             }
       }
-      type="submit"
+      type={type || "submit"}
       size="md"
+      onClick={onClick}
       fullWidth
       mt="md"
       {...rest}
