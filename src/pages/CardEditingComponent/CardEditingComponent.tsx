@@ -1,12 +1,11 @@
 import CardPreviewCard from "@components/CardPreviewCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { CardCreationTabContext } from "@contexts/CardCreationTabContext";
+import { CardCreationTabContext } from "@pages/CardCreationComponent/context/CardCreationTabContext";
 import { CardInfoInterface } from "@interfaces/CardInfoInterface";
-import { Information } from "@pages/CardCreationComponent/Information/Information";
-import { Display } from "@pages/CardCreationComponent/Display/Display";
-import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
-import Navbar from "@layout/ViewContainer/Navbar";
+import { Information } from "@pages/CardCreationComponent/components/Information/Information";
+import { Display } from "@pages/CardCreationComponent/components/Display/Display";
+import { Fields } from "@pages/CardCreationComponent/components/Fields/Fields";
 import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalNavBar";
 import useViewContext from "@contexts/useViewContext";
 
@@ -36,8 +35,6 @@ export function CardEditingComponent() {
       }}
     >
       <div className="flex flex-col gap-2 h-full">
-        <Navbar text="Card creation" />
-
         <div className="flex-1 flex justify-center items-center">
           {/* Preview */}
           <div className="p-20">

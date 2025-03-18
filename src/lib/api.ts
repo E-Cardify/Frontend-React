@@ -17,20 +17,12 @@ interface RegisterData {
   privacyPolicy: boolean;
 }
 
-type RequireAtLeastOne<T, Keys extends keyof T = keyof T> = Omit<T, Keys> & {
-  [K in Keys]-?: T[K];
-} & {
-  [K in Exclude<keyof T, Keys>]?: T[K];
-};
-
-export type UpdateUserDataProps = RequireAtLeastOne<{
+export type UpdateUserDataProps = {
   firstName?: string;
   lastName?: string;
   email?: string;
   password?: string;
-}>;
-
-export type UpdateUserDataKeys = keyof Omit<UpdateUserDataProps, never>;
+};
 
 export const login = async (data: LoginData) => API.post("/auth/login", data);
 

@@ -1,10 +1,9 @@
-import { Group, Paper } from "@mantine/core";
+import { Paper } from "@mantine/core";
 import { FC, FormEvent } from "react";
 import classes from "./Login.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../lib/api";
-import { emailSchema, passwordSchema } from "../../lib/schemas";
 import { notifications } from "@mantine/notifications";
 import { APIErrorResponse } from "../../api/apiClient";
 import LoginWithOAuth from "@components/LoginWithOAuth/LoginWIthOAuth";
@@ -16,6 +15,7 @@ import FormSubmitButton from "@components/Buttons/FormSubmitButton";
 import ForgotPasswordLink from "@components/Links/ForgotPasswordLink/ForgotPasswordLink";
 import ChangeSignForm from "@components/Links/ChangeSignForm/ChangeSignForm";
 import SignForm from "@components/Typography/SignForm/SignForm";
+import { emailValidator, passwordValidator } from "../../lib/validators";
 
 const Login: FC = () => {
   const navigate = useNavigate();
@@ -33,19 +33,8 @@ const Login: FC = () => {
     },
 
     validate: {
-      email: (value) => {
-        const parsed = emailSchema.safeParse(value);
-
-        if (parsed.success) return null;
-        return parsed.error.issues[0].message;
-      },
-
-      password: (value) => {
-        const parsed = passwordSchema.safeParse(value);
-
-        if (parsed.success) return null;
-        return parsed.error.issues[0].message;
-      },
+      email: emailValidator,
+      password: passwordValidator,
     },
   });
 
@@ -91,8 +80,8 @@ const Login: FC = () => {
 
   return (
     <LoginFormProvider form={form}>
-      <Group w="100%" h="100svh" className={classes.wrapper}>
-        <Paper p={30} h="100%" className={classes.loginForm}>
+      <div className={classes.wrapper}>
+        <Paper p={30} className={classes.loginForm}>
           <form onSubmit={handleLogin}>
             <SignForm text="Welcome back to Cardify" />
             <LoginWithOAuth />
@@ -131,7 +120,7 @@ const Login: FC = () => {
             />
           </form>
         </Paper>
-      </Group>
+      </div>
     </LoginFormProvider>
   );
 };

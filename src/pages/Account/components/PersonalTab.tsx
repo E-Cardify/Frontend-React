@@ -1,137 +1,150 @@
-import Input from "@components/ui/Input";
-import useAuth from "@hooks/useAuth";
-import { Button, Divider, Stack, Title } from "@mantine/core";
-import { useTranslation } from "react-i18next";
-import CustomInputWithSave from "./CustomInputWithSave";
-import { useMemo } from "react";
-import { UpdateUserDataKeys, logout as logoutFn } from "../../../lib/api";
+import { Stack } from "@mantine/core";
+import { updateUserData as updateUserDataFn } from "../../../lib/api";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-
-interface FormFieldProps {
-  id: string;
-  label: string;
-  type?: "text" | "email" | "password";
-  placeholder?: string;
-  useBlurFocusEffects?: boolean;
-}
-
-export const FormField = ({
-  id,
-  label,
-  type = "text",
-  placeholder,
-  useBlurFocusEffects = false,
-}: FormFieldProps) => {
-  const { t } = useTranslation();
-  return (
-    <div className="flex flex-col">
-      <label
-        className="font-Poppins font-semibold text-neutral-500"
-        htmlFor={id}
-      >
-        {t(label)}:
-      </label>
-      <Input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
-          if (useBlurFocusEffects) {
-            const inputElement = e.target as HTMLInputElement;
-            if (inputElement.value === inputElement.placeholder) {
-              inputElement.value = "";
-            }
-          }
-        }}
-        onFocus={(e: React.FocusEvent<HTMLInputElement>) => {
-          if (useBlurFocusEffects) {
-            const inputElement = e.target as HTMLInputElement;
-            if (inputElement.value === "") {
-              inputElement.value = inputElement.placeholder;
-            }
-          }
-        }}
-      />
-    </div>
-  );
-};
-
-export type InputInfoType = {
-  label: string;
-  placeholder: string;
-  objectKey: UpdateUserDataKeys;
-  type?: "password" | "text";
-};
+import {
+  UpdateProfileFormProvider,
+  useUpdateProfileForm,
+} from "../context/UpdateProfileContext";
+import {
+  emailValidator,
+  namesValidator,
+  passwordValidator,
+} from "../../../lib/validators";
+import { FormEvent } from "react";
+import GeneralTextInput from "@components/Inputs/GeneralTextInput/GeneralTextInput";
+import FormSubmitButton from "@components/Buttons/FormSubmitButton";
+import { APIErrorResponse } from "../../../api/apiClient";
+import useAuth, { AUTH } from "@hooks/useAuth";
+import { notifications } from "@mantine/notifications";
+import queryClient from "../../../config/queryClient";
+import PasswordInputWithStrength from "@components/Inputs/PasswordInputWithStrength/PasswordInputWithStrength";
+import getPasswordStrength from "@helpers/getPasswordStrength";
+import TitleDivider from "@components/Typography/TitleDivider/TitleDivider";
 
 export default function PersonalTab() {
   const { user } = useAuth();
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const { mutate: logout, isPending } = useMutation({
-    mutationFn: logoutFn,
-    onSettled: () => {
-      navigate("/login");
+  const form = useUpdateProfileForm({
+    mode: "uncontrolled",
+    validateInputOnBlur: true,
+    onValuesChange: () => {
+      form.clearErrors();
+    },
+    validate: {
+      email: (v) => {
+        if (!v) return;
+        return emailValidator(v);
+      },
+      firstName: (v) => {
+        if (!v) return;
+        return namesValidator(v);
+      },
+      lastName: (v) => {
+        if (!v) return;
+        return namesValidator(v);
+      },
+      password: (v) => {
+        if (!v) return;
+        if (getPasswordStrength(v) < 100) {
+          return "Password is not strong enough";
+        }
+        return passwordValidator(v);
+      },
     },
   });
 
-  const inputsInfo = useMemo<InputInfoType[]>(() => {
-    return [
-      {
-        label: "First Name",
-        placeholder: user.data.firstName,
-        objectKey: "firstName",
-      },
-      {
-        label: "Last Name",
-        placeholder: user.data.lastName,
-        objectKey: "lastName",
-      },
-      {
-        label: "Email",
-        placeholder: user.data.email,
-        objectKey: "email",
-      },
-      {
-        label: "Password",
-        placeholder: "••••••••",
-        objectKey: "password",
-        type: "password",
-      },
-    ];
-  }, [user.data.email, user.data.firstName, user.data.lastName]);
+  const { mutate: updateUserData, isPending: isUpdating } = useMutation({
+    mutationFn: updateUserDataFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [AUTH],
+      });
+      notifications.show({
+        message: "Your profile has been updated",
+      });
+      form.reset();
+    },
+    onError: (err: APIErrorResponse) => {
+      if (err.status === 500) {
+        notifications.show({
+          message: err.message,
+          color: "red",
+        });
+
+        return;
+      }
+
+      form.setValues({
+        password: "",
+      });
+
+      form.setErrors({
+        email: err.message,
+      });
+    },
+  });
+
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const { hasErrors } = form.validate();
+    if (hasErrors) return;
+
+    const { email, lastName, firstName, password } = form.getValues();
+
+    if (!email && !lastName && !firstName && !password) {
+      return;
+    }
+
+    const dataToUpdate = {
+      ...(email && { email }),
+      ...(lastName && { lastName }),
+      ...(firstName && { firstName }),
+      ...(password && { password }),
+    };
+
+    updateUserData(dataToUpdate);
+  };
 
   return (
-    <>
-      <Title order={2}>{t("General")}</Title>
-      <Divider size="xs" pb="20" />
-      <Stack maw="500">
-        {inputsInfo.map((inputInfo, index) => {
-          const { label, placeholder, objectKey, type } = inputInfo;
+    <UpdateProfileFormProvider form={form}>
+      <form onSubmit={submitHandler}>
+        <TitleDivider text="General" />
+        <Stack maw="500">
+          <GeneralTextInput
+            key={form.key("firstName")}
+            {...form.getInputProps("firstName")}
+            placeholder={user.data.firstName}
+            label="First name"
+          />
 
-          return (
-            <CustomInputWithSave
-              label={label}
-              placeholder={placeholder}
-              objectKey={objectKey}
-              type={type}
-              key={index}
-            />
-          );
-        })}
+          <GeneralTextInput
+            key={form.key("lastName")}
+            {...form.getInputProps("lastName")}
+            placeholder={user.data.lastName}
+            label="Last name"
+          />
 
-        <Button
-          w="max-content"
-          color="red"
-          loading={isPending}
-          onClick={() => {
-            logout();
-          }}
-        >
-          {t("Logout")}
-        </Button>
-      </Stack>
-    </>
+          <GeneralTextInput
+            key={form.key("email")}
+            {...form.getInputProps("email")}
+            placeholder={user.data.email}
+            label="Email address"
+          />
+
+          <PasswordInputWithStrength
+            key={form.key("password")}
+            {...form.getInputProps("password")}
+            label="Password"
+            placeholder="Your password"
+          />
+
+          <FormSubmitButton
+            text="Update your profile"
+            mt="sm"
+            loading={isUpdating}
+          />
+        </Stack>
+      </form>
+    </UpdateProfileFormProvider>
   );
 }

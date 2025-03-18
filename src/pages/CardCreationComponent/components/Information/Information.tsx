@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import CardCustomizerInputContainer from "../CardCustomizerInputContainer";
-import { SaveResetCardCustomizer } from "../SaveResetCardCustomizer";
+import CardCustomizerInputContainer from "../../CardCustomizerInputContainer";
+import { SaveResetCardCustomizer } from "../../SaveResetCardCustomizer";
 
 export function Information() {
   const { t } = useTranslation();

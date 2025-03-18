@@ -1,11 +1,11 @@
 import { BellIcon, SettingsIcon, MoonIcon, SunIcon } from "@icons";
-import { SideNavBarLogo } from "@layout/SideNavBar/SideNavBarLogo";
+import { SideNavBarLogo } from "@components/Logo/Logo";
 import { ActionIcon, Tooltip, useMantineColorScheme } from "@mantine/core";
 
 import { Group } from "@mantine/core";
 
 import { useTranslation } from "react-i18next";
-import NavbarToggle from "./components/NavbarToggle";
+import NavbarToggle from "./NavbarToggle";
 import { ReactNode, useMemo } from "react";
 import { Link } from "react-router-dom";
 

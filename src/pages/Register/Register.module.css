@@ -3,16 +3,22 @@
   background-position: right bottom;
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
 
-.loginForm {
+.registerForm {
   border-left: 1px solid
     light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
-  min-height: 900px;
   max-width: 450px;
   padding-top: 80px;
+  flex: 1;
+  margin-left: auto;
 
-  @media (max-width: $mantine-breakpoint-md) {
+  @media (max-width: $mantine-breakpoint-xs) {
     max-width: 100%;
+    margin: 0;
   }
 }

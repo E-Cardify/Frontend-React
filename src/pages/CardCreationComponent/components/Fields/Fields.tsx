@@ -1,9 +1,9 @@
-import { SaveResetCardCustomizer } from "../SaveResetCardCustomizer";
+import { SaveResetCardCustomizer } from "../../SaveResetCardCustomizer";
 import { useTranslation } from "react-i18next";
 import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { useEffect } from "react";
 import fields from "@data/fields";
-import { YourLinksLink } from "../YourLinksLink";
+import { YourLinksLink } from "../../YourLinksLink";
 import { ButtonHoverEffect } from "@components/ui/Buttons/ButtonHoverEffect";
 
 export function Fields() {

@@ -1,11 +1,11 @@
-import { Anchor, Group, Paper, Text } from "@mantine/core";
+import { Anchor, Paper, Text } from "@mantine/core";
 import { FormEvent } from "react";
 import classes from "./Register.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { register } from "../../lib/api";
 import { useTranslation } from "react-i18next";
-import { emailSchema, namesSchema, passwordSchema } from "../../lib/schemas";
+import { passwordSchema } from "../../lib/schemas";
 import { APIErrorResponse } from "../../api/apiClient";
 import { notifications } from "@mantine/notifications";
 import LoginWithOAuth from "@components/LoginWithOAuth/LoginWIthOAuth";
@@ -21,6 +21,7 @@ import SignForm from "@components/Typography/SignForm/SignForm";
 import FormSubmitButton from "@components/Buttons/FormSubmitButton";
 import ChangeSignForm from "@components/Links/ChangeSignForm/ChangeSignForm";
 import GeneralCheckbox from "@components/Inputs/GeneralCheckbox/GeneralCheckbox";
+import { emailValidator, namesValidator } from "../../lib/validators";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -58,24 +59,9 @@ const Register = () => {
     },
 
     validate: {
-      email: (value) => {
-        const parsed = emailSchema.safeParse(value);
-
-        if (parsed.success) return null;
-        return parsed.error.issues[0].message;
-      },
-
-      firstName: (value) => {
-        const parsed = namesSchema.safeParse(value);
-        if (parsed.success) return null;
-        return parsed.error.issues[0].message;
-      },
-
-      lastName: (value) => {
-        const parsed = namesSchema.safeParse(value);
-        if (parsed.success) return null;
-        return parsed.error.issues[0].message;
-      },
+      email: emailValidator,
+      firstName: namesValidator,
+      lastName: namesValidator,
 
       repeatPassword: (value) => {
         if (!value) {
@@ -155,8 +141,8 @@ const Register = () => {
 
   return (
     <RegisterFormProvider form={form}>
-      <Group w="100%" h="100svh" justify="end" className={classes.wrapper}>
-        <Paper p={30} h="100%" className={classes.loginForm}>
+      <div className={classes.wrapper}>
+        <Paper p={30} className={classes.registerForm}>
           <form onSubmit={handleRegister}>
             <SignForm text="Join Cardify and stay connected" ta="left" />
 
@@ -227,7 +213,7 @@ const Register = () => {
             />
           </form>
         </Paper>
-      </Group>
+      </div>
     </RegisterFormProvider>
   );
 };

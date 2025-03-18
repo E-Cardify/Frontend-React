@@ -1,37 +1,11 @@
 import useAuth from "@hooks/useAuth";
-import { Alert, AppShell, Container, Loader } from "@mantine/core";
+import { AppShell, Box, Loader, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Navigate, Outlet } from "react-router-dom";
-import Header from "./Header";
-import { Navbar } from "@layout/SideNavBar/Navbar";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-
-const MailNotVerifiedNotification = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  const { t } = useTranslation();
-
-  return (
-    <>
-      {isVisible && (
-        <Alert
-          variant="light"
-          color="yellow"
-          title="Email Verification Required"
-          mb="30"
-          withCloseButton
-          onClose={() => {
-            setIsVisible(false);
-          }}
-        >
-          {t(
-            "Check your email and please verify your email to access all features."
-          )}
-        </Alert>
-      )}
-    </>
-  );
-};
+import Header from "./components/Header";
+import { Navbar } from "./components/Navbar";
+import EmailNotVerifiedNotification from "@components/Notifications/EmailNotVerifiedNotification/EmailNotVerifiedNotification";
+import classes from "./AppContainer.module.css";
 
 const AppContainer = () => {
   const { user, isLoading } = useAuth();
@@ -40,16 +14,9 @@ const AppContainer = () => {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
   return isLoading ? (
-    <Container
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
+    <div className={classes.loaderContainer}>
       <Loader size={50} />
-    </Container>
+    </div>
   ) : user && user.data ? (
     <AppShell
       header={{ height: 60 }}
@@ -64,11 +31,23 @@ const AppContainer = () => {
         <Header toggleMobile={toggleMobile} toggleDesktop={toggleDesktop} />
       </AppShell.Header>
       <AppShell.Navbar>
-        <Navbar />
+        <Navbar toggleMobile={toggleMobile} />
       </AppShell.Navbar>
-      <AppShell.Main>
-        {!user.data.isVerified && <MailNotVerifiedNotification />}
-        <Outlet />
+      <AppShell.Main pb={0}>
+        <Stack
+          style={{
+            overflow: "hidden",
+            maxHeight: "calc(100svh - 60px - 16px)",
+            gap: 0,
+          }}
+        >
+          {!user.data.isVerified && (
+            <Box>
+              <EmailNotVerifiedNotification />
+            </Box>
+          )}
+          <Outlet />
+        </Stack>
       </AppShell.Main>
     </AppShell>
   ) : (

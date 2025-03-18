@@ -26,6 +26,7 @@ import { ArrowUp, IdCard, Info, Plus, Route, Share, User } from "lucide-react";
 import { useWindowScroll } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { useState } from "react";
+import ScrollingPage from "@components/ScrollingPage/ScrollingPage";
 
 export default function Dashboard() {
   const [scroll, scrollTo] = useWindowScroll();
@@ -54,7 +55,7 @@ export default function Dashboard() {
     });
 
   return (
-    <>
+    <ScrollingPage>
       <Stack>
         <Title order={2}>Hello, {user.data.firstName}</Title>
         <Text>{t("Manage your cards in Cardify")}</Text>
@@ -134,6 +135,6 @@ export default function Dashboard() {
           </Transition>
         </Affix>
       </Stack>
-    </>
+    </ScrollingPage>
   );
 }

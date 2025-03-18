@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import queryClient from "../config/queryClient";
 import { navigate } from "../lib/navigation";
+import { notifications } from "@mantine/notifications";
 
 export const defaultErrorMessage = "An error occurred";
 
@@ -43,6 +44,10 @@ API.interceptors.response.use(
             state: {
               redirect: window.location.pathname,
             },
+          });
+          notifications.show({
+            message: "Your session run out, please log in again",
+            color: "orange",
           });
         }
       }

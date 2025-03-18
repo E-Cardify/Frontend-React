@@ -1,17 +1,14 @@
 import useCardCreationTabContext from "@contexts/useCardCreationTabContext";
 import { CheckIcon } from "@icons";
-import { SaveResetCardCustomizer } from "../SaveResetCardCustomizer";
+import { SaveResetCardCustomizer } from "../../SaveResetCardCustomizer";
 import getLighterShade from "@helpers/getLighterShade";
 import { useTranslation } from "react-i18next";
 
 export function Display() {
-  const { cardInfo, setCardInfo } =
-    useCardCreationTabContext();
+  const { cardInfo, setCardInfo } = useCardCreationTabContext();
   const { t } = useTranslation();
 
-  const handleColorChange = (
-    newColor: string
-  ) => {
+  const handleColorChange = (newColor: string) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
       design: {
@@ -21,9 +18,7 @@ export function Display() {
     }));
   };
 
-  const handleStyleChange = (
-    newStyle: string
-  ) => {
+  const handleStyleChange = (newStyle: string) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
       design: {
@@ -54,29 +49,23 @@ export function Display() {
             {t("Color")}
           </h1>
           <div className="px-3 flex gap-5 py-3 flex-wrap">
-            {colors.map(
-              (color, index) => {
-                return (
-                  <div
-                    className={`rounded-xl w-10 h-10 bg-${color} cursor-pointer`}
-                    key={index}
-                    onClick={() => {
-                      handleColorChange(
-                        color
-                      );
-                    }}
-                  >
-                    {color ==
-                      cardInfo.design
-                        ?.color && (
-                      <div className="text-white p-1 flex items-center justify-center">
-                        <CheckIcon />
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-            )}
+            {colors.map((color, index) => {
+              return (
+                <div
+                  className={`rounded-xl w-10 h-10 bg-${color} cursor-pointer`}
+                  key={index}
+                  onClick={() => {
+                    handleColorChange(color);
+                  }}
+                >
+                  {color == cardInfo.design?.color && (
+                    <div className="text-white p-1 flex items-center justify-center">
+                      <CheckIcon />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           <h1 className="text-xl font-Poppins font-bold p-2 px-3 border-b-2 border-neutral-200">
@@ -85,19 +74,12 @@ export function Display() {
           <div className="px-3 flex gap-5 py-3 flex-wrap">
             <div
               title={t("Solid")}
-              onClick={() =>
-                handleStyleChange(
-                  "solid"
-                )
-              }
+              onClick={() => handleStyleChange("solid")}
               className={`rounded-xl w-10 h-10 bg-${
-                cardInfo.design
-                  ?.color || "green-500"
+                cardInfo.design?.color || "green-500"
               } cursor-pointer`}
             >
-              {"solid" ==
-                cardInfo.design
-                  ?.style && (
+              {"solid" == cardInfo.design?.style && (
                 <div className="text-white p-1 flex items-center justify-center">
                   <CheckIcon />
                 </div>
@@ -105,22 +87,14 @@ export function Display() {
             </div>
             <div
               title={t("Gradient")}
-              onClick={() =>
-                handleStyleChange(
-                  "gradient"
-                )
-              }
+              onClick={() => handleStyleChange("gradient")}
               className={`rounded-xl w-10 h-10 from-${
-                cardInfo.design
-                  ?.color || "green-500"
+                cardInfo.design?.color || "green-500"
               } to-${getLighterShade(
-                cardInfo.design
-                  ?.color || "green-500"
+                cardInfo.design?.color || "green-500"
               )} bg-gradient-to-br cursor-pointer`}
             >
-              {"gradient" ==
-                cardInfo.design
-                  ?.style && (
+              {"gradient" == cardInfo.design?.style && (
                 <div className="text-white p-1 flex items-center justify-center">
                   <CheckIcon />
                 </div>

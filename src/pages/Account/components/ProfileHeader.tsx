@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import useAuth from "@hooks/useAuth";
 // import { logout as logoutFn } from "../../../lib/api";
 import { Avatar, Group, Stack, Text, Title, Tooltip } from "@mantine/core";
+import LogoutButton from "@components/Buttons/LogoutButton";
 // import ButtonPrimary from "@components/ui/Buttons/ButtonPrimary";
 // import ButtonRectangle from "@components/ui/Buttons/ButtonRectangle";
 
@@ -43,22 +44,7 @@ export default function ProfileHeader() {
         </Text>
       </Stack>
 
-      {/* <div className="flex-1">
-        <h2 className="font-Poppins font-bold text-2xl dark:text-white">
-          {user.data.firstName} {user.data.lastName}
-        </h2>
-        <p className="text-neutral-600 dark:text-neutral-400">
-          {user.data.email}
-        </p>
-        <div className="flex gap-2 mt-3">
-          <ButtonPrimary text={t("Edit Profile")} />
-          <ButtonRectangle
-            text={t("Logout")}
-            onClick={logout}
-            className="bg-red-500 border-red-500 text-white hover:text-white hover:bg-red-600 hover:border-red-600"
-          />
-        </div>
-      </div> */}
+      <LogoutButton ml="auto" />
     </Group>
   );
 }

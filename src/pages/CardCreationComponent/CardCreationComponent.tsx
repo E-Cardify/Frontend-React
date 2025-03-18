@@ -1,16 +1,18 @@
 import CardPreviewCard from "@components/CardPreviewCard";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { CardCreationTabContext } from "@contexts/CardCreationTabContext";
+import { CardCreationTabContext } from "@pages/CardCreationComponent/context/CardCreationTabContext";
 import {
   CardInfoInterface,
   getDefaultCardInterfaceObject,
 } from "@interfaces/CardInfoInterface";
-import { Information } from "@pages/CardCreationComponent/Information/Information";
-import { Display } from "@pages/CardCreationComponent/Display/Display";
-import { Fields } from "@pages/CardCreationComponent/Fields/Fields";
-import Navbar from "@layout/ViewContainer/Navbar";
-import { ButtonHorizontalNavBar } from "@components/ui/Buttons/ButtonHorizontalNavBar";
+import { Information } from "@pages/CardCreationComponent/components/Information/Information";
+import { Fields } from "@pages/CardCreationComponent/components/Fields/Fields";
+import { Group, Paper, Stack, Tabs, Title } from "@mantine/core";
+import TitleDivider from "@components/Typography/TitleDivider/TitleDivider";
+import ScrollingPage from "@components/ScrollingPage/ScrollingPage";
+import { Book, CircleFadingPlus, Monitor } from "lucide-react";
+import { Display } from "./components/Display/Display";
 
 export function CardCreationComponent() {
   const { t } = useTranslation();
@@ -19,83 +21,66 @@ export function CardCreationComponent() {
     getDefaultCardInterfaceObject()
   );
 
-  const [currentTab, setCurrentTab] = useState<
-    "Display" | "Information" | "Fields"
-  >("Information");
-
-  const handleSetCurrentTab = (
-    newTab: "Display" | "Information" | "Fields"
-  ) => {
-    setCurrentTab(newTab);
-  };
-
   return (
-    <CardCreationTabContext.Provider
-      value={{
-        cardInfo,
-        setCardInfo,
-        currentTab,
-        setCurrentTab,
-      }}
-    >
-      <div className="flex flex-col gap-2 h-full">
-        <Navbar text="Card creation" />
+    <ScrollingPage>
+      <CardCreationTabContext.Provider
+        value={{
+          cardInfo,
+          setCardInfo,
+        }}
+      >
+        <Stack flex={1} h="100%">
+          <TitleDivider text="Create your card" mt="0" />
+          <Group align="start" justify="center">
+            {/* Information Inputs */}
+            <Paper
+              flex={1}
+              shadow="md"
+              radius="md"
+              withBorder
+              p="xl"
+              h="100%"
+              pb="sm"
+            >
+              <Title order={1}>{t("Card Customizer")}</Title>
+              <Tabs defaultValue="information" mt="md">
+                <Tabs.List>
+                  <Tabs.Tab value="display" leftSection={<Monitor size={12} />}>
+                    {t("Display")}
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="information"
+                    leftSection={<Book size={12} />}
+                  >
+                    {t("Information")}
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="fields"
+                    leftSection={<CircleFadingPlus size={12} />}
+                  >
+                    {t("Fields")}
+                  </Tabs.Tab>
+                </Tabs.List>
 
-        <div className="flex-1 flex justify-center items-center">
-          {/* Preview */}
-          <div className="p-20">
-            <CardPreviewCard cardInfo={cardInfo} />
-          </div>
-
-          {/* Information Inputs */}
-          <div className="flex-1 bg-white dark:bg-neutral-900 dark:border-black dark:text-white flex flex-col rounded-lg border-2 p-2 max-w-[1000px]">
-            <h1 className="font-Montserrat font-bold text-3xl">
-              {t("Card customizer")}
-            </h1>
-            <div className="flex mt-2 border-b-2">
-              <ButtonHorizontalNavBar
-                text="Display"
-                currentView={currentTab}
-                onClick={() => {
-                  handleSetCurrentTab("Display");
-                }}
-              />
-              <ButtonHorizontalNavBar
-                text="Information"
-                currentView={currentTab}
-                onClick={() => {
-                  handleSetCurrentTab("Information");
-                }}
-              />
-              <ButtonHorizontalNavBar
-                isBeta={true}
-                text="Fields"
-                currentView={currentTab}
-                onClick={() => {
-                  handleSetCurrentTab("Fields");
-                }}
-              />
-            </div>
-            <div className="flex-1 px-4 py-2">
-              {currentTab == "Information" && (
-                <>
+                <Tabs.Panel value="information">
                   <Information />
-                </>
-              )}
-              {currentTab == "Display" && (
-                <>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="display">
                   <Display />
-                </>
-              )}
-              {currentTab == "Fields" && (
-                <>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="fields">
                   <Fields />
-                </>
-              )}
+                </Tabs.Panel>
+              </Tabs>
+            </Paper>
+            <div className="p-20">
+              <CardPreviewCard cardInfo={cardInfo} />
             </div>
-          </div>
-        </div>
-      </div>
-    </CardCreationTabContext.Provider>
+          </Group>
+        </Stack>
+      </CardCreationTabContext.Provider>
+    </ScrollingPage>
   );
 }

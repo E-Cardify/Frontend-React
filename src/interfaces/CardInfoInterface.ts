@@ -1,26 +1,5 @@
 import Field from "./Field";
 
-// export const defaultCardInterfaceObject: CardInfoInterface = {
-//     information: {
-//         firstName: "",
-//         middleName: "",
-//         lastName: "",
-//         preferredName: "",
-//         maidenName: "",
-//         pronouns: "",
-//         title: "",
-//         department: "",
-//         company: "",
-//         headline: "",
-//         motto: "",
-//     },
-//     design: {
-//         color: "green-500",
-//         "style": "solid",
-//     },
-//     fields: [],
-// }
-
 export const getDefaultCardInterfaceObject: () => CardInfoInterface = () => {
   return {
     information: {

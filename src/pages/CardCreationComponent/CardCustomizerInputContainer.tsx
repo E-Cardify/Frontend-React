@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Input from "@components/ui/Input";
 import { ActionIcon, Textarea } from "@mantine/core";
 import CodeSandBox from "../../assets/icons/CodeSandBox";
-import "./CardCreationComponent.css";
 import { rewriteCardDescription } from "../../lib/api";
 import socket from "../../lib/socket.io";
 import { useState } from "react";
